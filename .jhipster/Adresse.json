@@ -1,0 +1,44 @@
+{
+  "name": "Adresse",
+  "fields": [
+    {
+      "fieldName": "adresseLigne1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresseLigne2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codePostal",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ville",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "stateProvince",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "departement",
+      "otherEntityRelationshipName": "adresse",
+      "relationshipName": "departement",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "adresse",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210801124941"
+}

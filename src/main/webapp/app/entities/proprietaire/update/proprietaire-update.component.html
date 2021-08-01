@@ -1,0 +1,145 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-proprietaire-heading"
+        data-cy="ProprietaireCreateUpdateHeading"
+        jhiTranslate="archisolverApp.proprietaire.home.createOrEditLabel"
+      >
+        Create or edit a Proprietaire
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.proprietaire.prenom" for="field_prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.proprietaire.nom" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.proprietaire.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.proprietaire.telephoneFixe" for="field_telephoneFixe"
+            >Telephone Fixe</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="telephoneFixe"
+            id="field_telephoneFixe"
+            data-cy="telephoneFixe"
+            formControlName="telephoneFixe"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.proprietaire.telephonePortable" for="field_telephonePortable"
+            >Telephone Portable</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="telephonePortable"
+            id="field_telephonePortable"
+            data-cy="telephonePortable"
+            formControlName="telephonePortable"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.proprietaire.depuis" for="field_depuis">Depuis</label>
+          <div class="input-group">
+            <input
+              id="field_depuis"
+              data-cy="depuis"
+              type="text"
+              class="form-control"
+              name="depuis"
+              ngbDatepicker
+              #depuisDp="ngbDatepicker"
+              formControlName="depuis"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="depuisDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.proprietaire.habiteLocal" for="field_habiteLocal"
+            >Habite Local</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="habiteLocal"
+            id="field_habiteLocal"
+            data-cy="habiteLocal"
+            formControlName="habiteLocal"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.proprietaire.finLe" for="field_finLe">Fin Le</label>
+          <div class="input-group">
+            <input
+              id="field_finLe"
+              data-cy="finLe"
+              type="text"
+              class="form-control"
+              name="finLe"
+              ngbDatepicker
+              #finLeDp="ngbDatepicker"
+              formControlName="finLe"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="finLeDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="archisolverApp.proprietaire.local" for="field_locals">Local</label>
+          <select class="form-control" id="field_locals" data-cy="local" multiple name="locals" formControlName="locals">
+            <option
+              [ngValue]="getSelectedLocal(localOption, editForm.get('locals')!.value)"
+              *ngFor="let localOption of localsSharedCollection; trackBy: trackLocalById"
+            >
+              {{ localOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

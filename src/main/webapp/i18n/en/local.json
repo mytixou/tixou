@@ -1,0 +1,29 @@
+{
+  "archisolverApp": {
+    "local": {
+      "home": {
+        "title": "Locals",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Local",
+        "createOrEditLabel": "Create or edit a Local",
+        "notFound": "No Locals found"
+      },
+      "created": "A new Local is created with identifier {{ param }}",
+      "updated": "A Local is updated with identifier {{ param }}",
+      "deleted": "A Local is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Local {{ id }}?"
+      },
+      "detail": {
+        "title": "Local"
+      },
+      "id": "ID",
+      "designation": "Designation",
+      "surface": "Surface",
+      "etage": "Etage",
+      "typelocal": "Typelocal",
+      "batiment": "Batiment",
+      "proprietaire": "Proprietaire"
+    }
+  }
+}

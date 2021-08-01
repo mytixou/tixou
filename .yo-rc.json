@@ -43,7 +43,9 @@
     "devServerPort": 4200,
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": ["Terrain", "Batiment", "Local", "Proprietaire", "Adresse", "Departement", "Region"],
+    "lastLiquibaseTimestamp": 1627822183000
   },
   "git-provider": "GitHub",
   "git-company": "mytixou",

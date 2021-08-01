@@ -1,0 +1,108 @@
+<div>
+  <h2 id="page-heading" data-cy="ProprietaireHeading">
+    <span jhiTranslate="archisolverApp.proprietaire.home.title">Proprietaires</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="archisolverApp.proprietaire.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-proprietaire"
+        [routerLink]="['/proprietaire/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="archisolverApp.proprietaire.home.createLabel"> Create a new Proprietaire </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="proprietaires?.length === 0">
+    <span jhiTranslate="archisolverApp.proprietaire.home.notFound">No proprietaires found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="proprietaires && proprietaires.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="prenom">
+            <span jhiTranslate="archisolverApp.proprietaire.prenom">Prenom</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nom">
+            <span jhiTranslate="archisolverApp.proprietaire.nom">Nom</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <span jhiTranslate="archisolverApp.proprietaire.email">Email</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="telephoneFixe">
+            <span jhiTranslate="archisolverApp.proprietaire.telephoneFixe">Telephone Fixe</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="telephonePortable">
+            <span jhiTranslate="archisolverApp.proprietaire.telephonePortable">Telephone Portable</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="depuis">
+            <span jhiTranslate="archisolverApp.proprietaire.depuis">Depuis</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="habiteLocal">
+            <span jhiTranslate="archisolverApp.proprietaire.habiteLocal">Habite Local</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="finLe">
+            <span jhiTranslate="archisolverApp.proprietaire.finLe">Fin Le</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let proprietaire of proprietaires; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/proprietaire', proprietaire.id, 'view']">{{ proprietaire.id }}</a>
+          </td>
+          <td>{{ proprietaire.prenom }}</td>
+          <td>{{ proprietaire.nom }}</td>
+          <td>{{ proprietaire.email }}</td>
+          <td>{{ proprietaire.telephoneFixe }}</td>
+          <td>{{ proprietaire.telephonePortable }}</td>
+          <td>{{ proprietaire.depuis | formatMediumDate }}</td>
+          <td>{{ proprietaire.habiteLocal }}</td>
+          <td>{{ proprietaire.finLe | formatMediumDate }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/proprietaire', proprietaire.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/proprietaire', proprietaire.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(proprietaire)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

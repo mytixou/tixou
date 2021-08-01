@@ -1,0 +1,41 @@
+{
+  "name": "Batiment",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "emprise",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "hauteur",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "etages",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "terrain",
+      "otherEntityRelationshipName": "batiment",
+      "relationshipName": "terrain",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "batiment",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210801124938"
+}
