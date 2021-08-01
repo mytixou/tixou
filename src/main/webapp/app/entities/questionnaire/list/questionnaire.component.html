@@ -1,0 +1,97 @@
+<div>
+  <h2 id="page-heading" data-cy="QuestionnaireHeading">
+    <span jhiTranslate="archisolverApp.questionnaire.home.title">Questionnaires</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="archisolverApp.questionnaire.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-questionnaire"
+        [routerLink]="['/questionnaire/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="archisolverApp.questionnaire.home.createLabel"> Create a new Questionnaire </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="questionnaires?.length === 0">
+    <span jhiTranslate="archisolverApp.questionnaire.home.notFound">No questionnaires found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="questionnaires && questionnaires.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.questionnaire.designation">Designation</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.questionnaire.explication">Explication</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.questionnaire.typeQuestionnaire">Type Questionnaire</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.questionnaire.dossier">Dossier</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.questionnaire.question">Question</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let questionnaire of questionnaires; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/questionnaire', questionnaire.id, 'view']">{{ questionnaire.id }}</a>
+          </td>
+          <td>{{ questionnaire.designation }}</td>
+          <td>{{ questionnaire.explication }}</td>
+          <td jhiTranslate="{{ 'archisolverApp.TypeDestination.' + questionnaire.typeQuestionnaire }}">
+            {{ questionnaire.typeQuestionnaire }}
+          </td>
+          <td>
+            <div *ngIf="questionnaire.dossier">
+              <a [routerLink]="['/dossier', questionnaire.dossier?.id, 'view']">{{ questionnaire.dossier?.designation }}</a>
+            </div>
+          </td>
+          <td>
+            <span *ngFor="let question of questionnaire.questions; let last = last">
+              <a class="form-control-static" [routerLink]="['/question', question.id, 'view']">{{ question.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/questionnaire', questionnaire.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/questionnaire', questionnaire.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(questionnaire)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

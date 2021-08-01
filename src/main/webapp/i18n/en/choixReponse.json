@@ -1,0 +1,26 @@
+{
+  "archisolverApp": {
+    "choixReponse": {
+      "home": {
+        "title": "Choix Reponses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Choix Reponse",
+        "createOrEditLabel": "Create or edit a Choix Reponse",
+        "notFound": "No Choix Reponses found"
+      },
+      "created": "A new Choix Reponse is created with identifier {{ param }}",
+      "updated": "A Choix Reponse is updated with identifier {{ param }}",
+      "deleted": "A Choix Reponse is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Choix Reponse {{ id }}?"
+      },
+      "detail": {
+        "title": "Choix Reponse"
+      },
+      "id": "ID",
+      "dateChoix": "Date Choix",
+      "dossier": "Dossier",
+      "reponse": "Reponse"
+    }
+  }
+}

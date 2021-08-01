@@ -14,6 +14,14 @@
         "adresse": "Adresse",
         "departement": "Departement",
         "region": "Region",
+        "commanditaire": "Commanditaire",
+        "dossier": "Dossier",
+        "questionnaire": "Questionnaire",
+        "question": "Question",
+        "reponse": "Reponse",
+        "choixReponse": "Choix Reponse",
+        "impact": "Impact",
+        "refContrainte": "Ref Contrainte",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

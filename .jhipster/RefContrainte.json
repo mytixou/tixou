@@ -1,0 +1,34 @@
+{
+  "name": "RefContrainte",
+  "fields": [
+    {
+      "fieldName": "designation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeContrainte",
+      "fieldType": "TypeContrainte",
+      "fieldValues": "PLU,RTE2020,DTU,ARCHITECTURE"
+    },
+    {
+      "fieldName": "typeDestination",
+      "fieldType": "TypeDestination",
+      "fieldValues": "TERRAIN,BATIMENT,LOCAL,ENVIRONNEMENT"
+    },
+    {
+      "fieldName": "explication",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "ref_contrainte",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210801145231"
+}

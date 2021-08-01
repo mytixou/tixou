@@ -21,11 +21,10 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-one",
+      "relationshipType": "many-to-one",
       "otherEntityName": "terrain",
       "otherEntityRelationshipName": "batiment",
-      "relationshipName": "terrain",
-      "ownerSide": true
+      "relationshipName": "terrain"
     }
   ],
   "entityTableName": "batiment",

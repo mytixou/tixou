@@ -1,0 +1,28 @@
+{
+  "archisolverApp": {
+    "dossier": {
+      "home": {
+        "title": "Dossiers",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Dossier",
+        "createOrEditLabel": "Créer ou éditer un Dossier",
+        "notFound": "Aucun Dossier trouvé"
+      },
+      "created": "Un nouveau Dossier a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Dossier avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Dossier avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Dossier {{ id }} ?"
+      },
+      "detail": {
+        "title": "Dossier"
+      },
+      "id": "ID",
+      "designation": "Designation",
+      "description": "Description",
+      "dateCreation": "Date Creation",
+      "dateCloture": "Date Cloture",
+      "commanditaire": "Commanditaire"
+    }
+  }
+}

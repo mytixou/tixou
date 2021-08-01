@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="impact">
+      <h2 data-cy="impactDetailsHeading"><span jhiTranslate="archisolverApp.impact.detail.title">Impact</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ impact.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.impact.designation">Designation</span></dt>
+        <dd>
+          <span>{{ impact.designation }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.impact.explication">Explication</span></dt>
+        <dd>
+          <span>{{ impact.explication }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.impact.typeImpact">Type Impact</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'archisolverApp.TypeDestination.' + impact.typeImpact }}">{{ impact.typeImpact }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.impact.reponse">Reponse</span></dt>
+        <dd>
+          <div *ngIf="impact.reponse">
+            <a [routerLink]="['/reponse', impact.reponse?.id, 'view']">{{ impact.reponse?.designation }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/impact', impact.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

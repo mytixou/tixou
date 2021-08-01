@@ -1,0 +1,44 @@
+{
+  "name": "Commanditaire",
+  "fields": [
+    {
+      "fieldName": "idMetierInterne",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephoneFixe",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephonePortable",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "connuDepuis",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "commanditaire",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210801145224"
+}

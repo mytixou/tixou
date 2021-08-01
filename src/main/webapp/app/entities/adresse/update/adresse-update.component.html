@@ -80,9 +80,9 @@
               [ngValue]="
                 departementOption.id === editForm.get('departement')!.value?.id ? editForm.get('departement')!.value : departementOption
               "
-              *ngFor="let departementOption of departementsCollection; trackBy: trackDepartementById"
+              *ngFor="let departementOption of departementsSharedCollection; trackBy: trackDepartementById"
             >
-              {{ departementOption.id }}
+              {{ departementOption.nom }}
             </option>
           </select>
         </div>

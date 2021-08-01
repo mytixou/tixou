@@ -12,11 +12,11 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-one",
+      "relationshipType": "many-to-one",
       "otherEntityName": "region",
       "otherEntityRelationshipName": "departement",
       "relationshipName": "region",
-      "ownerSide": true
+      "otherEntityField": "nom"
     }
   ],
   "entityTableName": "departement",

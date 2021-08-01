@@ -48,7 +48,7 @@
           <td>{{ departement.code }}</td>
           <td>
             <div *ngIf="departement.region">
-              <a [routerLink]="['/region', departement.region?.id, 'view']">{{ departement.region?.id }}</a>
+              <a [routerLink]="['/region', departement.region?.id, 'view']">{{ departement.region?.nom }}</a>
             </div>
           </td>
           <td class="text-right">

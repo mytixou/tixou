@@ -1,0 +1,11 @@
+{
+  "archisolverApp": {
+    "TypeDestination": {
+      "null": "",
+      "TERRAIN": "TERRAIN",
+      "BATIMENT": "BATIMENT",
+      "LOCAL": "LOCAL",
+      "ENVIRONNEMENT": "ENVIRONNEMENT"
+    }
+  }
+}

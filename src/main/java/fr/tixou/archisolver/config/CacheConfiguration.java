@@ -60,6 +60,16 @@ public class CacheConfiguration {
             createCache(cm, fr.tixou.archisolver.domain.Adresse.class.getName());
             createCache(cm, fr.tixou.archisolver.domain.Departement.class.getName());
             createCache(cm, fr.tixou.archisolver.domain.Region.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Commanditaire.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Dossier.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Questionnaire.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Questionnaire.class.getName() + ".questions");
+            createCache(cm, fr.tixou.archisolver.domain.Question.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Question.class.getName() + ".questionnaires");
+            createCache(cm, fr.tixou.archisolver.domain.Reponse.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.ChoixReponse.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Impact.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.RefContrainte.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

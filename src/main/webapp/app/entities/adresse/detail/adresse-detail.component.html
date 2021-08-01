@@ -37,7 +37,7 @@
         <dt><span jhiTranslate="archisolverApp.adresse.departement">Departement</span></dt>
         <dd>
           <div *ngIf="adresse.departement">
-            <a [routerLink]="['/departement', adresse.departement?.id, 'view']">{{ adresse.departement?.id }}</a>
+            <a [routerLink]="['/departement', adresse.departement?.id, 'view']">{{ adresse.departement?.nom }}</a>
           </div>
         </dd>
       </dl>

@@ -1,0 +1,86 @@
+<div>
+  <h2 id="page-heading" data-cy="RefContrainteHeading">
+    <span jhiTranslate="archisolverApp.refContrainte.home.title">Ref Contraintes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="archisolverApp.refContrainte.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ref-contrainte"
+        [routerLink]="['/ref-contrainte/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="archisolverApp.refContrainte.home.createLabel"> Create a new Ref Contrainte </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="refContraintes?.length === 0">
+    <span jhiTranslate="archisolverApp.refContrainte.home.notFound">No refContraintes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="refContraintes && refContraintes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.refContrainte.designation">Designation</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.refContrainte.typeContrainte">Type Contrainte</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.refContrainte.typeDestination">Type Destination</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.refContrainte.explication">Explication</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let refContrainte of refContraintes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/ref-contrainte', refContrainte.id, 'view']">{{ refContrainte.id }}</a>
+          </td>
+          <td>{{ refContrainte.designation }}</td>
+          <td jhiTranslate="{{ 'archisolverApp.TypeContrainte.' + refContrainte.typeContrainte }}">{{ refContrainte.typeContrainte }}</td>
+          <td jhiTranslate="{{ 'archisolverApp.TypeDestination.' + refContrainte.typeDestination }}">
+            {{ refContrainte.typeDestination }}
+          </td>
+          <td>{{ refContrainte.explication }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/ref-contrainte', refContrainte.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/ref-contrainte', refContrainte.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(refContrainte)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

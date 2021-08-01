@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ChoixReponse.
+    -->
+    <changeSet id="20210801145229-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="dossier_id"
+                                 baseTableName="choix_reponse"
+                                 constraintName="fk_choix_reponse__dossier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dossier"/>
+
+        <addForeignKeyConstraint baseColumnNames="reponse_id"
+                                 baseTableName="choix_reponse"
+                                 constraintName="fk_choix_reponse__reponse_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="reponse"/>
+    </changeSet>
+</databaseChangeLog>

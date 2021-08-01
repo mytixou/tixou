@@ -17,7 +17,7 @@ import { RegionService } from 'app/entities/region/service/region.service';
 export class DepartementUpdateComponent implements OnInit {
   isSaving = false;
 
-  regionsCollection: IRegion[] = [];
+  regionsSharedCollection: IRegion[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -86,15 +86,15 @@ export class DepartementUpdateComponent implements OnInit {
       region: departement.region,
     });
 
-    this.regionsCollection = this.regionService.addRegionToCollectionIfMissing(this.regionsCollection, departement.region);
+    this.regionsSharedCollection = this.regionService.addRegionToCollectionIfMissing(this.regionsSharedCollection, departement.region);
   }
 
   protected loadRelationshipsOptions(): void {
     this.regionService
-      .query({ filter: 'departement-is-null' })
+      .query()
       .pipe(map((res: HttpResponse<IRegion[]>) => res.body ?? []))
       .pipe(map((regions: IRegion[]) => this.regionService.addRegionToCollectionIfMissing(regions, this.editForm.get('region')!.value)))
-      .subscribe((regions: IRegion[]) => (this.regionsCollection = regions));
+      .subscribe((regions: IRegion[]) => (this.regionsSharedCollection = regions));
   }
 
   protected createFromForm(): IDepartement {

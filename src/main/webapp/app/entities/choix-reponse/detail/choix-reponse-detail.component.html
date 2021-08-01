@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="choixReponse">
+      <h2 data-cy="choixReponseDetailsHeading"><span jhiTranslate="archisolverApp.choixReponse.detail.title">Choix Reponse</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ choixReponse.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.choixReponse.dateChoix">Date Choix</span></dt>
+        <dd>
+          <span>{{ choixReponse.dateChoix | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.choixReponse.dossier">Dossier</span></dt>
+        <dd>
+          <div *ngIf="choixReponse.dossier">
+            <a [routerLink]="['/dossier', choixReponse.dossier?.id, 'view']">{{ choixReponse.dossier?.designation }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.choixReponse.reponse">Reponse</span></dt>
+        <dd>
+          <div *ngIf="choixReponse.reponse">
+            <a [routerLink]="['/reponse', choixReponse.reponse?.id, 'view']">{{ choixReponse.reponse?.designation }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/choix-reponse', choixReponse.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

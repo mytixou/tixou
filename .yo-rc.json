@@ -44,8 +44,24 @@
     "clientTheme": "none",
     "clientThemeVariant": "",
     "reactive": false,
-    "entities": ["Terrain", "Batiment", "Local", "Proprietaire", "Adresse", "Departement", "Region"],
-    "lastLiquibaseTimestamp": 1627822183000
+    "entities": [
+      "Terrain",
+      "Batiment",
+      "Local",
+      "Proprietaire",
+      "Adresse",
+      "Departement",
+      "Region",
+      "Commanditaire",
+      "Dossier",
+      "Questionnaire",
+      "Question",
+      "Reponse",
+      "ChoixReponse",
+      "Impact",
+      "RefContrainte"
+    ],
+    "lastLiquibaseTimestamp": 1627829551000
   },
   "git-provider": "GitHub",
   "git-company": "mytixou",

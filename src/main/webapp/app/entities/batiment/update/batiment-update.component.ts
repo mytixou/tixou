@@ -17,7 +17,7 @@ import { TerrainService } from 'app/entities/terrain/service/terrain.service';
 export class BatimentUpdateComponent implements OnInit {
   isSaving = false;
 
-  terrainsCollection: ITerrain[] = [];
+  terrainsSharedCollection: ITerrain[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -90,17 +90,17 @@ export class BatimentUpdateComponent implements OnInit {
       terrain: batiment.terrain,
     });
 
-    this.terrainsCollection = this.terrainService.addTerrainToCollectionIfMissing(this.terrainsCollection, batiment.terrain);
+    this.terrainsSharedCollection = this.terrainService.addTerrainToCollectionIfMissing(this.terrainsSharedCollection, batiment.terrain);
   }
 
   protected loadRelationshipsOptions(): void {
     this.terrainService
-      .query({ filter: 'batiment-is-null' })
+      .query()
       .pipe(map((res: HttpResponse<ITerrain[]>) => res.body ?? []))
       .pipe(
         map((terrains: ITerrain[]) => this.terrainService.addTerrainToCollectionIfMissing(terrains, this.editForm.get('terrain')!.value))
       )
-      .subscribe((terrains: ITerrain[]) => (this.terrainsCollection = terrains));
+      .subscribe((terrains: ITerrain[]) => (this.terrainsSharedCollection = terrains));
   }
 
   protected createFromForm(): IBatiment {
