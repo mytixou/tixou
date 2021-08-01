@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="proprietaire">
+      <h2 data-cy="proprietaireDetailsHeading"><span jhiTranslate="archisolverApp.proprietaire.detail.title">Proprietaire</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ proprietaire.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.proprietaire.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ proprietaire.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.proprietaire.nom">Nom</span></dt>
+        <dd>
+          <span>{{ proprietaire.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.proprietaire.email">Email</span></dt>
+        <dd>
+          <span>{{ proprietaire.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.proprietaire.telephoneFixe">Telephone Fixe</span></dt>
+        <dd>
+          <span>{{ proprietaire.telephoneFixe }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.proprietaire.telephonePortable">Telephone Portable</span></dt>
+        <dd>
+          <span>{{ proprietaire.telephonePortable }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.proprietaire.depuis">Depuis</span></dt>
+        <dd>
+          <span>{{ proprietaire.depuis | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.proprietaire.habiteLocal">Habite Local</span></dt>
+        <dd>
+          <span>{{ proprietaire.habiteLocal }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.proprietaire.finLe">Fin Le</span></dt>
+        <dd>
+          <span>{{ proprietaire.finLe | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.proprietaire.local">Local</span></dt>
+        <dd>
+          <span *ngFor="let local of proprietaire.locals; let last = last">
+            <a [routerLink]="['/local', local?.id, 'view']">{{ local.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/proprietaire', proprietaire.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

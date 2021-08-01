@@ -51,6 +51,15 @@ public class CacheConfiguration {
             createCache(cm, fr.tixou.archisolver.domain.User.class.getName());
             createCache(cm, fr.tixou.archisolver.domain.Authority.class.getName());
             createCache(cm, fr.tixou.archisolver.domain.User.class.getName() + ".authorities");
+            createCache(cm, fr.tixou.archisolver.domain.Terrain.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Batiment.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Local.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Local.class.getName() + ".proprietaires");
+            createCache(cm, fr.tixou.archisolver.domain.Proprietaire.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Proprietaire.class.getName() + ".locals");
+            createCache(cm, fr.tixou.archisolver.domain.Adresse.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Departement.class.getName());
+            createCache(cm, fr.tixou.archisolver.domain.Region.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

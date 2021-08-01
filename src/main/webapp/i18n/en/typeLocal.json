@@ -1,0 +1,10 @@
+{
+  "archisolverApp": {
+    "TypeLocal": {
+      "null": "",
+      "PROFESSIONNEL": "PROFESSIONNEL",
+      "HABITATION": "HABITATION",
+      "COMMUN": "COMMUN"
+    }
+  }
+}

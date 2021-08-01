@@ -1,0 +1,56 @@
+{
+  "name": "Proprietaire",
+  "fields": [
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephoneFixe",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephonePortable",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "depuis",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "habiteLocal",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "finLe",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "local",
+      "otherEntityRelationshipName": "proprietaire",
+      "relationshipName": "local",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "proprietaire",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210801124940"
+}

@@ -1,0 +1,28 @@
+{
+  "archisolverApp": {
+    "batiment": {
+      "home": {
+        "title": "Batiments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Batiment",
+        "createOrEditLabel": "Create or edit a Batiment",
+        "notFound": "No Batiments found"
+      },
+      "created": "A new Batiment is created with identifier {{ param }}",
+      "updated": "A Batiment is updated with identifier {{ param }}",
+      "deleted": "A Batiment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Batiment {{ id }}?"
+      },
+      "detail": {
+        "title": "Batiment"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "emprise": "Emprise",
+      "hauteur": "Hauteur",
+      "etages": "Etages",
+      "terrain": "Terrain"
+    }
+  }
+}

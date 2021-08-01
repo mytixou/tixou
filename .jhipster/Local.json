@@ -1,0 +1,47 @@
+{
+  "name": "Local",
+  "fields": [
+    {
+      "fieldName": "designation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "surface",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "etage",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "typelocal",
+      "fieldType": "TypeLocal",
+      "fieldValues": "PROFESSIONNEL,HABITATION,COMMUN"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "batiment",
+      "otherEntityRelationshipName": "local",
+      "relationshipName": "batiment"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "proprietaire",
+      "otherEntityRelationshipName": "local",
+      "relationshipName": "proprietaire",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "local",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210801124939"
+}

@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="batiment">
+      <h2 data-cy="batimentDetailsHeading"><span jhiTranslate="archisolverApp.batiment.detail.title">Batiment</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ batiment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.batiment.nom">Nom</span></dt>
+        <dd>
+          <span>{{ batiment.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.batiment.emprise">Emprise</span></dt>
+        <dd>
+          <span>{{ batiment.emprise }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.batiment.hauteur">Hauteur</span></dt>
+        <dd>
+          <span>{{ batiment.hauteur }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.batiment.etages">Etages</span></dt>
+        <dd>
+          <span>{{ batiment.etages }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.batiment.terrain">Terrain</span></dt>
+        <dd>
+          <div *ngIf="batiment.terrain">
+            <a [routerLink]="['/terrain', batiment.terrain?.id, 'view']">{{ batiment.terrain?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/batiment', batiment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

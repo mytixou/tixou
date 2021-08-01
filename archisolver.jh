@@ -1,0 +1,81 @@
+entity Terrain {
+	parcelle String required,
+    surface BigDecimal
+}
+
+entity Batiment {
+	nom String required,
+    emprise BigDecimal,
+    hauteur BigDecimal,
+    etages Integer
+}
+
+entity Local {
+	designation String,
+    surface BigDecimal,
+    etage Integer,
+    typelocal TypeLocal
+}
+
+enum TypeLocal {
+    PROFESSIONNEL, HABITATION, COMMUN
+}
+
+entity Proprietaire {
+	prenom String,
+	nom String,
+	email String,
+	telephoneFixe String,
+	telephonePortable String,
+	depuis LocalDate,
+    habiteLocal Boolean,
+    finLe LocalDate
+}
+
+entity Adresse {
+	adresseLigne1 String,
+    adresseLigne2 String,
+	codePostal String,
+	ville String,
+	stateProvince String
+}
+
+entity Departement {
+	nom String,
+    code Integer
+}
+
+entity Region {
+	regionName String
+}
+
+relationship OneToOne {
+	Departement{region} to Region,
+	Adresse{departement} to Departement
+}
+
+relationship OneToOne {
+	Terrain{adresse} to Adresse,
+    Batiment{terrain} to Terrain
+}
+
+relationship ManyToOne {
+	Local{batiment} to Batiment
+}
+
+relationship ManyToMany {
+	Proprietaire{local} to Local{proprietaire}
+}
+
+// Set pagination options
+paginate Proprietaire, Local with infinite-scroll
+paginate Local with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

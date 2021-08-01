@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Proprietaire.
+    -->
+    <changeSet id="20210801124940-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="proprietaire_id"
+                                 baseTableName="rel_proprietaire__local"
+                                 constraintName="fk_rel_proprietaire__local__proprietaire_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="proprietaire"/>
+
+        <addForeignKeyConstraint baseColumnNames="local_id"
+                                 baseTableName="rel_proprietaire__local"
+                                 constraintName="fk_rel_proprietaire__local__local_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="local"/>
+    </changeSet>
+</databaseChangeLog>
