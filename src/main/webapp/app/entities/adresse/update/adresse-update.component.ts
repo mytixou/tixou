@@ -17,7 +17,7 @@ import { DepartementService } from 'app/entities/departement/service/departement
 export class AdresseUpdateComponent implements OnInit {
   isSaving = false;
 
-  departementsCollection: IDepartement[] = [];
+  departementsSharedCollection: IDepartement[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -92,22 +92,22 @@ export class AdresseUpdateComponent implements OnInit {
       departement: adresse.departement,
     });
 
-    this.departementsCollection = this.departementService.addDepartementToCollectionIfMissing(
-      this.departementsCollection,
+    this.departementsSharedCollection = this.departementService.addDepartementToCollectionIfMissing(
+      this.departementsSharedCollection,
       adresse.departement
     );
   }
 
   protected loadRelationshipsOptions(): void {
     this.departementService
-      .query({ filter: 'adresse-is-null' })
+      .query()
       .pipe(map((res: HttpResponse<IDepartement[]>) => res.body ?? []))
       .pipe(
         map((departements: IDepartement[]) =>
           this.departementService.addDepartementToCollectionIfMissing(departements, this.editForm.get('departement')!.value)
         )
       )
-      .subscribe((departements: IDepartement[]) => (this.departementsCollection = departements));
+      .subscribe((departements: IDepartement[]) => (this.departementsSharedCollection = departements));
   }
 
   protected createFromForm(): IAdresse {

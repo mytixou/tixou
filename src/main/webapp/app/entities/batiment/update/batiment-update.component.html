@@ -44,7 +44,7 @@
             <option [ngValue]="null"></option>
             <option
               [ngValue]="terrainOption.id === editForm.get('terrain')!.value?.id ? editForm.get('terrain')!.value : terrainOption"
-              *ngFor="let terrainOption of terrainsCollection; trackBy: trackTerrainById"
+              *ngFor="let terrainOption of terrainsSharedCollection; trackBy: trackTerrainById"
             >
               {{ terrainOption.id }}
             </option>

@@ -30,9 +30,8 @@ public class Terrain implements Serializable {
     @Column(name = "surface", precision = 21, scale = 2)
     private BigDecimal surface;
 
+    @ManyToOne
     @JsonIgnoreProperties(value = { "departement" }, allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true)
     private Adresse adresse;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

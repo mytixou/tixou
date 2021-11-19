@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="reponse">
+      <h2 data-cy="reponseDetailsHeading"><span jhiTranslate="archisolverApp.reponse.detail.title">Reponse</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ reponse.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.reponse.designation">Designation</span></dt>
+        <dd>
+          <span>{{ reponse.designation }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.reponse.explication">Explication</span></dt>
+        <dd>
+          <span>{{ reponse.explication }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.reponse.typeQuestion">Type Question</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'archisolverApp.TypeDestination.' + reponse.typeQuestion }}">{{ reponse.typeQuestion }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.reponse.question">Question</span></dt>
+        <dd>
+          <div *ngIf="reponse.question">
+            <a [routerLink]="['/question', reponse.question?.id, 'view']">{{ reponse.question?.designation }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/reponse', reponse.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

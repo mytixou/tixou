@@ -1,0 +1,88 @@
+<div>
+  <h2 id="page-heading" data-cy="ReponseHeading">
+    <span jhiTranslate="archisolverApp.reponse.home.title">Reponses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="archisolverApp.reponse.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-reponse"
+        [routerLink]="['/reponse/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="archisolverApp.reponse.home.createLabel"> Create a new Reponse </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="reponses?.length === 0">
+    <span jhiTranslate="archisolverApp.reponse.home.notFound">No reponses found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="reponses && reponses.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.reponse.designation">Designation</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.reponse.explication">Explication</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.reponse.typeQuestion">Type Question</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.reponse.question">Question</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reponse of reponses; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/reponse', reponse.id, 'view']">{{ reponse.id }}</a>
+          </td>
+          <td>{{ reponse.designation }}</td>
+          <td>{{ reponse.explication }}</td>
+          <td jhiTranslate="{{ 'archisolverApp.TypeDestination.' + reponse.typeQuestion }}">{{ reponse.typeQuestion }}</td>
+          <td>
+            <div *ngIf="reponse.question">
+              <a [routerLink]="['/question', reponse.question?.id, 'view']">{{ reponse.question?.designation }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/reponse', reponse.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/reponse', reponse.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(reponse)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

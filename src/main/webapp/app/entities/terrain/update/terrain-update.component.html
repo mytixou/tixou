@@ -38,7 +38,7 @@
             <option [ngValue]="null"></option>
             <option
               [ngValue]="adresseOption.id === editForm.get('adresse')!.value?.id ? editForm.get('adresse')!.value : adresseOption"
-              *ngFor="let adresseOption of adressesCollection; trackBy: trackAdresseById"
+              *ngFor="let adresseOption of adressesSharedCollection; trackBy: trackAdresseById"
             >
               {{ adresseOption.id }}
             </option>

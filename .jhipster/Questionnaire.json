@@ -1,0 +1,44 @@
+{
+  "name": "Questionnaire",
+  "fields": [
+    {
+      "fieldName": "designation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "explication",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeQuestionnaire",
+      "fieldType": "TypeDestination",
+      "fieldValues": "TERRAIN,BATIMENT,LOCAL,ENVIRONNEMENT"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "dossier",
+      "otherEntityRelationshipName": "questionnaire",
+      "relationshipName": "dossier",
+      "otherEntityField": "designation"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "question",
+      "otherEntityRelationshipName": "questionnaire",
+      "relationshipName": "question",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "questionnaire",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210801145226"
+}

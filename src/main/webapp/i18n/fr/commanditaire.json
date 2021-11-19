@@ -1,0 +1,30 @@
+{
+  "archisolverApp": {
+    "commanditaire": {
+      "home": {
+        "title": "Commanditaires",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Commanditaire",
+        "createOrEditLabel": "Créer ou éditer un Commanditaire",
+        "notFound": "Aucun Commanditaire trouvé"
+      },
+      "created": "Un nouveau Commanditaire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Commanditaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Commanditaire avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Commanditaire {{ id }} ?"
+      },
+      "detail": {
+        "title": "Commanditaire"
+      },
+      "id": "ID",
+      "idMetierInterne": "Id Metier Interne",
+      "prenom": "Prenom",
+      "nom": "Nom",
+      "email": "Email",
+      "telephoneFixe": "Telephone Fixe",
+      "telephonePortable": "Telephone Portable",
+      "connuDepuis": "Connu Depuis"
+    }
+  }
+}

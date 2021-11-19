@@ -1,0 +1,27 @@
+{
+  "archisolverApp": {
+    "impact": {
+      "home": {
+        "title": "Impacts",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Impact",
+        "createOrEditLabel": "Créer ou éditer un Impact",
+        "notFound": "Aucun Impact trouvé"
+      },
+      "created": "Un nouveau Impact a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Impact avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Impact avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Impact {{ id }} ?"
+      },
+      "detail": {
+        "title": "Impact"
+      },
+      "id": "ID",
+      "designation": "Designation",
+      "explication": "Explication",
+      "typeImpact": "Type Impact",
+      "reponse": "Reponse"
+    }
+  }
+}

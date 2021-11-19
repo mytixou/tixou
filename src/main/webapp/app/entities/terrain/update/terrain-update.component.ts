@@ -17,7 +17,7 @@ import { AdresseService } from 'app/entities/adresse/service/adresse.service';
 export class TerrainUpdateComponent implements OnInit {
   isSaving = false;
 
-  adressesCollection: IAdresse[] = [];
+  adressesSharedCollection: IAdresse[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -86,17 +86,17 @@ export class TerrainUpdateComponent implements OnInit {
       adresse: terrain.adresse,
     });
 
-    this.adressesCollection = this.adresseService.addAdresseToCollectionIfMissing(this.adressesCollection, terrain.adresse);
+    this.adressesSharedCollection = this.adresseService.addAdresseToCollectionIfMissing(this.adressesSharedCollection, terrain.adresse);
   }
 
   protected loadRelationshipsOptions(): void {
     this.adresseService
-      .query({ filter: 'terrain-is-null' })
+      .query()
       .pipe(map((res: HttpResponse<IAdresse[]>) => res.body ?? []))
       .pipe(
         map((adresses: IAdresse[]) => this.adresseService.addAdresseToCollectionIfMissing(adresses, this.editForm.get('adresse')!.value))
       )
-      .subscribe((adresses: IAdresse[]) => (this.adressesCollection = adresses));
+      .subscribe((adresses: IAdresse[]) => (this.adressesSharedCollection = adresses));
   }
 
   protected createFromForm(): ITerrain {

@@ -1,0 +1,35 @@
+{
+  "name": "ChoixReponse",
+  "fields": [
+    {
+      "fieldName": "dateChoix",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "dossier",
+      "otherEntityRelationshipName": "choixReponse",
+      "relationshipName": "dossier",
+      "otherEntityField": "designation"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "reponse",
+      "otherEntityRelationshipName": "choixReponse",
+      "relationshipName": "reponse",
+      "otherEntityField": "designation"
+    }
+  ],
+  "entityTableName": "choix_reponse",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210801145229"
+}

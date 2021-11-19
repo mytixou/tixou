@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="commanditaire">
+      <h2 data-cy="commanditaireDetailsHeading"><span jhiTranslate="archisolverApp.commanditaire.detail.title">Commanditaire</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ commanditaire.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.commanditaire.idMetierInterne">Id Metier Interne</span></dt>
+        <dd>
+          <span>{{ commanditaire.idMetierInterne }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.commanditaire.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ commanditaire.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.commanditaire.nom">Nom</span></dt>
+        <dd>
+          <span>{{ commanditaire.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.commanditaire.email">Email</span></dt>
+        <dd>
+          <span>{{ commanditaire.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.commanditaire.telephoneFixe">Telephone Fixe</span></dt>
+        <dd>
+          <span>{{ commanditaire.telephoneFixe }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.commanditaire.telephonePortable">Telephone Portable</span></dt>
+        <dd>
+          <span>{{ commanditaire.telephonePortable }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.commanditaire.connuDepuis">Connu Depuis</span></dt>
+        <dd>
+          <span>{{ commanditaire.connuDepuis | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/commanditaire', commanditaire.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

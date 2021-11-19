@@ -40,22 +40,23 @@ describe('Component Tests', () => {
     });
 
     describe('ngOnInit', () => {
-      it('Should call region query and add missing value', () => {
+      it('Should call Region query and add missing value', () => {
         const departement: IDepartement = { id: 456 };
         const region: IRegion = { id: 55905 };
         departement.region = region;
 
         const regionCollection: IRegion[] = [{ id: 96358 }];
         jest.spyOn(regionService, 'query').mockReturnValue(of(new HttpResponse({ body: regionCollection })));
-        const expectedCollection: IRegion[] = [region, ...regionCollection];
+        const additionalRegions = [region];
+        const expectedCollection: IRegion[] = [...additionalRegions, ...regionCollection];
         jest.spyOn(regionService, 'addRegionToCollectionIfMissing').mockReturnValue(expectedCollection);
 
         activatedRoute.data = of({ departement });
         comp.ngOnInit();
 
         expect(regionService.query).toHaveBeenCalled();
-        expect(regionService.addRegionToCollectionIfMissing).toHaveBeenCalledWith(regionCollection, region);
-        expect(comp.regionsCollection).toEqual(expectedCollection);
+        expect(regionService.addRegionToCollectionIfMissing).toHaveBeenCalledWith(regionCollection, ...additionalRegions);
+        expect(comp.regionsSharedCollection).toEqual(expectedCollection);
       });
 
       it('Should update editForm', () => {
@@ -67,7 +68,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(departement));
-        expect(comp.regionsCollection).toContain(region);
+        expect(comp.regionsSharedCollection).toContain(region);
       });
     });
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Impact.
+    -->
+    <changeSet id="20210801145230-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="reponse_id"
+                                 baseTableName="impact"
+                                 constraintName="fk_impact__reponse_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="reponse"/>
+    </changeSet>
+</databaseChangeLog>

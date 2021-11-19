@@ -27,7 +27,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="terrain_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_batiment__terrain_id" />
+                <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>

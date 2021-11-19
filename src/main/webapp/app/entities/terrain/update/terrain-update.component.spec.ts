@@ -40,22 +40,23 @@ describe('Component Tests', () => {
     });
 
     describe('ngOnInit', () => {
-      it('Should call adresse query and add missing value', () => {
+      it('Should call Adresse query and add missing value', () => {
         const terrain: ITerrain = { id: 456 };
         const adresse: IAdresse = { id: 39778 };
         terrain.adresse = adresse;
 
         const adresseCollection: IAdresse[] = [{ id: 53886 }];
         jest.spyOn(adresseService, 'query').mockReturnValue(of(new HttpResponse({ body: adresseCollection })));
-        const expectedCollection: IAdresse[] = [adresse, ...adresseCollection];
+        const additionalAdresses = [adresse];
+        const expectedCollection: IAdresse[] = [...additionalAdresses, ...adresseCollection];
         jest.spyOn(adresseService, 'addAdresseToCollectionIfMissing').mockReturnValue(expectedCollection);
 
         activatedRoute.data = of({ terrain });
         comp.ngOnInit();
 
         expect(adresseService.query).toHaveBeenCalled();
-        expect(adresseService.addAdresseToCollectionIfMissing).toHaveBeenCalledWith(adresseCollection, adresse);
-        expect(comp.adressesCollection).toEqual(expectedCollection);
+        expect(adresseService.addAdresseToCollectionIfMissing).toHaveBeenCalledWith(adresseCollection, ...additionalAdresses);
+        expect(comp.adressesSharedCollection).toEqual(expectedCollection);
       });
 
       it('Should update editForm', () => {
@@ -67,7 +68,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(terrain));
-        expect(comp.adressesCollection).toContain(adresse);
+        expect(comp.adressesSharedCollection).toContain(adresse);
       });
     });
 

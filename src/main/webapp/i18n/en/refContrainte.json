@@ -1,0 +1,27 @@
+{
+  "archisolverApp": {
+    "refContrainte": {
+      "home": {
+        "title": "Ref Contraintes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Ref Contrainte",
+        "createOrEditLabel": "Create or edit a Ref Contrainte",
+        "notFound": "No Ref Contraintes found"
+      },
+      "created": "A new Ref Contrainte is created with identifier {{ param }}",
+      "updated": "A Ref Contrainte is updated with identifier {{ param }}",
+      "deleted": "A Ref Contrainte is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Ref Contrainte {{ id }}?"
+      },
+      "detail": {
+        "title": "Ref Contrainte"
+      },
+      "id": "ID",
+      "designation": "Designation",
+      "typeContrainte": "Type Contrainte",
+      "typeDestination": "Type Destination",
+      "explication": "Explication"
+    }
+  }
+}

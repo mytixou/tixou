@@ -32,6 +32,82 @@ entity Proprietaire {
     finLe LocalDate
 }
 
+entity Commanditaire {
+	idMetierInterne String,
+    prenom String,
+	nom String,
+	email String,
+	telephoneFixe String,
+	telephonePortable String,
+	connuDepuis LocalDate
+}
+
+entity Dossier {
+	designation String,
+    description String,
+    dateCreation Instant,
+    dateCloture Instant
+}
+
+entity Questionnaire {
+	designation String,
+    explication String,
+    typeQuestionnaire TypeDestination
+}
+
+relationship ManyToOne {
+	Dossier{commanditaire(idMetierInterne)} to Commanditaire,
+	Questionnaire{dossier(designation)} to Dossier,
+    ChoixReponse{dossier(designation)} to Dossier,
+    ChoixReponse{reponse(designation)} to Reponse
+}
+
+entity Question {
+	designation String,
+    explication String,
+    typeQuestion TypeDestination
+}
+
+entity Reponse {
+	designation String,
+    explication String,
+    typeQuestion TypeDestination
+}
+
+entity ChoixReponse {
+    dateChoix Instant
+}
+
+entity Impact {
+	designation String,
+    explication String,
+    typeImpact TypeDestination
+}
+
+entity RefContrainte {
+	designation String,
+    typeContrainte TypeContrainte,
+    typeDestination TypeDestination,
+    explication String
+}
+
+relationship ManyToOne {
+	Reponse{question(designation)} to Question,
+	Impact{reponse(designation)} to Reponse
+}
+
+relationship ManyToMany {
+	Questionnaire{question} to Question{questionnaire}
+}
+
+enum TypeContrainte {
+    PLU, RTE2020, DTU, ARCHITECTURE
+}
+
+enum TypeDestination {
+    TERRAIN, BATIMENT, LOCAL, ENVIRONNEMENT
+}
+
 entity Adresse {
 	adresseLigne1 String,
     adresseLigne2 String,
@@ -49,18 +125,15 @@ entity Region {
 	regionName String
 }
 
-relationship OneToOne {
-	Departement{region} to Region,
-	Adresse{departement} to Departement
-}
-
-relationship OneToOne {
-	Terrain{adresse} to Adresse,
-    Batiment{terrain} to Terrain
+relationship ManyToOne {
+	Departement{region(nom)} to Region,
+	Adresse{departement(nom)} to Departement
 }
 
 relationship ManyToOne {
-	Local{batiment} to Batiment
+	Local{batiment} to Batiment,
+	Terrain{adresse} to Adresse,
+    Batiment{terrain} to Terrain
 }
 
 relationship ManyToMany {

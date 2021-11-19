@@ -40,22 +40,23 @@ describe('Component Tests', () => {
     });
 
     describe('ngOnInit', () => {
-      it('Should call terrain query and add missing value', () => {
+      it('Should call Terrain query and add missing value', () => {
         const batiment: IBatiment = { id: 456 };
         const terrain: ITerrain = { id: 15790 };
         batiment.terrain = terrain;
 
         const terrainCollection: ITerrain[] = [{ id: 26094 }];
         jest.spyOn(terrainService, 'query').mockReturnValue(of(new HttpResponse({ body: terrainCollection })));
-        const expectedCollection: ITerrain[] = [terrain, ...terrainCollection];
+        const additionalTerrains = [terrain];
+        const expectedCollection: ITerrain[] = [...additionalTerrains, ...terrainCollection];
         jest.spyOn(terrainService, 'addTerrainToCollectionIfMissing').mockReturnValue(expectedCollection);
 
         activatedRoute.data = of({ batiment });
         comp.ngOnInit();
 
         expect(terrainService.query).toHaveBeenCalled();
-        expect(terrainService.addTerrainToCollectionIfMissing).toHaveBeenCalledWith(terrainCollection, terrain);
-        expect(comp.terrainsCollection).toEqual(expectedCollection);
+        expect(terrainService.addTerrainToCollectionIfMissing).toHaveBeenCalledWith(terrainCollection, ...additionalTerrains);
+        expect(comp.terrainsSharedCollection).toEqual(expectedCollection);
       });
 
       it('Should update editForm', () => {
@@ -67,7 +68,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(batiment));
-        expect(comp.terrainsCollection).toContain(terrain);
+        expect(comp.terrainsSharedCollection).toContain(terrain);
       });
     });
 

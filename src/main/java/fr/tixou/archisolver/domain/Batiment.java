@@ -36,9 +36,8 @@ public class Batiment implements Serializable {
     @Column(name = "etages")
     private Integer etages;
 
+    @ManyToOne
     @JsonIgnoreProperties(value = { "adresse" }, allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true)
     private Terrain terrain;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

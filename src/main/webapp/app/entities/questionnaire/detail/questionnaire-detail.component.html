@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="questionnaire">
+      <h2 data-cy="questionnaireDetailsHeading"><span jhiTranslate="archisolverApp.questionnaire.detail.title">Questionnaire</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ questionnaire.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.questionnaire.designation">Designation</span></dt>
+        <dd>
+          <span>{{ questionnaire.designation }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.questionnaire.explication">Explication</span></dt>
+        <dd>
+          <span>{{ questionnaire.explication }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.questionnaire.typeQuestionnaire">Type Questionnaire</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'archisolverApp.TypeDestination.' + questionnaire.typeQuestionnaire }}">{{
+            questionnaire.typeQuestionnaire
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.questionnaire.dossier">Dossier</span></dt>
+        <dd>
+          <div *ngIf="questionnaire.dossier">
+            <a [routerLink]="['/dossier', questionnaire.dossier?.id, 'view']">{{ questionnaire.dossier?.designation }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.questionnaire.question">Question</span></dt>
+        <dd>
+          <span *ngFor="let question of questionnaire.questions; let last = last">
+            <a [routerLink]="['/question', question?.id, 'view']">{{ question.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/questionnaire', questionnaire.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -13,11 +13,10 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-one",
+      "relationshipType": "many-to-one",
       "otherEntityName": "adresse",
       "otherEntityRelationshipName": "terrain",
-      "relationshipName": "adresse",
-      "ownerSide": true
+      "relationshipName": "adresse"
     }
   ],
   "entityTableName": "terrain",

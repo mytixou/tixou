@@ -1,0 +1,26 @@
+{
+  "archisolverApp": {
+    "choixReponse": {
+      "home": {
+        "title": "ChoixReponses",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Choix Reponse",
+        "createOrEditLabel": "Créer ou éditer un Choix Reponse",
+        "notFound": "Aucun Choix Reponse trouvé"
+      },
+      "created": "Un nouveau Choix Reponse a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Choix Reponse avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Choix Reponse avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Choix Reponse {{ id }} ?"
+      },
+      "detail": {
+        "title": "Choix Reponse"
+      },
+      "id": "ID",
+      "dateChoix": "Date Choix",
+      "dossier": "Dossier",
+      "reponse": "Reponse"
+    }
+  }
+}

@@ -36,9 +36,8 @@ public class Adresse implements Serializable {
     @Column(name = "state_province")
     private String stateProvince;
 
+    @ManyToOne
     @JsonIgnoreProperties(value = { "region" }, allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true)
     private Departement departement;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

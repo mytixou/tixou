@@ -1,0 +1,37 @@
+{
+  "name": "Impact",
+  "fields": [
+    {
+      "fieldName": "designation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "explication",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeImpact",
+      "fieldType": "TypeDestination",
+      "fieldValues": "TERRAIN,BATIMENT,LOCAL,ENVIRONNEMENT"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "reponse",
+      "otherEntityRelationshipName": "impact",
+      "relationshipName": "reponse",
+      "otherEntityField": "designation"
+    }
+  ],
+  "entityTableName": "impact",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210801145230"
+}

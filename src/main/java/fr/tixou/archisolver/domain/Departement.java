@@ -26,8 +26,7 @@ public class Departement implements Serializable {
     @Column(name = "code")
     private Integer code;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Region region;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
