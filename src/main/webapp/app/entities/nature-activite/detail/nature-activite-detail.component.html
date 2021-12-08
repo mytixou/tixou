@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="natureActivite">
+      <h2 data-cy="natureActiviteDetailsHeading"><span jhiTranslate="archisolverApp.natureActivite.detail.title">Nature Activite</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ natureActivite.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureActivite.code">Code</span></dt>
+        <dd>
+          <span>{{ natureActivite.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureActivite.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ natureActivite.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureActivite.description">Description</span></dt>
+        <dd>
+          <span>{{ natureActivite.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureActivite.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="natureActivite.strategie">
+            <a [routerLink]="['/strategie-ci', natureActivite.strategie?.id, 'view']">{{ natureActivite.strategie?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureActivite.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="natureActivite.strategie">
+            <a [routerLink]="['/strategie-apa', natureActivite.strategie?.id, 'view']">{{ natureActivite.strategie?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureActivite.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="natureActivite.strategie">
+            <a [routerLink]="['/strategie-pch', natureActivite.strategie?.id, 'view']">{{ natureActivite.strategie?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureActivite.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="natureActivite.strategie">
+            <a [routerLink]="['/strategie-pch-e', natureActivite.strategie?.id, 'view']">{{ natureActivite.strategie?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/nature-activite', natureActivite.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

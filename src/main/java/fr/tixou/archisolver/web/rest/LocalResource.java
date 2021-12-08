@@ -109,7 +109,7 @@ public class LocalResource {
      * or with status {@code 500 (Internal Server Error)} if the local couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/locals/{id}", consumes = "application/merge-patch+json")
+    @PatchMapping(value = "/locals/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Local> partialUpdateLocal(@PathVariable(value = "id", required = false) final Long id, @RequestBody Local local)
         throws URISyntaxException {
         log.debug("REST request to partial update Local partially : {}, {}", id, local);

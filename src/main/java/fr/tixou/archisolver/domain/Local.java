@@ -23,6 +23,7 @@ public class Local implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "designation")
@@ -48,17 +49,18 @@ public class Local implements Serializable {
     private Set<Proprietaire> proprietaires = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Local id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Local id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getDesignation() {
@@ -66,7 +68,7 @@ public class Local implements Serializable {
     }
 
     public Local designation(String designation) {
-        this.designation = designation;
+        this.setDesignation(designation);
         return this;
     }
 
@@ -79,7 +81,7 @@ public class Local implements Serializable {
     }
 
     public Local surface(BigDecimal surface) {
-        this.surface = surface;
+        this.setSurface(surface);
         return this;
     }
 
@@ -92,7 +94,7 @@ public class Local implements Serializable {
     }
 
     public Local etage(Integer etage) {
-        this.etage = etage;
+        this.setEtage(etage);
         return this;
     }
 
@@ -105,7 +107,7 @@ public class Local implements Serializable {
     }
 
     public Local typelocal(TypeLocal typelocal) {
-        this.typelocal = typelocal;
+        this.setTypelocal(typelocal);
         return this;
     }
 
@@ -117,17 +119,27 @@ public class Local implements Serializable {
         return this.batiment;
     }
 
+    public void setBatiment(Batiment batiment) {
+        this.batiment = batiment;
+    }
+
     public Local batiment(Batiment batiment) {
         this.setBatiment(batiment);
         return this;
     }
 
-    public void setBatiment(Batiment batiment) {
-        this.batiment = batiment;
-    }
-
     public Set<Proprietaire> getProprietaires() {
         return this.proprietaires;
+    }
+
+    public void setProprietaires(Set<Proprietaire> proprietaires) {
+        if (this.proprietaires != null) {
+            this.proprietaires.forEach(i -> i.removeLocal(this));
+        }
+        if (proprietaires != null) {
+            proprietaires.forEach(i -> i.addLocal(this));
+        }
+        this.proprietaires = proprietaires;
     }
 
     public Local proprietaires(Set<Proprietaire> proprietaires) {
@@ -145,16 +157,6 @@ public class Local implements Serializable {
         this.proprietaires.remove(proprietaire);
         proprietaire.getLocals().remove(this);
         return this;
-    }
-
-    public void setProprietaires(Set<Proprietaire> proprietaires) {
-        if (this.proprietaires != null) {
-            this.proprietaires.forEach(i -> i.removeLocal(this));
-        }
-        if (proprietaires != null) {
-            proprietaires.forEach(i -> i.addLocal(this));
-        }
-        this.proprietaires = proprietaires;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

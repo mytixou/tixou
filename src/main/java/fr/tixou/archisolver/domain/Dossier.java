@@ -19,6 +19,7 @@ public class Dossier implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "designation")
@@ -37,17 +38,18 @@ public class Dossier implements Serializable {
     private Commanditaire commanditaire;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Dossier id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Dossier id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getDesignation() {
@@ -55,7 +57,7 @@ public class Dossier implements Serializable {
     }
 
     public Dossier designation(String designation) {
-        this.designation = designation;
+        this.setDesignation(designation);
         return this;
     }
 
@@ -68,7 +70,7 @@ public class Dossier implements Serializable {
     }
 
     public Dossier description(String description) {
-        this.description = description;
+        this.setDescription(description);
         return this;
     }
 
@@ -81,7 +83,7 @@ public class Dossier implements Serializable {
     }
 
     public Dossier dateCreation(Instant dateCreation) {
-        this.dateCreation = dateCreation;
+        this.setDateCreation(dateCreation);
         return this;
     }
 
@@ -94,7 +96,7 @@ public class Dossier implements Serializable {
     }
 
     public Dossier dateCloture(Instant dateCloture) {
-        this.dateCloture = dateCloture;
+        this.setDateCloture(dateCloture);
         return this;
     }
 
@@ -106,13 +108,13 @@ public class Dossier implements Serializable {
         return this.commanditaire;
     }
 
+    public void setCommanditaire(Commanditaire commanditaire) {
+        this.commanditaire = commanditaire;
+    }
+
     public Dossier commanditaire(Commanditaire commanditaire) {
         this.setCommanditaire(commanditaire);
         return this;
-    }
-
-    public void setCommanditaire(Commanditaire commanditaire) {
-        this.commanditaire = commanditaire;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -7,6 +7,8 @@ import { finalize } from 'rxjs/operators';
 
 import { IRefContrainte, RefContrainte } from '../ref-contrainte.model';
 import { RefContrainteService } from '../service/ref-contrainte.service';
+import { TypeContrainte } from 'app/entities/enumerations/type-contrainte.model';
+import { TypeDestination } from 'app/entities/enumerations/type-destination.model';
 
 @Component({
   selector: 'jhi-ref-contrainte-update',
@@ -14,6 +16,8 @@ import { RefContrainteService } from '../service/ref-contrainte.service';
 })
 export class RefContrainteUpdateComponent implements OnInit {
   isSaving = false;
+  typeContrainteValues = Object.keys(TypeContrainte);
+  typeDestinationValues = Object.keys(TypeDestination);
 
   editForm = this.fb.group({
     id: [],

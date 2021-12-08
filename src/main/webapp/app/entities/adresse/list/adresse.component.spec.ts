@@ -7,42 +7,40 @@ import { AdresseService } from '../service/adresse.service';
 
 import { AdresseComponent } from './adresse.component';
 
-describe('Component Tests', () => {
-  describe('Adresse Management Component', () => {
-    let comp: AdresseComponent;
-    let fixture: ComponentFixture<AdresseComponent>;
-    let service: AdresseService;
+describe('Adresse Management Component', () => {
+  let comp: AdresseComponent;
+  let fixture: ComponentFixture<AdresseComponent>;
+  let service: AdresseService;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        declarations: [AdresseComponent],
-      })
-        .overrideTemplate(AdresseComponent, '')
-        .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      declarations: [AdresseComponent],
+    })
+      .overrideTemplate(AdresseComponent, '')
+      .compileComponents();
 
-      fixture = TestBed.createComponent(AdresseComponent);
-      comp = fixture.componentInstance;
-      service = TestBed.inject(AdresseService);
+    fixture = TestBed.createComponent(AdresseComponent);
+    comp = fixture.componentInstance;
+    service = TestBed.inject(AdresseService);
 
-      const headers = new HttpHeaders().append('link', 'link;link');
-      jest.spyOn(service, 'query').mockReturnValue(
-        of(
-          new HttpResponse({
-            body: [{ id: 123 }],
-            headers,
-          })
-        )
-      );
-    });
+    const headers = new HttpHeaders();
+    jest.spyOn(service, 'query').mockReturnValue(
+      of(
+        new HttpResponse({
+          body: [{ id: 123 }],
+          headers,
+        })
+      )
+    );
+  });
 
-    it('Should call load all on init', () => {
-      // WHEN
-      comp.ngOnInit();
+  it('Should call load all on init', () => {
+    // WHEN
+    comp.ngOnInit();
 
-      // THEN
-      expect(service.query).toHaveBeenCalled();
-      expect(comp.adresses?.[0]).toEqual(expect.objectContaining({ id: 123 }));
-    });
+    // THEN
+    expect(service.query).toHaveBeenCalled();
+    expect(comp.adresses?.[0]).toEqual(expect.objectContaining({ id: 123 }));
   });
 });

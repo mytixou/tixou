@@ -16,195 +16,193 @@ import { QuestionService } from 'app/entities/question/service/question.service'
 
 import { QuestionnaireUpdateComponent } from './questionnaire-update.component';
 
-describe('Component Tests', () => {
-  describe('Questionnaire Management Update Component', () => {
-    let comp: QuestionnaireUpdateComponent;
-    let fixture: ComponentFixture<QuestionnaireUpdateComponent>;
-    let activatedRoute: ActivatedRoute;
-    let questionnaireService: QuestionnaireService;
-    let dossierService: DossierService;
-    let questionService: QuestionService;
+describe('Questionnaire Management Update Component', () => {
+  let comp: QuestionnaireUpdateComponent;
+  let fixture: ComponentFixture<QuestionnaireUpdateComponent>;
+  let activatedRoute: ActivatedRoute;
+  let questionnaireService: QuestionnaireService;
+  let dossierService: DossierService;
+  let questionService: QuestionService;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        declarations: [QuestionnaireUpdateComponent],
-        providers: [FormBuilder, ActivatedRoute],
-      })
-        .overrideTemplate(QuestionnaireUpdateComponent, '')
-        .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      declarations: [QuestionnaireUpdateComponent],
+      providers: [FormBuilder, ActivatedRoute],
+    })
+      .overrideTemplate(QuestionnaireUpdateComponent, '')
+      .compileComponents();
 
-      fixture = TestBed.createComponent(QuestionnaireUpdateComponent);
-      activatedRoute = TestBed.inject(ActivatedRoute);
-      questionnaireService = TestBed.inject(QuestionnaireService);
-      dossierService = TestBed.inject(DossierService);
-      questionService = TestBed.inject(QuestionService);
+    fixture = TestBed.createComponent(QuestionnaireUpdateComponent);
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    questionnaireService = TestBed.inject(QuestionnaireService);
+    dossierService = TestBed.inject(DossierService);
+    questionService = TestBed.inject(QuestionService);
 
-      comp = fixture.componentInstance;
+    comp = fixture.componentInstance;
+  });
+
+  describe('ngOnInit', () => {
+    it('Should call Dossier query and add missing value', () => {
+      const questionnaire: IQuestionnaire = { id: 456 };
+      const dossier: IDossier = { id: 73325 };
+      questionnaire.dossier = dossier;
+
+      const dossierCollection: IDossier[] = [{ id: 25813 }];
+      jest.spyOn(dossierService, 'query').mockReturnValue(of(new HttpResponse({ body: dossierCollection })));
+      const additionalDossiers = [dossier];
+      const expectedCollection: IDossier[] = [...additionalDossiers, ...dossierCollection];
+      jest.spyOn(dossierService, 'addDossierToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ questionnaire });
+      comp.ngOnInit();
+
+      expect(dossierService.query).toHaveBeenCalled();
+      expect(dossierService.addDossierToCollectionIfMissing).toHaveBeenCalledWith(dossierCollection, ...additionalDossiers);
+      expect(comp.dossiersSharedCollection).toEqual(expectedCollection);
     });
 
-    describe('ngOnInit', () => {
-      it('Should call Dossier query and add missing value', () => {
-        const questionnaire: IQuestionnaire = { id: 456 };
-        const dossier: IDossier = { id: 73325 };
-        questionnaire.dossier = dossier;
+    it('Should call Question query and add missing value', () => {
+      const questionnaire: IQuestionnaire = { id: 456 };
+      const questions: IQuestion[] = [{ id: 17996 }];
+      questionnaire.questions = questions;
 
-        const dossierCollection: IDossier[] = [{ id: 25813 }];
-        jest.spyOn(dossierService, 'query').mockReturnValue(of(new HttpResponse({ body: dossierCollection })));
-        const additionalDossiers = [dossier];
-        const expectedCollection: IDossier[] = [...additionalDossiers, ...dossierCollection];
-        jest.spyOn(dossierService, 'addDossierToCollectionIfMissing').mockReturnValue(expectedCollection);
+      const questionCollection: IQuestion[] = [{ id: 58303 }];
+      jest.spyOn(questionService, 'query').mockReturnValue(of(new HttpResponse({ body: questionCollection })));
+      const additionalQuestions = [...questions];
+      const expectedCollection: IQuestion[] = [...additionalQuestions, ...questionCollection];
+      jest.spyOn(questionService, 'addQuestionToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ questionnaire });
-        comp.ngOnInit();
+      activatedRoute.data = of({ questionnaire });
+      comp.ngOnInit();
 
-        expect(dossierService.query).toHaveBeenCalled();
-        expect(dossierService.addDossierToCollectionIfMissing).toHaveBeenCalledWith(dossierCollection, ...additionalDossiers);
-        expect(comp.dossiersSharedCollection).toEqual(expectedCollection);
-      });
-
-      it('Should call Question query and add missing value', () => {
-        const questionnaire: IQuestionnaire = { id: 456 };
-        const questions: IQuestion[] = [{ id: 17996 }];
-        questionnaire.questions = questions;
-
-        const questionCollection: IQuestion[] = [{ id: 58303 }];
-        jest.spyOn(questionService, 'query').mockReturnValue(of(new HttpResponse({ body: questionCollection })));
-        const additionalQuestions = [...questions];
-        const expectedCollection: IQuestion[] = [...additionalQuestions, ...questionCollection];
-        jest.spyOn(questionService, 'addQuestionToCollectionIfMissing').mockReturnValue(expectedCollection);
-
-        activatedRoute.data = of({ questionnaire });
-        comp.ngOnInit();
-
-        expect(questionService.query).toHaveBeenCalled();
-        expect(questionService.addQuestionToCollectionIfMissing).toHaveBeenCalledWith(questionCollection, ...additionalQuestions);
-        expect(comp.questionsSharedCollection).toEqual(expectedCollection);
-      });
-
-      it('Should update editForm', () => {
-        const questionnaire: IQuestionnaire = { id: 456 };
-        const dossier: IDossier = { id: 12773 };
-        questionnaire.dossier = dossier;
-        const questions: IQuestion = { id: 52789 };
-        questionnaire.questions = [questions];
-
-        activatedRoute.data = of({ questionnaire });
-        comp.ngOnInit();
-
-        expect(comp.editForm.value).toEqual(expect.objectContaining(questionnaire));
-        expect(comp.dossiersSharedCollection).toContain(dossier);
-        expect(comp.questionsSharedCollection).toContain(questions);
-      });
+      expect(questionService.query).toHaveBeenCalled();
+      expect(questionService.addQuestionToCollectionIfMissing).toHaveBeenCalledWith(questionCollection, ...additionalQuestions);
+      expect(comp.questionsSharedCollection).toEqual(expectedCollection);
     });
 
-    describe('save', () => {
-      it('Should call update service on save for existing entity', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Questionnaire>>();
-        const questionnaire = { id: 123 };
-        jest.spyOn(questionnaireService, 'update').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ questionnaire });
-        comp.ngOnInit();
+    it('Should update editForm', () => {
+      const questionnaire: IQuestionnaire = { id: 456 };
+      const dossier: IDossier = { id: 12773 };
+      questionnaire.dossier = dossier;
+      const questions: IQuestion = { id: 52789 };
+      questionnaire.questions = [questions];
 
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: questionnaire }));
-        saveSubject.complete();
+      activatedRoute.data = of({ questionnaire });
+      comp.ngOnInit();
 
-        // THEN
-        expect(comp.previousState).toHaveBeenCalled();
-        expect(questionnaireService.update).toHaveBeenCalledWith(questionnaire);
-        expect(comp.isSaving).toEqual(false);
-      });
+      expect(comp.editForm.value).toEqual(expect.objectContaining(questionnaire));
+      expect(comp.dossiersSharedCollection).toContain(dossier);
+      expect(comp.questionsSharedCollection).toContain(questions);
+    });
+  });
 
-      it('Should call create service on save for new entity', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Questionnaire>>();
-        const questionnaire = new Questionnaire();
-        jest.spyOn(questionnaireService, 'create').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ questionnaire });
-        comp.ngOnInit();
+  describe('save', () => {
+    it('Should call update service on save for existing entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Questionnaire>>();
+      const questionnaire = { id: 123 };
+      jest.spyOn(questionnaireService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ questionnaire });
+      comp.ngOnInit();
 
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: questionnaire }));
-        saveSubject.complete();
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: questionnaire }));
+      saveSubject.complete();
 
-        // THEN
-        expect(questionnaireService.create).toHaveBeenCalledWith(questionnaire);
-        expect(comp.isSaving).toEqual(false);
-        expect(comp.previousState).toHaveBeenCalled();
-      });
-
-      it('Should set isSaving to false on error', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Questionnaire>>();
-        const questionnaire = { id: 123 };
-        jest.spyOn(questionnaireService, 'update').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ questionnaire });
-        comp.ngOnInit();
-
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.error('This is an error!');
-
-        // THEN
-        expect(questionnaireService.update).toHaveBeenCalledWith(questionnaire);
-        expect(comp.isSaving).toEqual(false);
-        expect(comp.previousState).not.toHaveBeenCalled();
-      });
+      // THEN
+      expect(comp.previousState).toHaveBeenCalled();
+      expect(questionnaireService.update).toHaveBeenCalledWith(questionnaire);
+      expect(comp.isSaving).toEqual(false);
     });
 
-    describe('Tracking relationships identifiers', () => {
-      describe('trackDossierById', () => {
-        it('Should return tracked Dossier primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackDossierById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
-      });
+    it('Should call create service on save for new entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Questionnaire>>();
+      const questionnaire = new Questionnaire();
+      jest.spyOn(questionnaireService, 'create').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ questionnaire });
+      comp.ngOnInit();
 
-      describe('trackQuestionById', () => {
-        it('Should return tracked Question primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackQuestionById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: questionnaire }));
+      saveSubject.complete();
+
+      // THEN
+      expect(questionnaireService.create).toHaveBeenCalledWith(questionnaire);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).toHaveBeenCalled();
+    });
+
+    it('Should set isSaving to false on error', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Questionnaire>>();
+      const questionnaire = { id: 123 };
+      jest.spyOn(questionnaireService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ questionnaire });
+      comp.ngOnInit();
+
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.error('This is an error!');
+
+      // THEN
+      expect(questionnaireService.update).toHaveBeenCalledWith(questionnaire);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Tracking relationships identifiers', () => {
+    describe('trackDossierById', () => {
+      it('Should return tracked Dossier primary key', () => {
+        const entity = { id: 123 };
+        const trackResult = comp.trackDossierById(0, entity);
+        expect(trackResult).toEqual(entity.id);
       });
     });
 
-    describe('Getting selected relationships', () => {
-      describe('getSelectedQuestion', () => {
-        it('Should return option if no Question is selected', () => {
-          const option = { id: 123 };
-          const result = comp.getSelectedQuestion(option);
-          expect(result === option).toEqual(true);
-        });
+    describe('trackQuestionById', () => {
+      it('Should return tracked Question primary key', () => {
+        const entity = { id: 123 };
+        const trackResult = comp.trackQuestionById(0, entity);
+        expect(trackResult).toEqual(entity.id);
+      });
+    });
+  });
 
-        it('Should return selected Question for according option', () => {
-          const option = { id: 123 };
-          const selected = { id: 123 };
-          const selected2 = { id: 456 };
-          const result = comp.getSelectedQuestion(option, [selected2, selected]);
-          expect(result === selected).toEqual(true);
-          expect(result === selected2).toEqual(false);
-          expect(result === option).toEqual(false);
-        });
+  describe('Getting selected relationships', () => {
+    describe('getSelectedQuestion', () => {
+      it('Should return option if no Question is selected', () => {
+        const option = { id: 123 };
+        const result = comp.getSelectedQuestion(option);
+        expect(result === option).toEqual(true);
+      });
 
-        it('Should return option if this Question is not selected', () => {
-          const option = { id: 123 };
-          const selected = { id: 456 };
-          const result = comp.getSelectedQuestion(option, [selected]);
-          expect(result === option).toEqual(true);
-          expect(result === selected).toEqual(false);
-        });
+      it('Should return selected Question for according option', () => {
+        const option = { id: 123 };
+        const selected = { id: 123 };
+        const selected2 = { id: 456 };
+        const result = comp.getSelectedQuestion(option, [selected2, selected]);
+        expect(result === selected).toEqual(true);
+        expect(result === selected2).toEqual(false);
+        expect(result === option).toEqual(false);
+      });
+
+      it('Should return option if this Question is not selected', () => {
+        const option = { id: 123 };
+        const selected = { id: 456 };
+        const result = comp.getSelectedQuestion(option, [selected]);
+        expect(result === option).toEqual(true);
+        expect(result === selected).toEqual(false);
       });
     });
   });

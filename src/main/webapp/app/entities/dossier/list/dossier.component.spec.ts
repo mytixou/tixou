@@ -7,42 +7,40 @@ import { DossierService } from '../service/dossier.service';
 
 import { DossierComponent } from './dossier.component';
 
-describe('Component Tests', () => {
-  describe('Dossier Management Component', () => {
-    let comp: DossierComponent;
-    let fixture: ComponentFixture<DossierComponent>;
-    let service: DossierService;
+describe('Dossier Management Component', () => {
+  let comp: DossierComponent;
+  let fixture: ComponentFixture<DossierComponent>;
+  let service: DossierService;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        declarations: [DossierComponent],
-      })
-        .overrideTemplate(DossierComponent, '')
-        .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      declarations: [DossierComponent],
+    })
+      .overrideTemplate(DossierComponent, '')
+      .compileComponents();
 
-      fixture = TestBed.createComponent(DossierComponent);
-      comp = fixture.componentInstance;
-      service = TestBed.inject(DossierService);
+    fixture = TestBed.createComponent(DossierComponent);
+    comp = fixture.componentInstance;
+    service = TestBed.inject(DossierService);
 
-      const headers = new HttpHeaders().append('link', 'link;link');
-      jest.spyOn(service, 'query').mockReturnValue(
-        of(
-          new HttpResponse({
-            body: [{ id: 123 }],
-            headers,
-          })
-        )
-      );
-    });
+    const headers = new HttpHeaders();
+    jest.spyOn(service, 'query').mockReturnValue(
+      of(
+        new HttpResponse({
+          body: [{ id: 123 }],
+          headers,
+        })
+      )
+    );
+  });
 
-    it('Should call load all on init', () => {
-      // WHEN
-      comp.ngOnInit();
+  it('Should call load all on init', () => {
+    // WHEN
+    comp.ngOnInit();
 
-      // THEN
-      expect(service.query).toHaveBeenCalled();
-      expect(comp.dossiers?.[0]).toEqual(expect.objectContaining({ id: 123 }));
-    });
+    // THEN
+    expect(service.query).toHaveBeenCalled();
+    expect(comp.dossiers?.[0]).toEqual(expect.objectContaining({ id: 123 }));
   });
 });

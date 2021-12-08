@@ -37,18 +37,16 @@ public class DepartementServiceImpl implements DepartementService {
 
         return departementRepository
             .findById(departement.getId())
-            .map(
-                existingDepartement -> {
-                    if (departement.getNom() != null) {
-                        existingDepartement.setNom(departement.getNom());
-                    }
-                    if (departement.getCode() != null) {
-                        existingDepartement.setCode(departement.getCode());
-                    }
-
-                    return existingDepartement;
+            .map(existingDepartement -> {
+                if (departement.getNom() != null) {
+                    existingDepartement.setNom(departement.getNom());
                 }
-            )
+                if (departement.getCode() != null) {
+                    existingDepartement.setCode(departement.getCode());
+                }
+
+                return existingDepartement;
+            })
             .map(departementRepository::save);
     }
 

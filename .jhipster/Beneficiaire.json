@@ -1,0 +1,85 @@
+{
+  "name": "Beneficiaire",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "externeId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isActif",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "dateInscription",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateResiliation",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "soldeCi",
+      "otherEntityRelationshipName": "beneficiaire",
+      "relationshipName": "soldeCi"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "soldeApa",
+      "otherEntityRelationshipName": "beneficiaire",
+      "relationshipName": "soldeApa"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "soldePch",
+      "otherEntityRelationshipName": "beneficiaire",
+      "relationshipName": "soldePch"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "soldePchE",
+      "otherEntityRelationshipName": "beneficiaire",
+      "relationshipName": "soldePchE"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "consommationCi",
+      "otherEntityRelationshipName": "beneficiaire",
+      "relationshipName": "consommationCi"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "consommationApa",
+      "otherEntityRelationshipName": "beneficiaire",
+      "relationshipName": "consommationApa"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "consommationPch",
+      "otherEntityRelationshipName": "beneficiaire",
+      "relationshipName": "consommationPch"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "consommationPchE",
+      "otherEntityRelationshipName": "beneficiaire",
+      "relationshipName": "consommationPchE"
+    }
+  ],
+  "entityTableName": "beneficiaire",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211208011840"
+}

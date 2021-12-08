@@ -11,72 +11,70 @@ import { LocalService } from '../service/local.service';
 
 import { LocalRoutingResolveService } from './local-routing-resolve.service';
 
-describe('Service Tests', () => {
-  describe('Local routing resolve service', () => {
-    let mockRouter: Router;
-    let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
-    let routingResolveService: LocalRoutingResolveService;
-    let service: LocalService;
-    let resultLocal: ILocal | undefined;
+describe('Local routing resolve service', () => {
+  let mockRouter: Router;
+  let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
+  let routingResolveService: LocalRoutingResolveService;
+  let service: LocalService;
+  let resultLocal: ILocal | undefined;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        providers: [Router, ActivatedRouteSnapshot],
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [Router, ActivatedRouteSnapshot],
+    });
+    mockRouter = TestBed.inject(Router);
+    mockActivatedRouteSnapshot = TestBed.inject(ActivatedRouteSnapshot);
+    routingResolveService = TestBed.inject(LocalRoutingResolveService);
+    service = TestBed.inject(LocalService);
+    resultLocal = undefined;
+  });
+
+  describe('resolve', () => {
+    it('should return ILocal returned by find', () => {
+      // GIVEN
+      service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
+      mockActivatedRouteSnapshot.params = { id: 123 };
+
+      // WHEN
+      routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
+        resultLocal = result;
       });
-      mockRouter = TestBed.inject(Router);
-      mockActivatedRouteSnapshot = TestBed.inject(ActivatedRouteSnapshot);
-      routingResolveService = TestBed.inject(LocalRoutingResolveService);
-      service = TestBed.inject(LocalService);
-      resultLocal = undefined;
+
+      // THEN
+      expect(service.find).toBeCalledWith(123);
+      expect(resultLocal).toEqual({ id: 123 });
     });
 
-    describe('resolve', () => {
-      it('should return ILocal returned by find', () => {
-        // GIVEN
-        service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
-        mockActivatedRouteSnapshot.params = { id: 123 };
+    it('should return new ILocal if id is not provided', () => {
+      // GIVEN
+      service.find = jest.fn();
+      mockActivatedRouteSnapshot.params = {};
 
-        // WHEN
-        routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
-          resultLocal = result;
-        });
-
-        // THEN
-        expect(service.find).toBeCalledWith(123);
-        expect(resultLocal).toEqual({ id: 123 });
+      // WHEN
+      routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
+        resultLocal = result;
       });
 
-      it('should return new ILocal if id is not provided', () => {
-        // GIVEN
-        service.find = jest.fn();
-        mockActivatedRouteSnapshot.params = {};
+      // THEN
+      expect(service.find).not.toBeCalled();
+      expect(resultLocal).toEqual(new Local());
+    });
 
-        // WHEN
-        routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
-          resultLocal = result;
-        });
+    it('should route to 404 page if data not found in server', () => {
+      // GIVEN
+      jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse({ body: null as unknown as Local })));
+      mockActivatedRouteSnapshot.params = { id: 123 };
 
-        // THEN
-        expect(service.find).not.toBeCalled();
-        expect(resultLocal).toEqual(new Local());
+      // WHEN
+      routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
+        resultLocal = result;
       });
 
-      it('should route to 404 page if data not found in server', () => {
-        // GIVEN
-        jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse({ body: null as unknown as Local })));
-        mockActivatedRouteSnapshot.params = { id: 123 };
-
-        // WHEN
-        routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
-          resultLocal = result;
-        });
-
-        // THEN
-        expect(service.find).toBeCalledWith(123);
-        expect(resultLocal).toEqual(undefined);
-        expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
-      });
+      // THEN
+      expect(service.find).toBeCalledWith(123);
+      expect(resultLocal).toEqual(undefined);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
     });
   });
 });

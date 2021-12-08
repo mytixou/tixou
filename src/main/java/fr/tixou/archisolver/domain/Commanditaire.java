@@ -19,6 +19,7 @@ public class Commanditaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "id_metier_interne")
@@ -43,17 +44,18 @@ public class Commanditaire implements Serializable {
     private LocalDate connuDepuis;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Commanditaire id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Commanditaire id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getIdMetierInterne() {
@@ -61,7 +63,7 @@ public class Commanditaire implements Serializable {
     }
 
     public Commanditaire idMetierInterne(String idMetierInterne) {
-        this.idMetierInterne = idMetierInterne;
+        this.setIdMetierInterne(idMetierInterne);
         return this;
     }
 
@@ -74,7 +76,7 @@ public class Commanditaire implements Serializable {
     }
 
     public Commanditaire prenom(String prenom) {
-        this.prenom = prenom;
+        this.setPrenom(prenom);
         return this;
     }
 
@@ -87,7 +89,7 @@ public class Commanditaire implements Serializable {
     }
 
     public Commanditaire nom(String nom) {
-        this.nom = nom;
+        this.setNom(nom);
         return this;
     }
 
@@ -100,7 +102,7 @@ public class Commanditaire implements Serializable {
     }
 
     public Commanditaire email(String email) {
-        this.email = email;
+        this.setEmail(email);
         return this;
     }
 
@@ -113,7 +115,7 @@ public class Commanditaire implements Serializable {
     }
 
     public Commanditaire telephoneFixe(String telephoneFixe) {
-        this.telephoneFixe = telephoneFixe;
+        this.setTelephoneFixe(telephoneFixe);
         return this;
     }
 
@@ -126,7 +128,7 @@ public class Commanditaire implements Serializable {
     }
 
     public Commanditaire telephonePortable(String telephonePortable) {
-        this.telephonePortable = telephonePortable;
+        this.setTelephonePortable(telephonePortable);
         return this;
     }
 
@@ -139,7 +141,7 @@ public class Commanditaire implements Serializable {
     }
 
     public Commanditaire connuDepuis(LocalDate connuDepuis) {
-        this.connuDepuis = connuDepuis;
+        this.setConnuDepuis(connuDepuis);
         return this;
     }
 

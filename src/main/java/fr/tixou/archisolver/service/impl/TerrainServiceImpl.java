@@ -37,18 +37,16 @@ public class TerrainServiceImpl implements TerrainService {
 
         return terrainRepository
             .findById(terrain.getId())
-            .map(
-                existingTerrain -> {
-                    if (terrain.getParcelle() != null) {
-                        existingTerrain.setParcelle(terrain.getParcelle());
-                    }
-                    if (terrain.getSurface() != null) {
-                        existingTerrain.setSurface(terrain.getSurface());
-                    }
-
-                    return existingTerrain;
+            .map(existingTerrain -> {
+                if (terrain.getParcelle() != null) {
+                    existingTerrain.setParcelle(terrain.getParcelle());
                 }
-            )
+                if (terrain.getSurface() != null) {
+                    existingTerrain.setSurface(terrain.getSurface());
+                }
+
+                return existingTerrain;
+            })
             .map(terrainRepository::save);
     }
 

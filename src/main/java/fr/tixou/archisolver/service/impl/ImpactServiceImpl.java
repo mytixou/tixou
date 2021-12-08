@@ -37,21 +37,19 @@ public class ImpactServiceImpl implements ImpactService {
 
         return impactRepository
             .findById(impact.getId())
-            .map(
-                existingImpact -> {
-                    if (impact.getDesignation() != null) {
-                        existingImpact.setDesignation(impact.getDesignation());
-                    }
-                    if (impact.getExplication() != null) {
-                        existingImpact.setExplication(impact.getExplication());
-                    }
-                    if (impact.getTypeImpact() != null) {
-                        existingImpact.setTypeImpact(impact.getTypeImpact());
-                    }
-
-                    return existingImpact;
+            .map(existingImpact -> {
+                if (impact.getDesignation() != null) {
+                    existingImpact.setDesignation(impact.getDesignation());
                 }
-            )
+                if (impact.getExplication() != null) {
+                    existingImpact.setExplication(impact.getExplication());
+                }
+                if (impact.getTypeImpact() != null) {
+                    existingImpact.setTypeImpact(impact.getTypeImpact());
+                }
+
+                return existingImpact;
+            })
             .map(impactRepository::save);
     }
 

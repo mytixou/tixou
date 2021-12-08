@@ -14,135 +14,133 @@ import { ReponseService } from 'app/entities/reponse/service/reponse.service';
 
 import { ImpactUpdateComponent } from './impact-update.component';
 
-describe('Component Tests', () => {
-  describe('Impact Management Update Component', () => {
-    let comp: ImpactUpdateComponent;
-    let fixture: ComponentFixture<ImpactUpdateComponent>;
-    let activatedRoute: ActivatedRoute;
-    let impactService: ImpactService;
-    let reponseService: ReponseService;
+describe('Impact Management Update Component', () => {
+  let comp: ImpactUpdateComponent;
+  let fixture: ComponentFixture<ImpactUpdateComponent>;
+  let activatedRoute: ActivatedRoute;
+  let impactService: ImpactService;
+  let reponseService: ReponseService;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        declarations: [ImpactUpdateComponent],
-        providers: [FormBuilder, ActivatedRoute],
-      })
-        .overrideTemplate(ImpactUpdateComponent, '')
-        .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      declarations: [ImpactUpdateComponent],
+      providers: [FormBuilder, ActivatedRoute],
+    })
+      .overrideTemplate(ImpactUpdateComponent, '')
+      .compileComponents();
 
-      fixture = TestBed.createComponent(ImpactUpdateComponent);
-      activatedRoute = TestBed.inject(ActivatedRoute);
-      impactService = TestBed.inject(ImpactService);
-      reponseService = TestBed.inject(ReponseService);
+    fixture = TestBed.createComponent(ImpactUpdateComponent);
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    impactService = TestBed.inject(ImpactService);
+    reponseService = TestBed.inject(ReponseService);
 
-      comp = fixture.componentInstance;
+    comp = fixture.componentInstance;
+  });
+
+  describe('ngOnInit', () => {
+    it('Should call Reponse query and add missing value', () => {
+      const impact: IImpact = { id: 456 };
+      const reponse: IReponse = { id: 32868 };
+      impact.reponse = reponse;
+
+      const reponseCollection: IReponse[] = [{ id: 45433 }];
+      jest.spyOn(reponseService, 'query').mockReturnValue(of(new HttpResponse({ body: reponseCollection })));
+      const additionalReponses = [reponse];
+      const expectedCollection: IReponse[] = [...additionalReponses, ...reponseCollection];
+      jest.spyOn(reponseService, 'addReponseToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ impact });
+      comp.ngOnInit();
+
+      expect(reponseService.query).toHaveBeenCalled();
+      expect(reponseService.addReponseToCollectionIfMissing).toHaveBeenCalledWith(reponseCollection, ...additionalReponses);
+      expect(comp.reponsesSharedCollection).toEqual(expectedCollection);
     });
 
-    describe('ngOnInit', () => {
-      it('Should call Reponse query and add missing value', () => {
-        const impact: IImpact = { id: 456 };
-        const reponse: IReponse = { id: 32868 };
-        impact.reponse = reponse;
+    it('Should update editForm', () => {
+      const impact: IImpact = { id: 456 };
+      const reponse: IReponse = { id: 74616 };
+      impact.reponse = reponse;
 
-        const reponseCollection: IReponse[] = [{ id: 45433 }];
-        jest.spyOn(reponseService, 'query').mockReturnValue(of(new HttpResponse({ body: reponseCollection })));
-        const additionalReponses = [reponse];
-        const expectedCollection: IReponse[] = [...additionalReponses, ...reponseCollection];
-        jest.spyOn(reponseService, 'addReponseToCollectionIfMissing').mockReturnValue(expectedCollection);
+      activatedRoute.data = of({ impact });
+      comp.ngOnInit();
 
-        activatedRoute.data = of({ impact });
-        comp.ngOnInit();
+      expect(comp.editForm.value).toEqual(expect.objectContaining(impact));
+      expect(comp.reponsesSharedCollection).toContain(reponse);
+    });
+  });
 
-        expect(reponseService.query).toHaveBeenCalled();
-        expect(reponseService.addReponseToCollectionIfMissing).toHaveBeenCalledWith(reponseCollection, ...additionalReponses);
-        expect(comp.reponsesSharedCollection).toEqual(expectedCollection);
-      });
+  describe('save', () => {
+    it('Should call update service on save for existing entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Impact>>();
+      const impact = { id: 123 };
+      jest.spyOn(impactService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ impact });
+      comp.ngOnInit();
 
-      it('Should update editForm', () => {
-        const impact: IImpact = { id: 456 };
-        const reponse: IReponse = { id: 74616 };
-        impact.reponse = reponse;
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: impact }));
+      saveSubject.complete();
 
-        activatedRoute.data = of({ impact });
-        comp.ngOnInit();
-
-        expect(comp.editForm.value).toEqual(expect.objectContaining(impact));
-        expect(comp.reponsesSharedCollection).toContain(reponse);
-      });
+      // THEN
+      expect(comp.previousState).toHaveBeenCalled();
+      expect(impactService.update).toHaveBeenCalledWith(impact);
+      expect(comp.isSaving).toEqual(false);
     });
 
-    describe('save', () => {
-      it('Should call update service on save for existing entity', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Impact>>();
-        const impact = { id: 123 };
-        jest.spyOn(impactService, 'update').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ impact });
-        comp.ngOnInit();
+    it('Should call create service on save for new entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Impact>>();
+      const impact = new Impact();
+      jest.spyOn(impactService, 'create').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ impact });
+      comp.ngOnInit();
 
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: impact }));
-        saveSubject.complete();
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: impact }));
+      saveSubject.complete();
 
-        // THEN
-        expect(comp.previousState).toHaveBeenCalled();
-        expect(impactService.update).toHaveBeenCalledWith(impact);
-        expect(comp.isSaving).toEqual(false);
-      });
-
-      it('Should call create service on save for new entity', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Impact>>();
-        const impact = new Impact();
-        jest.spyOn(impactService, 'create').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ impact });
-        comp.ngOnInit();
-
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: impact }));
-        saveSubject.complete();
-
-        // THEN
-        expect(impactService.create).toHaveBeenCalledWith(impact);
-        expect(comp.isSaving).toEqual(false);
-        expect(comp.previousState).toHaveBeenCalled();
-      });
-
-      it('Should set isSaving to false on error', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Impact>>();
-        const impact = { id: 123 };
-        jest.spyOn(impactService, 'update').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ impact });
-        comp.ngOnInit();
-
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.error('This is an error!');
-
-        // THEN
-        expect(impactService.update).toHaveBeenCalledWith(impact);
-        expect(comp.isSaving).toEqual(false);
-        expect(comp.previousState).not.toHaveBeenCalled();
-      });
+      // THEN
+      expect(impactService.create).toHaveBeenCalledWith(impact);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).toHaveBeenCalled();
     });
 
-    describe('Tracking relationships identifiers', () => {
-      describe('trackReponseById', () => {
-        it('Should return tracked Reponse primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackReponseById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
+    it('Should set isSaving to false on error', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Impact>>();
+      const impact = { id: 123 };
+      jest.spyOn(impactService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ impact });
+      comp.ngOnInit();
+
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.error('This is an error!');
+
+      // THEN
+      expect(impactService.update).toHaveBeenCalledWith(impact);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Tracking relationships identifiers', () => {
+    describe('trackReponseById', () => {
+      it('Should return tracked Reponse primary key', () => {
+        const entity = { id: 123 };
+        const trackResult = comp.trackReponseById(0, entity);
+        expect(trackResult).toEqual(entity.id);
       });
     });
   });

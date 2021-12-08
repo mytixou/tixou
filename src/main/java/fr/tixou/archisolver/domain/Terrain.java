@@ -21,6 +21,7 @@ public class Terrain implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @NotNull
@@ -35,17 +36,18 @@ public class Terrain implements Serializable {
     private Adresse adresse;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Terrain id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Terrain id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getParcelle() {
@@ -53,7 +55,7 @@ public class Terrain implements Serializable {
     }
 
     public Terrain parcelle(String parcelle) {
-        this.parcelle = parcelle;
+        this.setParcelle(parcelle);
         return this;
     }
 
@@ -66,7 +68,7 @@ public class Terrain implements Serializable {
     }
 
     public Terrain surface(BigDecimal surface) {
-        this.surface = surface;
+        this.setSurface(surface);
         return this;
     }
 
@@ -78,13 +80,13 @@ public class Terrain implements Serializable {
         return this.adresse;
     }
 
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
+
     public Terrain adresse(Adresse adresse) {
         this.setAdresse(adresse);
         return this;
-    }
-
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

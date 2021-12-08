@@ -1,0 +1,41 @@
+{
+  "name": "ConsommationApa",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "montantCotisations",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "nbHeures",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "beneficiaire",
+      "otherEntityRelationshipName": "consommationApa",
+      "relationshipName": "beneficiaire"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "strategieApa",
+      "otherEntityRelationshipName": "consommationApa",
+      "relationshipName": "strategieApa"
+    }
+  ],
+  "entityTableName": "consommation_apa",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211208011854"
+}

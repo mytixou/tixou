@@ -1,0 +1,198 @@
+
+entity Beneficiaire {
+	id String,
+    externeId String,
+    isActif Boolean,
+    dateInscription LocalDate,
+    dateResiliation LocalDate
+}
+
+//------ Gestion des soldes
+
+entity SoldeCi {
+	annee Integer,
+    soldeMontantCi BigDecimal,
+    soldeMontantCiRec BigDecimal
+}
+
+entity SoldeApa {
+	annee Integer,
+    mois Integer,
+    soldeMontantApa BigDecimal,
+    soldeHeureApa BigDecimal
+}
+
+entity SoldePch {
+	annee Integer,
+    mois Integer,
+    soldeMontantPch BigDecimal,
+    soldeHeurePch BigDecimal
+}
+
+entity SoldePchE {
+	annee Integer,
+    mois Integer,
+    soldeMontantPchE BigDecimal,
+    soldeHeurePchE BigDecimal
+}
+
+relationship OneToMany {
+	Beneficiaire to SoldeCi{beneficiaire},
+	Beneficiaire to SoldeApa{beneficiaire},
+	Beneficiaire to SoldePch{beneficiaire},
+	Beneficiaire to SoldePchE{beneficiaire}
+}
+
+//------ Gestion des aides
+
+entity TiersFinanceur {
+	nom String,
+    // 001 (Ain), 971 (Guadeloupe), FRA (France)
+    localisation String,
+    isActif Boolean,
+    dateInscription LocalDate,
+    anneLancement Integer,
+    moisLancement Integer,
+    dateResiliation LocalDate
+    derniereAnnee Integer,
+    dernierMois Integer
+}
+
+// les différents types d'aide
+enum TypeAide {
+    CI, APA, PCH, PCHE
+}
+
+entity Aide {
+	nom TypeAide,
+    isActif Boolean,
+    dateLancement LocalDate,
+    anneLancement Integer,
+    moisLancement Integer,
+    dateArret LocalDate,
+    derniereAnnee Integer,
+    dernierMois Integer
+}
+
+entity StrategieCi {
+    isActif Boolean,
+    anne Integer,
+    montantPlafond BigDecimal,
+    taux BigDecimal
+}
+
+entity StrategieApa {
+    isActif Boolean,
+    anne Integer,
+    montantPlafond BigDecimal,
+    nbPlafondheure BigDecimal,
+    taux BigDecimal
+}
+
+entity StrategiePch {
+    isActif Boolean,
+    anne Integer,
+    montantPlafond BigDecimal,
+    nbPlafondheure BigDecimal,
+    taux BigDecimal
+}
+
+entity StrategiePchE {
+    isActif Boolean,
+    anne Integer,
+    montantPlafond BigDecimal,
+    nbPlafondheure BigDecimal,
+    taux BigDecimal
+}
+
+// Application des stratégies pour les aides sur l'année ou sur le mois
+relationship OneToMany {
+	Aide to StrategieCi{aide},
+	Aide to StrategieApa{aide},
+	Aide to StrategiePch{aide},
+	Aide to StrategiePchE{aide},
+}
+
+// Application des stratégies par les Tiers financeurs sur l'année ou sur le mois
+relationship OneToMany {
+	StrategieCi to TiersFinanceur{strategie},
+	StrategieApa to TiersFinanceur{strategie},
+	StrategiePch to TiersFinanceur{strategie},
+	StrategiePchE to TiersFinanceur{strategie}
+}
+
+entity NatureActivite {
+    code String,
+    libelle String,
+    description String
+}
+
+entity NatureMontant {
+    code String,
+    libelle String,
+    description String
+}
+
+// Application de l'éligibilite des natures d'activité éligibles pour les stratégies
+relationship OneToMany {
+	StrategieCi to NatureActivite{strategie},
+	StrategieApa to NatureActivite{strategie},
+	StrategiePch to NatureActivite{strategie},
+	StrategiePchE to NatureActivite{strategie}
+}
+
+// Application de l'éligibilite des natures des montants éligibles pour les stratégies
+relationship OneToMany {
+	StrategieCi to NatureMontant{strategie},
+	StrategieApa to NatureMontant{strategie},
+	StrategiePch to NatureMontant{strategie},
+	StrategiePchE to NatureMontant{strategie}
+}
+
+//------ Gestion des consommations
+
+entity ConsommationCi {
+    date Instant,
+    montantCi BigDecimal,
+    montantRecuperable BigDecimal
+}
+
+entity ConsommationApa {
+    date Instant,
+    montantCotisations BigDecimal,
+    nbHeures BigDecimal
+}
+
+entity ConsommationPch {
+    date Instant,
+    montantCotisations BigDecimal,
+    nbHeures BigDecimal
+}
+
+entity ConsommationPchE {
+    date Instant,
+    montantCotisations BigDecimal,
+    nbHeures BigDecimal
+}
+
+// Application des consommations au bénéficiaire
+relationship OneToMany {
+	Beneficiaire to ConsommationCi{beneficiaire},
+	Beneficiaire to ConsommationApa{beneficiaire},
+	Beneficiaire to ConsommationPch{beneficiaire},
+	Beneficiaire to ConsommationPchE{beneficiaire},
+}
+
+// Application des consommations pour une stratégie
+relationship OneToMany {
+	StrategieCi to ConsommationCi{strategieCi},
+	StrategieApa to ConsommationApa{strategieApa},
+	StrategiePch to ConsommationPch{strategiePch},
+	StrategiePchE to ConsommationPchE{strategiePchE},
+}
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

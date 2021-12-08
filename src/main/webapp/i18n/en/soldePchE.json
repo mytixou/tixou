@@ -1,0 +1,28 @@
+{
+  "archisolverApp": {
+    "soldePchE": {
+      "home": {
+        "title": "Solde Pch ES",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Solde Pch E",
+        "createOrEditLabel": "Create or edit a Solde Pch E",
+        "notFound": "No Solde Pch ES found"
+      },
+      "created": "A new Solde Pch E is created with identifier {{ param }}",
+      "updated": "A Solde Pch E is updated with identifier {{ param }}",
+      "deleted": "A Solde Pch E is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Solde Pch E {{ id }}?"
+      },
+      "detail": {
+        "title": "Solde Pch E"
+      },
+      "id": "ID",
+      "annee": "Annee",
+      "mois": "Mois",
+      "soldeMontantPchE": "Solde Montant Pch E",
+      "soldeHeurePchE": "Solde Heure Pch E",
+      "beneficiaire": "Beneficiaire"
+    }
+  }
+}

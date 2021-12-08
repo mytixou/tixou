@@ -1,0 +1,30 @@
+{
+  "archisolverApp": {
+    "natureMontant": {
+      "home": {
+        "title": "NatureMontants",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Nature Montant",
+        "createOrEditLabel": "Créer ou éditer un Nature Montant",
+        "notFound": "Aucun Nature Montant trouvé"
+      },
+      "created": "Un nouveau Nature Montant a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Nature Montant avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Nature Montant avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Nature Montant {{ id }} ?"
+      },
+      "detail": {
+        "title": "Nature Montant"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "strategie": "Strategie",
+      "strategie": "Strategie",
+      "strategie": "Strategie",
+      "strategie": "Strategie"
+    }
+  }
+}

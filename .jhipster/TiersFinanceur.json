@@ -1,0 +1,77 @@
+{
+  "name": "TiersFinanceur",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "localisation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isActif",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "dateInscription",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "anneLancement",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "moisLancement",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateResiliation",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "derniereAnnee",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dernierMois",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "strategieCi",
+      "otherEntityRelationshipName": "tiersFinanceur",
+      "relationshipName": "strategie"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "strategieApa",
+      "otherEntityRelationshipName": "tiersFinanceur",
+      "relationshipName": "strategie"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "strategiePch",
+      "otherEntityRelationshipName": "tiersFinanceur",
+      "relationshipName": "strategie"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "strategiePchE",
+      "otherEntityRelationshipName": "tiersFinanceur",
+      "relationshipName": "strategie"
+    }
+  ],
+  "entityTableName": "tiers_financeur",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211208011845"
+}

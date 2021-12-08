@@ -7,42 +7,40 @@ import { DepartementService } from '../service/departement.service';
 
 import { DepartementComponent } from './departement.component';
 
-describe('Component Tests', () => {
-  describe('Departement Management Component', () => {
-    let comp: DepartementComponent;
-    let fixture: ComponentFixture<DepartementComponent>;
-    let service: DepartementService;
+describe('Departement Management Component', () => {
+  let comp: DepartementComponent;
+  let fixture: ComponentFixture<DepartementComponent>;
+  let service: DepartementService;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        declarations: [DepartementComponent],
-      })
-        .overrideTemplate(DepartementComponent, '')
-        .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      declarations: [DepartementComponent],
+    })
+      .overrideTemplate(DepartementComponent, '')
+      .compileComponents();
 
-      fixture = TestBed.createComponent(DepartementComponent);
-      comp = fixture.componentInstance;
-      service = TestBed.inject(DepartementService);
+    fixture = TestBed.createComponent(DepartementComponent);
+    comp = fixture.componentInstance;
+    service = TestBed.inject(DepartementService);
 
-      const headers = new HttpHeaders().append('link', 'link;link');
-      jest.spyOn(service, 'query').mockReturnValue(
-        of(
-          new HttpResponse({
-            body: [{ id: 123 }],
-            headers,
-          })
-        )
-      );
-    });
+    const headers = new HttpHeaders();
+    jest.spyOn(service, 'query').mockReturnValue(
+      of(
+        new HttpResponse({
+          body: [{ id: 123 }],
+          headers,
+        })
+      )
+    );
+  });
 
-    it('Should call load all on init', () => {
-      // WHEN
-      comp.ngOnInit();
+  it('Should call load all on init', () => {
+    // WHEN
+    comp.ngOnInit();
 
-      // THEN
-      expect(service.query).toHaveBeenCalled();
-      expect(comp.departements?.[0]).toEqual(expect.objectContaining({ id: 123 }));
-    });
+    // THEN
+    expect(service.query).toHaveBeenCalled();
+    expect(comp.departements?.[0]).toEqual(expect.objectContaining({ id: 123 }));
   });
 });

@@ -1,0 +1,33 @@
+{
+  "archisolverApp": {
+    "strategiePchE": {
+      "home": {
+        "title": "Strategie Pch ES",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Strategie Pch E",
+        "createOrEditLabel": "Create or edit a Strategie Pch E",
+        "notFound": "No Strategie Pch ES found"
+      },
+      "created": "A new Strategie Pch E is created with identifier {{ param }}",
+      "updated": "A Strategie Pch E is updated with identifier {{ param }}",
+      "deleted": "A Strategie Pch E is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Strategie Pch E {{ id }}?"
+      },
+      "detail": {
+        "title": "Strategie Pch E"
+      },
+      "id": "ID",
+      "isActif": "Is Actif",
+      "anne": "Anne",
+      "montantPlafond": "Montant Plafond",
+      "nbPlafondheure": "Nb Plafondheure",
+      "taux": "Taux",
+      "tiersFinanceur": "Tiers Financeur",
+      "natureActivite": "Nature Activite",
+      "natureMontant": "Nature Montant",
+      "consommationPchE": "Consommation Pch E",
+      "aide": "Aide"
+    }
+  }
+}

@@ -57,10 +57,9 @@
             data-cy="typeQuestionnaire"
           >
             <option [ngValue]="null">{{ 'archisolverApp.TypeDestination.null' | translate }}</option>
-            <option value="TERRAIN">{{ 'archisolverApp.TypeDestination.TERRAIN' | translate }}</option>
-            <option value="BATIMENT">{{ 'archisolverApp.TypeDestination.BATIMENT' | translate }}</option>
-            <option value="LOCAL">{{ 'archisolverApp.TypeDestination.LOCAL' | translate }}</option>
-            <option value="ENVIRONNEMENT">{{ 'archisolverApp.TypeDestination.ENVIRONNEMENT' | translate }}</option>
+            <option *ngFor="let typeDestination of typeDestinationValues" [value]="typeDestination">
+              {{ 'archisolverApp.TypeDestination.' + typeDestination | translate }}
+            </option>
           </select>
         </div>
 

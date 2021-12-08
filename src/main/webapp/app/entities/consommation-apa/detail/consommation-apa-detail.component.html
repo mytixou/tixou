@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="consommationApa">
+      <h2 data-cy="consommationApaDetailsHeading">
+        <span jhiTranslate="archisolverApp.consommationApa.detail.title">Consommation Apa</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ consommationApa.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.consommationApa.date">Date</span></dt>
+        <dd>
+          <span>{{ consommationApa.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.consommationApa.montantCotisations">Montant Cotisations</span></dt>
+        <dd>
+          <span>{{ consommationApa.montantCotisations }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.consommationApa.nbHeures">Nb Heures</span></dt>
+        <dd>
+          <span>{{ consommationApa.nbHeures }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.consommationApa.beneficiaire">Beneficiaire</span></dt>
+        <dd>
+          <div *ngIf="consommationApa.beneficiaire">
+            <a [routerLink]="['/beneficiaire', consommationApa.beneficiaire?.id, 'view']">{{ consommationApa.beneficiaire?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.consommationApa.strategieApa">Strategie Apa</span></dt>
+        <dd>
+          <div *ngIf="consommationApa.strategieApa">
+            <a [routerLink]="['/strategie-apa', consommationApa.strategieApa?.id, 'view']">{{ consommationApa.strategieApa?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/consommation-apa', consommationApa.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

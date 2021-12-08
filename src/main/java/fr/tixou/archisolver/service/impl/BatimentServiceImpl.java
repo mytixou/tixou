@@ -37,24 +37,22 @@ public class BatimentServiceImpl implements BatimentService {
 
         return batimentRepository
             .findById(batiment.getId())
-            .map(
-                existingBatiment -> {
-                    if (batiment.getNom() != null) {
-                        existingBatiment.setNom(batiment.getNom());
-                    }
-                    if (batiment.getEmprise() != null) {
-                        existingBatiment.setEmprise(batiment.getEmprise());
-                    }
-                    if (batiment.getHauteur() != null) {
-                        existingBatiment.setHauteur(batiment.getHauteur());
-                    }
-                    if (batiment.getEtages() != null) {
-                        existingBatiment.setEtages(batiment.getEtages());
-                    }
-
-                    return existingBatiment;
+            .map(existingBatiment -> {
+                if (batiment.getNom() != null) {
+                    existingBatiment.setNom(batiment.getNom());
                 }
-            )
+                if (batiment.getEmprise() != null) {
+                    existingBatiment.setEmprise(batiment.getEmprise());
+                }
+                if (batiment.getHauteur() != null) {
+                    existingBatiment.setHauteur(batiment.getHauteur());
+                }
+                if (batiment.getEtages() != null) {
+                    existingBatiment.setEtages(batiment.getEtages());
+                }
+
+                return existingBatiment;
+            })
             .map(batimentRepository::save);
     }
 

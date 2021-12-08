@@ -1,0 +1,28 @@
+{
+  "archisolverApp": {
+    "soldeApa": {
+      "home": {
+        "title": "Solde Apas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Solde Apa",
+        "createOrEditLabel": "Create or edit a Solde Apa",
+        "notFound": "No Solde Apas found"
+      },
+      "created": "A new Solde Apa is created with identifier {{ param }}",
+      "updated": "A Solde Apa is updated with identifier {{ param }}",
+      "deleted": "A Solde Apa is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Solde Apa {{ id }}?"
+      },
+      "detail": {
+        "title": "Solde Apa"
+      },
+      "id": "ID",
+      "annee": "Annee",
+      "mois": "Mois",
+      "soldeMontantApa": "Solde Montant Apa",
+      "soldeHeureApa": "Solde Heure Apa",
+      "beneficiaire": "Beneficiaire"
+    }
+  }
+}

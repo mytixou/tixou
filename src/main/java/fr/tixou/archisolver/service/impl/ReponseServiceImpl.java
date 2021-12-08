@@ -37,21 +37,19 @@ public class ReponseServiceImpl implements ReponseService {
 
         return reponseRepository
             .findById(reponse.getId())
-            .map(
-                existingReponse -> {
-                    if (reponse.getDesignation() != null) {
-                        existingReponse.setDesignation(reponse.getDesignation());
-                    }
-                    if (reponse.getExplication() != null) {
-                        existingReponse.setExplication(reponse.getExplication());
-                    }
-                    if (reponse.getTypeQuestion() != null) {
-                        existingReponse.setTypeQuestion(reponse.getTypeQuestion());
-                    }
-
-                    return existingReponse;
+            .map(existingReponse -> {
+                if (reponse.getDesignation() != null) {
+                    existingReponse.setDesignation(reponse.getDesignation());
                 }
-            )
+                if (reponse.getExplication() != null) {
+                    existingReponse.setExplication(reponse.getExplication());
+                }
+                if (reponse.getTypeQuestion() != null) {
+                    existingReponse.setTypeQuestion(reponse.getTypeQuestion());
+                }
+
+                return existingReponse;
+            })
             .map(reponseRepository::save);
     }
 

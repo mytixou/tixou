@@ -1,0 +1,27 @@
+{
+  "archisolverApp": {
+    "soldeCi": {
+      "home": {
+        "title": "SoldeCis",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Solde Ci",
+        "createOrEditLabel": "Créer ou éditer un Solde Ci",
+        "notFound": "Aucun Solde Ci trouvé"
+      },
+      "created": "Un nouveau Solde Ci a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Solde Ci avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Solde Ci avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Solde Ci {{ id }} ?"
+      },
+      "detail": {
+        "title": "Solde Ci"
+      },
+      "id": "ID",
+      "annee": "Annee",
+      "soldeMontantCi": "Solde Montant Ci",
+      "soldeMontantCiRec": "Solde Montant Ci Rec",
+      "beneficiaire": "Beneficiaire"
+    }
+  }
+}

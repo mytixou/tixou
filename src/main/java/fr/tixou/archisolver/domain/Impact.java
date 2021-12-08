@@ -20,6 +20,7 @@ public class Impact implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "designation")
@@ -37,17 +38,18 @@ public class Impact implements Serializable {
     private Reponse reponse;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Impact id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Impact id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getDesignation() {
@@ -55,7 +57,7 @@ public class Impact implements Serializable {
     }
 
     public Impact designation(String designation) {
-        this.designation = designation;
+        this.setDesignation(designation);
         return this;
     }
 
@@ -68,7 +70,7 @@ public class Impact implements Serializable {
     }
 
     public Impact explication(String explication) {
-        this.explication = explication;
+        this.setExplication(explication);
         return this;
     }
 
@@ -81,7 +83,7 @@ public class Impact implements Serializable {
     }
 
     public Impact typeImpact(TypeDestination typeImpact) {
-        this.typeImpact = typeImpact;
+        this.setTypeImpact(typeImpact);
         return this;
     }
 
@@ -93,13 +95,13 @@ public class Impact implements Serializable {
         return this.reponse;
     }
 
+    public void setReponse(Reponse reponse) {
+        this.reponse = reponse;
+    }
+
     public Impact reponse(Reponse reponse) {
         this.setReponse(reponse);
         return this;
-    }
-
-    public void setReponse(Reponse reponse) {
-        this.reponse = reponse;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

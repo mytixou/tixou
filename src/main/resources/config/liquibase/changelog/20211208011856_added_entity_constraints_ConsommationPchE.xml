@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity ConsommationPchE.
+    -->
+    <changeSet id="20211208011856-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="beneficiaire_id"
+                                 baseTableName="consommation_pch_e"
+                                 constraintName="fk_consommation_pch_e__beneficiaire_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="beneficiaire"/>
+
+        <addForeignKeyConstraint baseColumnNames="strategie_pche_id"
+                                 baseTableName="consommation_pch_e"
+                                 constraintName="fk_consommation_pch_e__strategie_pche_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="strategie_pch_e"/>
+    </changeSet>
+</databaseChangeLog>

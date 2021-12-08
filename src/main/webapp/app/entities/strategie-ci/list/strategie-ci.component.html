@@ -1,0 +1,90 @@
+<div>
+  <h2 id="page-heading" data-cy="StrategieCiHeading">
+    <span jhiTranslate="archisolverApp.strategieCi.home.title">Strategie Cis</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="archisolverApp.strategieCi.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-strategie-ci"
+        [routerLink]="['/strategie-ci/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="archisolverApp.strategieCi.home.createLabel"> Create a new Strategie Ci </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="strategieCis?.length === 0">
+    <span jhiTranslate="archisolverApp.strategieCi.home.notFound">No strategieCis found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="strategieCis && strategieCis.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.strategieCi.isActif">Is Actif</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.strategieCi.anne">Anne</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.strategieCi.montantPlafond">Montant Plafond</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.strategieCi.taux">Taux</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.strategieCi.aide">Aide</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let strategieCi of strategieCis; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/strategie-ci', strategieCi.id, 'view']">{{ strategieCi.id }}</a>
+          </td>
+          <td>{{ strategieCi.isActif }}</td>
+          <td>{{ strategieCi.anne }}</td>
+          <td>{{ strategieCi.montantPlafond }}</td>
+          <td>{{ strategieCi.taux }}</td>
+          <td>
+            <div *ngIf="strategieCi.aide">
+              <a [routerLink]="['/aide', strategieCi.aide?.id, 'view']">{{ strategieCi.aide?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/strategie-ci', strategieCi.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/strategie-ci', strategieCi.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(strategieCi)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

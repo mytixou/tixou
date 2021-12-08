@@ -1,0 +1,41 @@
+{
+  "name": "ConsommationCi",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "montantCi",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "montantRecuperable",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "beneficiaire",
+      "otherEntityRelationshipName": "consommationCi",
+      "relationshipName": "beneficiaire"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "strategieCi",
+      "otherEntityRelationshipName": "consommationCi",
+      "relationshipName": "strategieCi"
+    }
+  ],
+  "entityTableName": "consommation_ci",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211208011853"
+}

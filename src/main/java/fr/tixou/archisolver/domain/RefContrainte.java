@@ -20,6 +20,7 @@ public class RefContrainte implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "designation")
@@ -37,17 +38,18 @@ public class RefContrainte implements Serializable {
     private String explication;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public RefContrainte id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public RefContrainte id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getDesignation() {
@@ -55,7 +57,7 @@ public class RefContrainte implements Serializable {
     }
 
     public RefContrainte designation(String designation) {
-        this.designation = designation;
+        this.setDesignation(designation);
         return this;
     }
 
@@ -68,7 +70,7 @@ public class RefContrainte implements Serializable {
     }
 
     public RefContrainte typeContrainte(TypeContrainte typeContrainte) {
-        this.typeContrainte = typeContrainte;
+        this.setTypeContrainte(typeContrainte);
         return this;
     }
 
@@ -81,7 +83,7 @@ public class RefContrainte implements Serializable {
     }
 
     public RefContrainte typeDestination(TypeDestination typeDestination) {
-        this.typeDestination = typeDestination;
+        this.setTypeDestination(typeDestination);
         return this;
     }
 
@@ -94,7 +96,7 @@ public class RefContrainte implements Serializable {
     }
 
     public RefContrainte explication(String explication) {
-        this.explication = explication;
+        this.setExplication(explication);
         return this;
     }
 

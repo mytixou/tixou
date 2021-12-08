@@ -37,27 +37,25 @@ public class AdresseServiceImpl implements AdresseService {
 
         return adresseRepository
             .findById(adresse.getId())
-            .map(
-                existingAdresse -> {
-                    if (adresse.getAdresseLigne1() != null) {
-                        existingAdresse.setAdresseLigne1(adresse.getAdresseLigne1());
-                    }
-                    if (adresse.getAdresseLigne2() != null) {
-                        existingAdresse.setAdresseLigne2(adresse.getAdresseLigne2());
-                    }
-                    if (adresse.getCodePostal() != null) {
-                        existingAdresse.setCodePostal(adresse.getCodePostal());
-                    }
-                    if (adresse.getVille() != null) {
-                        existingAdresse.setVille(adresse.getVille());
-                    }
-                    if (adresse.getStateProvince() != null) {
-                        existingAdresse.setStateProvince(adresse.getStateProvince());
-                    }
-
-                    return existingAdresse;
+            .map(existingAdresse -> {
+                if (adresse.getAdresseLigne1() != null) {
+                    existingAdresse.setAdresseLigne1(adresse.getAdresseLigne1());
                 }
-            )
+                if (adresse.getAdresseLigne2() != null) {
+                    existingAdresse.setAdresseLigne2(adresse.getAdresseLigne2());
+                }
+                if (adresse.getCodePostal() != null) {
+                    existingAdresse.setCodePostal(adresse.getCodePostal());
+                }
+                if (adresse.getVille() != null) {
+                    existingAdresse.setVille(adresse.getVille());
+                }
+                if (adresse.getStateProvince() != null) {
+                    existingAdresse.setStateProvince(adresse.getStateProvince());
+                }
+
+                return existingAdresse;
+            })
             .map(adresseRepository::save);
     }
 

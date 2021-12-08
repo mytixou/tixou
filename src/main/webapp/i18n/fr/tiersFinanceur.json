@@ -1,0 +1,36 @@
+{
+  "archisolverApp": {
+    "tiersFinanceur": {
+      "home": {
+        "title": "TiersFinanceurs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Tiers Financeur",
+        "createOrEditLabel": "Créer ou éditer un Tiers Financeur",
+        "notFound": "Aucun Tiers Financeur trouvé"
+      },
+      "created": "Un nouveau Tiers Financeur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Tiers Financeur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Tiers Financeur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Tiers Financeur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Tiers Financeur"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "localisation": "Localisation",
+      "isActif": "Is Actif",
+      "dateInscription": "Date Inscription",
+      "anneLancement": "Anne Lancement",
+      "moisLancement": "Mois Lancement",
+      "dateResiliation": "Date Resiliation",
+      "derniereAnnee": "Derniere Annee",
+      "dernierMois": "Dernier Mois",
+      "strategie": "Strategie",
+      "strategie": "Strategie",
+      "strategie": "Strategie",
+      "strategie": "Strategie"
+    }
+  }
+}

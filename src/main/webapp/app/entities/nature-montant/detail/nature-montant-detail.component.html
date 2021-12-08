@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="natureMontant">
+      <h2 data-cy="natureMontantDetailsHeading"><span jhiTranslate="archisolverApp.natureMontant.detail.title">Nature Montant</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ natureMontant.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureMontant.code">Code</span></dt>
+        <dd>
+          <span>{{ natureMontant.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureMontant.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ natureMontant.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureMontant.description">Description</span></dt>
+        <dd>
+          <span>{{ natureMontant.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureMontant.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="natureMontant.strategie">
+            <a [routerLink]="['/strategie-ci', natureMontant.strategie?.id, 'view']">{{ natureMontant.strategie?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureMontant.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="natureMontant.strategie">
+            <a [routerLink]="['/strategie-apa', natureMontant.strategie?.id, 'view']">{{ natureMontant.strategie?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureMontant.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="natureMontant.strategie">
+            <a [routerLink]="['/strategie-pch', natureMontant.strategie?.id, 'view']">{{ natureMontant.strategie?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.natureMontant.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="natureMontant.strategie">
+            <a [routerLink]="['/strategie-pch-e', natureMontant.strategie?.id, 'view']">{{ natureMontant.strategie?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/nature-montant', natureMontant.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

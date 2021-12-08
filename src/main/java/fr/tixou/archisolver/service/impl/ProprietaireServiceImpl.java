@@ -38,36 +38,34 @@ public class ProprietaireServiceImpl implements ProprietaireService {
 
         return proprietaireRepository
             .findById(proprietaire.getId())
-            .map(
-                existingProprietaire -> {
-                    if (proprietaire.getPrenom() != null) {
-                        existingProprietaire.setPrenom(proprietaire.getPrenom());
-                    }
-                    if (proprietaire.getNom() != null) {
-                        existingProprietaire.setNom(proprietaire.getNom());
-                    }
-                    if (proprietaire.getEmail() != null) {
-                        existingProprietaire.setEmail(proprietaire.getEmail());
-                    }
-                    if (proprietaire.getTelephoneFixe() != null) {
-                        existingProprietaire.setTelephoneFixe(proprietaire.getTelephoneFixe());
-                    }
-                    if (proprietaire.getTelephonePortable() != null) {
-                        existingProprietaire.setTelephonePortable(proprietaire.getTelephonePortable());
-                    }
-                    if (proprietaire.getDepuis() != null) {
-                        existingProprietaire.setDepuis(proprietaire.getDepuis());
-                    }
-                    if (proprietaire.getHabiteLocal() != null) {
-                        existingProprietaire.setHabiteLocal(proprietaire.getHabiteLocal());
-                    }
-                    if (proprietaire.getFinLe() != null) {
-                        existingProprietaire.setFinLe(proprietaire.getFinLe());
-                    }
-
-                    return existingProprietaire;
+            .map(existingProprietaire -> {
+                if (proprietaire.getPrenom() != null) {
+                    existingProprietaire.setPrenom(proprietaire.getPrenom());
                 }
-            )
+                if (proprietaire.getNom() != null) {
+                    existingProprietaire.setNom(proprietaire.getNom());
+                }
+                if (proprietaire.getEmail() != null) {
+                    existingProprietaire.setEmail(proprietaire.getEmail());
+                }
+                if (proprietaire.getTelephoneFixe() != null) {
+                    existingProprietaire.setTelephoneFixe(proprietaire.getTelephoneFixe());
+                }
+                if (proprietaire.getTelephonePortable() != null) {
+                    existingProprietaire.setTelephonePortable(proprietaire.getTelephonePortable());
+                }
+                if (proprietaire.getDepuis() != null) {
+                    existingProprietaire.setDepuis(proprietaire.getDepuis());
+                }
+                if (proprietaire.getHabiteLocal() != null) {
+                    existingProprietaire.setHabiteLocal(proprietaire.getHabiteLocal());
+                }
+                if (proprietaire.getFinLe() != null) {
+                    existingProprietaire.setFinLe(proprietaire.getFinLe());
+                }
+
+                return existingProprietaire;
+            })
             .map(proprietaireRepository::save);
     }
 

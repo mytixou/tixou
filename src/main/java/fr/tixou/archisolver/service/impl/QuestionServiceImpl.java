@@ -37,21 +37,19 @@ public class QuestionServiceImpl implements QuestionService {
 
         return questionRepository
             .findById(question.getId())
-            .map(
-                existingQuestion -> {
-                    if (question.getDesignation() != null) {
-                        existingQuestion.setDesignation(question.getDesignation());
-                    }
-                    if (question.getExplication() != null) {
-                        existingQuestion.setExplication(question.getExplication());
-                    }
-                    if (question.getTypeQuestion() != null) {
-                        existingQuestion.setTypeQuestion(question.getTypeQuestion());
-                    }
-
-                    return existingQuestion;
+            .map(existingQuestion -> {
+                if (question.getDesignation() != null) {
+                    existingQuestion.setDesignation(question.getDesignation());
                 }
-            )
+                if (question.getExplication() != null) {
+                    existingQuestion.setExplication(question.getExplication());
+                }
+                if (question.getTypeQuestion() != null) {
+                    existingQuestion.setTypeQuestion(question.getTypeQuestion());
+                }
+
+                return existingQuestion;
+            })
             .map(questionRepository::save);
     }
 

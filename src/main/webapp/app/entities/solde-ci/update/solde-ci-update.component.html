@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-solde-ci-heading" data-cy="SoldeCiCreateUpdateHeading" jhiTranslate="archisolverApp.soldeCi.home.createOrEditLabel">
+        Create or edit a Solde Ci
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.soldeCi.annee" for="field_annee">Annee</label>
+          <input type="number" class="form-control" name="annee" id="field_annee" data-cy="annee" formControlName="annee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.soldeCi.soldeMontantCi" for="field_soldeMontantCi"
+            >Solde Montant Ci</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="soldeMontantCi"
+            id="field_soldeMontantCi"
+            data-cy="soldeMontantCi"
+            formControlName="soldeMontantCi"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.soldeCi.soldeMontantCiRec" for="field_soldeMontantCiRec"
+            >Solde Montant Ci Rec</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="soldeMontantCiRec"
+            id="field_soldeMontantCiRec"
+            data-cy="soldeMontantCiRec"
+            formControlName="soldeMontantCiRec"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.soldeCi.beneficiaire" for="field_beneficiaire">Beneficiaire</label>
+          <select class="form-control" id="field_beneficiaire" data-cy="beneficiaire" name="beneficiaire" formControlName="beneficiaire">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                beneficiaireOption.id === editForm.get('beneficiaire')!.value?.id ? editForm.get('beneficiaire')!.value : beneficiaireOption
+              "
+              *ngFor="let beneficiaireOption of beneficiairesSharedCollection; trackBy: trackBeneficiaireById"
+            >
+              {{ beneficiaireOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

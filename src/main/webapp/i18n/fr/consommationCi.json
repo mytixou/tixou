@@ -1,0 +1,28 @@
+{
+  "archisolverApp": {
+    "consommationCi": {
+      "home": {
+        "title": "ConsommationCis",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Consommation Ci",
+        "createOrEditLabel": "Créer ou éditer un Consommation Ci",
+        "notFound": "Aucun Consommation Ci trouvé"
+      },
+      "created": "Un nouveau Consommation Ci a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Consommation Ci avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Consommation Ci avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Consommation Ci {{ id }} ?"
+      },
+      "detail": {
+        "title": "Consommation Ci"
+      },
+      "id": "ID",
+      "date": "Date",
+      "montantCi": "Montant Ci",
+      "montantRecuperable": "Montant Recuperable",
+      "beneficiaire": "Beneficiaire",
+      "strategieCi": "Strategie Ci"
+    }
+  }
+}

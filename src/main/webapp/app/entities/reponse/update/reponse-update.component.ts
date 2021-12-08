@@ -9,6 +9,7 @@ import { IReponse, Reponse } from '../reponse.model';
 import { ReponseService } from '../service/reponse.service';
 import { IQuestion } from 'app/entities/question/question.model';
 import { QuestionService } from 'app/entities/question/service/question.service';
+import { TypeDestination } from 'app/entities/enumerations/type-destination.model';
 
 @Component({
   selector: 'jhi-reponse-update',
@@ -16,6 +17,7 @@ import { QuestionService } from 'app/entities/question/service/question.service'
 })
 export class ReponseUpdateComponent implements OnInit {
   isSaving = false;
+  typeDestinationValues = Object.keys(TypeDestination);
 
   questionsSharedCollection: IQuestion[] = [];
 

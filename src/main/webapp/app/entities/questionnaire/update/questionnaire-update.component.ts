@@ -11,6 +11,7 @@ import { IDossier } from 'app/entities/dossier/dossier.model';
 import { DossierService } from 'app/entities/dossier/service/dossier.service';
 import { IQuestion } from 'app/entities/question/question.model';
 import { QuestionService } from 'app/entities/question/service/question.service';
+import { TypeDestination } from 'app/entities/enumerations/type-destination.model';
 
 @Component({
   selector: 'jhi-questionnaire-update',
@@ -18,6 +19,7 @@ import { QuestionService } from 'app/entities/question/service/question.service'
 })
 export class QuestionnaireUpdateComponent implements OnInit {
   isSaving = false;
+  typeDestinationValues = Object.keys(TypeDestination);
 
   dossiersSharedCollection: IDossier[] = [];
   questionsSharedCollection: IQuestion[] = [];

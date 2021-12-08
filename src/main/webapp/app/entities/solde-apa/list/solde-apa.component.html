@@ -1,0 +1,90 @@
+<div>
+  <h2 id="page-heading" data-cy="SoldeApaHeading">
+    <span jhiTranslate="archisolverApp.soldeApa.home.title">Solde Apas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="archisolverApp.soldeApa.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-solde-apa"
+        [routerLink]="['/solde-apa/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="archisolverApp.soldeApa.home.createLabel"> Create a new Solde Apa </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="soldeApas?.length === 0">
+    <span jhiTranslate="archisolverApp.soldeApa.home.notFound">No soldeApas found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="soldeApas && soldeApas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.soldeApa.annee">Annee</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.soldeApa.mois">Mois</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.soldeApa.soldeMontantApa">Solde Montant Apa</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.soldeApa.soldeHeureApa">Solde Heure Apa</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.soldeApa.beneficiaire">Beneficiaire</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let soldeApa of soldeApas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/solde-apa', soldeApa.id, 'view']">{{ soldeApa.id }}</a>
+          </td>
+          <td>{{ soldeApa.annee }}</td>
+          <td>{{ soldeApa.mois }}</td>
+          <td>{{ soldeApa.soldeMontantApa }}</td>
+          <td>{{ soldeApa.soldeHeureApa }}</td>
+          <td>
+            <div *ngIf="soldeApa.beneficiaire">
+              <a [routerLink]="['/beneficiaire', soldeApa.beneficiaire?.id, 'view']">{{ soldeApa.beneficiaire?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/solde-apa', soldeApa.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/solde-apa', soldeApa.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(soldeApa)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

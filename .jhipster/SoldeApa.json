@@ -1,0 +1,39 @@
+{
+  "name": "SoldeApa",
+  "fields": [
+    {
+      "fieldName": "annee",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "mois",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "soldeMontantApa",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "soldeHeureApa",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "beneficiaire",
+      "otherEntityRelationshipName": "soldeApa",
+      "relationshipName": "beneficiaire"
+    }
+  ],
+  "entityTableName": "solde_apa",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211208011842"
+}

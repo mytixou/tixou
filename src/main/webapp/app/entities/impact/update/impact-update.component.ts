@@ -9,6 +9,7 @@ import { IImpact, Impact } from '../impact.model';
 import { ImpactService } from '../service/impact.service';
 import { IReponse } from 'app/entities/reponse/reponse.model';
 import { ReponseService } from 'app/entities/reponse/service/reponse.service';
+import { TypeDestination } from 'app/entities/enumerations/type-destination.model';
 
 @Component({
   selector: 'jhi-impact-update',
@@ -16,6 +17,7 @@ import { ReponseService } from 'app/entities/reponse/service/reponse.service';
 })
 export class ImpactUpdateComponent implements OnInit {
   isSaving = false;
+  typeDestinationValues = Object.keys(TypeDestination);
 
   reponsesSharedCollection: IReponse[] = [];
 

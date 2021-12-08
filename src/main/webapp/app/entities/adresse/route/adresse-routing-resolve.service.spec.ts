@@ -11,72 +11,70 @@ import { AdresseService } from '../service/adresse.service';
 
 import { AdresseRoutingResolveService } from './adresse-routing-resolve.service';
 
-describe('Service Tests', () => {
-  describe('Adresse routing resolve service', () => {
-    let mockRouter: Router;
-    let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
-    let routingResolveService: AdresseRoutingResolveService;
-    let service: AdresseService;
-    let resultAdresse: IAdresse | undefined;
+describe('Adresse routing resolve service', () => {
+  let mockRouter: Router;
+  let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
+  let routingResolveService: AdresseRoutingResolveService;
+  let service: AdresseService;
+  let resultAdresse: IAdresse | undefined;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        providers: [Router, ActivatedRouteSnapshot],
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [Router, ActivatedRouteSnapshot],
+    });
+    mockRouter = TestBed.inject(Router);
+    mockActivatedRouteSnapshot = TestBed.inject(ActivatedRouteSnapshot);
+    routingResolveService = TestBed.inject(AdresseRoutingResolveService);
+    service = TestBed.inject(AdresseService);
+    resultAdresse = undefined;
+  });
+
+  describe('resolve', () => {
+    it('should return IAdresse returned by find', () => {
+      // GIVEN
+      service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
+      mockActivatedRouteSnapshot.params = { id: 123 };
+
+      // WHEN
+      routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
+        resultAdresse = result;
       });
-      mockRouter = TestBed.inject(Router);
-      mockActivatedRouteSnapshot = TestBed.inject(ActivatedRouteSnapshot);
-      routingResolveService = TestBed.inject(AdresseRoutingResolveService);
-      service = TestBed.inject(AdresseService);
-      resultAdresse = undefined;
+
+      // THEN
+      expect(service.find).toBeCalledWith(123);
+      expect(resultAdresse).toEqual({ id: 123 });
     });
 
-    describe('resolve', () => {
-      it('should return IAdresse returned by find', () => {
-        // GIVEN
-        service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
-        mockActivatedRouteSnapshot.params = { id: 123 };
+    it('should return new IAdresse if id is not provided', () => {
+      // GIVEN
+      service.find = jest.fn();
+      mockActivatedRouteSnapshot.params = {};
 
-        // WHEN
-        routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
-          resultAdresse = result;
-        });
-
-        // THEN
-        expect(service.find).toBeCalledWith(123);
-        expect(resultAdresse).toEqual({ id: 123 });
+      // WHEN
+      routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
+        resultAdresse = result;
       });
 
-      it('should return new IAdresse if id is not provided', () => {
-        // GIVEN
-        service.find = jest.fn();
-        mockActivatedRouteSnapshot.params = {};
+      // THEN
+      expect(service.find).not.toBeCalled();
+      expect(resultAdresse).toEqual(new Adresse());
+    });
 
-        // WHEN
-        routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
-          resultAdresse = result;
-        });
+    it('should route to 404 page if data not found in server', () => {
+      // GIVEN
+      jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse({ body: null as unknown as Adresse })));
+      mockActivatedRouteSnapshot.params = { id: 123 };
 
-        // THEN
-        expect(service.find).not.toBeCalled();
-        expect(resultAdresse).toEqual(new Adresse());
+      // WHEN
+      routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
+        resultAdresse = result;
       });
 
-      it('should route to 404 page if data not found in server', () => {
-        // GIVEN
-        jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse({ body: null as unknown as Adresse })));
-        mockActivatedRouteSnapshot.params = { id: 123 };
-
-        // WHEN
-        routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
-          resultAdresse = result;
-        });
-
-        // THEN
-        expect(service.find).toBeCalledWith(123);
-        expect(resultAdresse).toEqual(undefined);
-        expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
-      });
+      // THEN
+      expect(service.find).toBeCalledWith(123);
+      expect(resultAdresse).toEqual(undefined);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
     });
   });
 });

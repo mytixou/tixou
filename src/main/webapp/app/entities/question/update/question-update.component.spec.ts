@@ -12,102 +12,100 @@ import { IQuestion, Question } from '../question.model';
 
 import { QuestionUpdateComponent } from './question-update.component';
 
-describe('Component Tests', () => {
-  describe('Question Management Update Component', () => {
-    let comp: QuestionUpdateComponent;
-    let fixture: ComponentFixture<QuestionUpdateComponent>;
-    let activatedRoute: ActivatedRoute;
-    let questionService: QuestionService;
+describe('Question Management Update Component', () => {
+  let comp: QuestionUpdateComponent;
+  let fixture: ComponentFixture<QuestionUpdateComponent>;
+  let activatedRoute: ActivatedRoute;
+  let questionService: QuestionService;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        declarations: [QuestionUpdateComponent],
-        providers: [FormBuilder, ActivatedRoute],
-      })
-        .overrideTemplate(QuestionUpdateComponent, '')
-        .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      declarations: [QuestionUpdateComponent],
+      providers: [FormBuilder, ActivatedRoute],
+    })
+      .overrideTemplate(QuestionUpdateComponent, '')
+      .compileComponents();
 
-      fixture = TestBed.createComponent(QuestionUpdateComponent);
-      activatedRoute = TestBed.inject(ActivatedRoute);
-      questionService = TestBed.inject(QuestionService);
+    fixture = TestBed.createComponent(QuestionUpdateComponent);
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    questionService = TestBed.inject(QuestionService);
 
-      comp = fixture.componentInstance;
+    comp = fixture.componentInstance;
+  });
+
+  describe('ngOnInit', () => {
+    it('Should update editForm', () => {
+      const question: IQuestion = { id: 456 };
+
+      activatedRoute.data = of({ question });
+      comp.ngOnInit();
+
+      expect(comp.editForm.value).toEqual(expect.objectContaining(question));
+    });
+  });
+
+  describe('save', () => {
+    it('Should call update service on save for existing entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Question>>();
+      const question = { id: 123 };
+      jest.spyOn(questionService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ question });
+      comp.ngOnInit();
+
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: question }));
+      saveSubject.complete();
+
+      // THEN
+      expect(comp.previousState).toHaveBeenCalled();
+      expect(questionService.update).toHaveBeenCalledWith(question);
+      expect(comp.isSaving).toEqual(false);
     });
 
-    describe('ngOnInit', () => {
-      it('Should update editForm', () => {
-        const question: IQuestion = { id: 456 };
+    it('Should call create service on save for new entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Question>>();
+      const question = new Question();
+      jest.spyOn(questionService, 'create').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ question });
+      comp.ngOnInit();
 
-        activatedRoute.data = of({ question });
-        comp.ngOnInit();
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: question }));
+      saveSubject.complete();
 
-        expect(comp.editForm.value).toEqual(expect.objectContaining(question));
-      });
+      // THEN
+      expect(questionService.create).toHaveBeenCalledWith(question);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).toHaveBeenCalled();
     });
 
-    describe('save', () => {
-      it('Should call update service on save for existing entity', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Question>>();
-        const question = { id: 123 };
-        jest.spyOn(questionService, 'update').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ question });
-        comp.ngOnInit();
+    it('Should set isSaving to false on error', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Question>>();
+      const question = { id: 123 };
+      jest.spyOn(questionService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ question });
+      comp.ngOnInit();
 
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: question }));
-        saveSubject.complete();
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.error('This is an error!');
 
-        // THEN
-        expect(comp.previousState).toHaveBeenCalled();
-        expect(questionService.update).toHaveBeenCalledWith(question);
-        expect(comp.isSaving).toEqual(false);
-      });
-
-      it('Should call create service on save for new entity', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Question>>();
-        const question = new Question();
-        jest.spyOn(questionService, 'create').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ question });
-        comp.ngOnInit();
-
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: question }));
-        saveSubject.complete();
-
-        // THEN
-        expect(questionService.create).toHaveBeenCalledWith(question);
-        expect(comp.isSaving).toEqual(false);
-        expect(comp.previousState).toHaveBeenCalled();
-      });
-
-      it('Should set isSaving to false on error', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Question>>();
-        const question = { id: 123 };
-        jest.spyOn(questionService, 'update').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ question });
-        comp.ngOnInit();
-
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.error('This is an error!');
-
-        // THEN
-        expect(questionService.update).toHaveBeenCalledWith(question);
-        expect(comp.isSaving).toEqual(false);
-        expect(comp.previousState).not.toHaveBeenCalled();
-      });
+      // THEN
+      expect(questionService.update).toHaveBeenCalledWith(question);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).not.toHaveBeenCalled();
     });
   });
 });

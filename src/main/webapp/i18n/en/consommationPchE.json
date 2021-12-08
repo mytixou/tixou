@@ -1,0 +1,28 @@
+{
+  "archisolverApp": {
+    "consommationPchE": {
+      "home": {
+        "title": "Consommation Pch ES",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Consommation Pch E",
+        "createOrEditLabel": "Create or edit a Consommation Pch E",
+        "notFound": "No Consommation Pch ES found"
+      },
+      "created": "A new Consommation Pch E is created with identifier {{ param }}",
+      "updated": "A Consommation Pch E is updated with identifier {{ param }}",
+      "deleted": "A Consommation Pch E is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Consommation Pch E {{ id }}?"
+      },
+      "detail": {
+        "title": "Consommation Pch E"
+      },
+      "id": "ID",
+      "date": "Date",
+      "montantCotisations": "Montant Cotisations",
+      "nbHeures": "Nb Heures",
+      "beneficiaire": "Beneficiaire",
+      "strategiePchE": "Strategie Pch E"
+    }
+  }
+}

@@ -1,0 +1,94 @@
+<div>
+  <h2 id="page-heading" data-cy="ConsommationCiHeading">
+    <span jhiTranslate="archisolverApp.consommationCi.home.title">Consommation Cis</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="archisolverApp.consommationCi.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-consommation-ci"
+        [routerLink]="['/consommation-ci/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="archisolverApp.consommationCi.home.createLabel"> Create a new Consommation Ci </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="consommationCis?.length === 0">
+    <span jhiTranslate="archisolverApp.consommationCi.home.notFound">No consommationCis found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="consommationCis && consommationCis.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.consommationCi.date">Date</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.consommationCi.montantCi">Montant Ci</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.consommationCi.montantRecuperable">Montant Recuperable</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.consommationCi.beneficiaire">Beneficiaire</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.consommationCi.strategieCi">Strategie Ci</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let consommationCi of consommationCis; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/consommation-ci', consommationCi.id, 'view']">{{ consommationCi.id }}</a>
+          </td>
+          <td>{{ consommationCi.date | formatMediumDatetime }}</td>
+          <td>{{ consommationCi.montantCi }}</td>
+          <td>{{ consommationCi.montantRecuperable }}</td>
+          <td>
+            <div *ngIf="consommationCi.beneficiaire">
+              <a [routerLink]="['/beneficiaire', consommationCi.beneficiaire?.id, 'view']">{{ consommationCi.beneficiaire?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="consommationCi.strategieCi">
+              <a [routerLink]="['/strategie-ci', consommationCi.strategieCi?.id, 'view']">{{ consommationCi.strategieCi?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/consommation-ci', consommationCi.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/consommation-ci', consommationCi.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(consommationCi)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

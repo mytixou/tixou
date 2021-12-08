@@ -1,0 +1,224 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-tiers-financeur-heading"
+        data-cy="TiersFinanceurCreateUpdateHeading"
+        jhiTranslate="archisolverApp.tiersFinanceur.home.createOrEditLabel"
+      >
+        Create or edit a Tiers Financeur
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.nom" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.localisation" for="field_localisation"
+            >Localisation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="localisation"
+            id="field_localisation"
+            data-cy="localisation"
+            formControlName="localisation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.isActif" for="field_isActif">Is Actif</label>
+          <input type="checkbox" class="form-check" name="isActif" id="field_isActif" data-cy="isActif" formControlName="isActif" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.dateInscription" for="field_dateInscription"
+            >Date Inscription</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateInscription"
+              data-cy="dateInscription"
+              type="text"
+              class="form-control"
+              name="dateInscription"
+              ngbDatepicker
+              #dateInscriptionDp="ngbDatepicker"
+              formControlName="dateInscription"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateInscriptionDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.anneLancement" for="field_anneLancement"
+            >Anne Lancement</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="anneLancement"
+            id="field_anneLancement"
+            data-cy="anneLancement"
+            formControlName="anneLancement"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.moisLancement" for="field_moisLancement"
+            >Mois Lancement</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="moisLancement"
+            id="field_moisLancement"
+            data-cy="moisLancement"
+            formControlName="moisLancement"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.dateResiliation" for="field_dateResiliation"
+            >Date Resiliation</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateResiliation"
+              data-cy="dateResiliation"
+              type="text"
+              class="form-control"
+              name="dateResiliation"
+              ngbDatepicker
+              #dateResiliationDp="ngbDatepicker"
+              formControlName="dateResiliation"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateResiliationDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.derniereAnnee" for="field_derniereAnnee"
+            >Derniere Annee</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="derniereAnnee"
+            id="field_derniereAnnee"
+            data-cy="derniereAnnee"
+            formControlName="derniereAnnee"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.dernierMois" for="field_dernierMois"
+            >Dernier Mois</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="dernierMois"
+            id="field_dernierMois"
+            data-cy="dernierMois"
+            formControlName="dernierMois"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.strategie" for="field_strategie">Strategie</label>
+          <select class="form-control" id="field_strategie" data-cy="strategie" name="strategie" formControlName="strategie">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                strategieCiOption.id === editForm.get('strategie')!.value?.id ? editForm.get('strategie')!.value : strategieCiOption
+              "
+              *ngFor="let strategieCiOption of strategieCisSharedCollection; trackBy: trackStrategieCiById"
+            >
+              {{ strategieCiOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.strategie" for="field_strategie">Strategie</label>
+          <select class="form-control" id="field_strategie" data-cy="strategie" name="strategie" formControlName="strategie">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                strategieApaOption.id === editForm.get('strategie')!.value?.id ? editForm.get('strategie')!.value : strategieApaOption
+              "
+              *ngFor="let strategieApaOption of strategieApasSharedCollection; trackBy: trackStrategieApaById"
+            >
+              {{ strategieApaOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.strategie" for="field_strategie">Strategie</label>
+          <select class="form-control" id="field_strategie" data-cy="strategie" name="strategie" formControlName="strategie">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                strategiePchOption.id === editForm.get('strategie')!.value?.id ? editForm.get('strategie')!.value : strategiePchOption
+              "
+              *ngFor="let strategiePchOption of strategiePchesSharedCollection; trackBy: trackStrategiePchById"
+            >
+              {{ strategiePchOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.tiersFinanceur.strategie" for="field_strategie">Strategie</label>
+          <select class="form-control" id="field_strategie" data-cy="strategie" name="strategie" formControlName="strategie">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                strategiePchEOption.id === editForm.get('strategie')!.value?.id ? editForm.get('strategie')!.value : strategiePchEOption
+              "
+              *ngFor="let strategiePchEOption of strategiePchESSharedCollection; trackBy: trackStrategiePchEById"
+            >
+              {{ strategiePchEOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

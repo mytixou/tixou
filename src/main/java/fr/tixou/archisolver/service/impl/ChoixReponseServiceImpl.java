@@ -37,15 +37,13 @@ public class ChoixReponseServiceImpl implements ChoixReponseService {
 
         return choixReponseRepository
             .findById(choixReponse.getId())
-            .map(
-                existingChoixReponse -> {
-                    if (choixReponse.getDateChoix() != null) {
-                        existingChoixReponse.setDateChoix(choixReponse.getDateChoix());
-                    }
-
-                    return existingChoixReponse;
+            .map(existingChoixReponse -> {
+                if (choixReponse.getDateChoix() != null) {
+                    existingChoixReponse.setDateChoix(choixReponse.getDateChoix());
                 }
-            )
+
+                return existingChoixReponse;
+            })
             .map(choixReponseRepository::save);
     }
 

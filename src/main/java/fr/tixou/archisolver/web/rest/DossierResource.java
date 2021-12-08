@@ -103,7 +103,7 @@ public class DossierResource {
      * or with status {@code 500 (Internal Server Error)} if the dossier couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/dossiers/{id}", consumes = "application/merge-patch+json")
+    @PatchMapping(value = "/dossiers/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Dossier> partialUpdateDossier(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Dossier dossier

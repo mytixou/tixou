@@ -1,0 +1,147 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-aide-heading" data-cy="AideCreateUpdateHeading" jhiTranslate="archisolverApp.aide.home.createOrEditLabel">
+        Create or edit a Aide
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.aide.nom" for="field_nom">Nom</label>
+          <select class="form-control" name="nom" formControlName="nom" id="field_nom" data-cy="nom">
+            <option [ngValue]="null">{{ 'archisolverApp.TypeAide.null' | translate }}</option>
+            <option *ngFor="let typeAide of typeAideValues" [value]="typeAide">
+              {{ 'archisolverApp.TypeAide.' + typeAide | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.aide.isActif" for="field_isActif">Is Actif</label>
+          <input type="checkbox" class="form-check" name="isActif" id="field_isActif" data-cy="isActif" formControlName="isActif" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.aide.dateLancement" for="field_dateLancement"
+            >Date Lancement</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateLancement"
+              data-cy="dateLancement"
+              type="text"
+              class="form-control"
+              name="dateLancement"
+              ngbDatepicker
+              #dateLancementDp="ngbDatepicker"
+              formControlName="dateLancement"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateLancementDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.aide.anneLancement" for="field_anneLancement"
+            >Anne Lancement</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="anneLancement"
+            id="field_anneLancement"
+            data-cy="anneLancement"
+            formControlName="anneLancement"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.aide.moisLancement" for="field_moisLancement"
+            >Mois Lancement</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="moisLancement"
+            id="field_moisLancement"
+            data-cy="moisLancement"
+            formControlName="moisLancement"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.aide.dateArret" for="field_dateArret">Date Arret</label>
+          <div class="input-group">
+            <input
+              id="field_dateArret"
+              data-cy="dateArret"
+              type="text"
+              class="form-control"
+              name="dateArret"
+              ngbDatepicker
+              #dateArretDp="ngbDatepicker"
+              formControlName="dateArret"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateArretDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.aide.derniereAnnee" for="field_derniereAnnee"
+            >Derniere Annee</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="derniereAnnee"
+            id="field_derniereAnnee"
+            data-cy="derniereAnnee"
+            formControlName="derniereAnnee"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.aide.dernierMois" for="field_dernierMois">Dernier Mois</label>
+          <input
+            type="number"
+            class="form-control"
+            name="dernierMois"
+            id="field_dernierMois"
+            data-cy="dernierMois"
+            formControlName="dernierMois"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

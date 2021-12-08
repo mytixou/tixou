@@ -1,0 +1,28 @@
+{
+  "archisolverApp": {
+    "consommationApa": {
+      "home": {
+        "title": "Consommation Apas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Consommation Apa",
+        "createOrEditLabel": "Create or edit a Consommation Apa",
+        "notFound": "No Consommation Apas found"
+      },
+      "created": "A new Consommation Apa is created with identifier {{ param }}",
+      "updated": "A Consommation Apa is updated with identifier {{ param }}",
+      "deleted": "A Consommation Apa is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Consommation Apa {{ id }}?"
+      },
+      "detail": {
+        "title": "Consommation Apa"
+      },
+      "id": "ID",
+      "date": "Date",
+      "montantCotisations": "Montant Cotisations",
+      "nbHeures": "Nb Heures",
+      "beneficiaire": "Beneficiaire",
+      "strategieApa": "Strategie Apa"
+    }
+  }
+}
