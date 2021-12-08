@@ -1,0 +1,114 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-consommation-pch-e-heading"
+        data-cy="ConsommationPchECreateUpdateHeading"
+        jhiTranslate="archisolverApp.consommationPchE.home.createOrEditLabel"
+      >
+        Create or edit a Consommation Pch E
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.consommationPchE.date" for="field_date">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.consommationPchE.montantCotisations" for="field_montantCotisations"
+            >Montant Cotisations</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="montantCotisations"
+            id="field_montantCotisations"
+            data-cy="montantCotisations"
+            formControlName="montantCotisations"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.consommationPchE.nbHeures" for="field_nbHeures">Nb Heures</label>
+          <input type="number" class="form-control" name="nbHeures" id="field_nbHeures" data-cy="nbHeures" formControlName="nbHeures" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.consommationPchE.beneficiaire" for="field_beneficiaire"
+            >Beneficiaire</label
+          >
+          <select class="form-control" id="field_beneficiaire" data-cy="beneficiaire" name="beneficiaire" formControlName="beneficiaire">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                beneficiaireOption.id === editForm.get('beneficiaire')!.value?.id ? editForm.get('beneficiaire')!.value : beneficiaireOption
+              "
+              *ngFor="let beneficiaireOption of beneficiairesSharedCollection; trackBy: trackBeneficiaireById"
+            >
+              {{ beneficiaireOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.consommationPchE.strategiePchE" for="field_strategiePchE"
+            >Strategie Pch E</label
+          >
+          <select
+            class="form-control"
+            id="field_strategiePchE"
+            data-cy="strategiePchE"
+            name="strategiePchE"
+            formControlName="strategiePchE"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                strategiePchEOption.id === editForm.get('strategiePchE')!.value?.id
+                  ? editForm.get('strategiePchE')!.value
+                  : strategiePchEOption
+              "
+              *ngFor="let strategiePchEOption of strategiePchESSharedCollection; trackBy: trackStrategiePchEById"
+            >
+              {{ strategiePchEOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

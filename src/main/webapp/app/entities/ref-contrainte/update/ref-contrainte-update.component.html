@@ -43,10 +43,9 @@
             data-cy="typeContrainte"
           >
             <option [ngValue]="null">{{ 'archisolverApp.TypeContrainte.null' | translate }}</option>
-            <option value="PLU">{{ 'archisolverApp.TypeContrainte.PLU' | translate }}</option>
-            <option value="RTE2020">{{ 'archisolverApp.TypeContrainte.RTE2020' | translate }}</option>
-            <option value="DTU">{{ 'archisolverApp.TypeContrainte.DTU' | translate }}</option>
-            <option value="ARCHITECTURE">{{ 'archisolverApp.TypeContrainte.ARCHITECTURE' | translate }}</option>
+            <option *ngFor="let typeContrainte of typeContrainteValues" [value]="typeContrainte">
+              {{ 'archisolverApp.TypeContrainte.' + typeContrainte | translate }}
+            </option>
           </select>
         </div>
 
@@ -62,10 +61,9 @@
             data-cy="typeDestination"
           >
             <option [ngValue]="null">{{ 'archisolverApp.TypeDestination.null' | translate }}</option>
-            <option value="TERRAIN">{{ 'archisolverApp.TypeDestination.TERRAIN' | translate }}</option>
-            <option value="BATIMENT">{{ 'archisolverApp.TypeDestination.BATIMENT' | translate }}</option>
-            <option value="LOCAL">{{ 'archisolverApp.TypeDestination.LOCAL' | translate }}</option>
-            <option value="ENVIRONNEMENT">{{ 'archisolverApp.TypeDestination.ENVIRONNEMENT' | translate }}</option>
+            <option *ngFor="let typeDestination of typeDestinationValues" [value]="typeDestination">
+              {{ 'archisolverApp.TypeDestination.' + typeDestination | translate }}
+            </option>
           </select>
         </div>
 

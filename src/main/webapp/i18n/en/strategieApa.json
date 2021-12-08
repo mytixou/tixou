@@ -1,0 +1,33 @@
+{
+  "archisolverApp": {
+    "strategieApa": {
+      "home": {
+        "title": "Strategie Apas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Strategie Apa",
+        "createOrEditLabel": "Create or edit a Strategie Apa",
+        "notFound": "No Strategie Apas found"
+      },
+      "created": "A new Strategie Apa is created with identifier {{ param }}",
+      "updated": "A Strategie Apa is updated with identifier {{ param }}",
+      "deleted": "A Strategie Apa is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Strategie Apa {{ id }}?"
+      },
+      "detail": {
+        "title": "Strategie Apa"
+      },
+      "id": "ID",
+      "isActif": "Is Actif",
+      "anne": "Anne",
+      "montantPlafond": "Montant Plafond",
+      "nbPlafondheure": "Nb Plafondheure",
+      "taux": "Taux",
+      "tiersFinanceur": "Tiers Financeur",
+      "natureActivite": "Nature Activite",
+      "natureMontant": "Nature Montant",
+      "consommationApa": "Consommation Apa",
+      "aide": "Aide"
+    }
+  }
+}

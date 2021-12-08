@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity NatureActivite.
+    -->
+    <changeSet id="20211208011851-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="strategie_id"
+                                 baseTableName="nature_activite"
+                                 constraintName="fk_nature_activite__strategie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="strategie_ci"/>
+
+        <addForeignKeyConstraint baseColumnNames="strategie_id"
+                                 baseTableName="nature_activite"
+                                 constraintName="fk_nature_activite__strategie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="strategie_apa"/>
+
+        <addForeignKeyConstraint baseColumnNames="strategie_id"
+                                 baseTableName="nature_activite"
+                                 constraintName="fk_nature_activite__strategie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="strategie_pch"/>
+
+        <addForeignKeyConstraint baseColumnNames="strategie_id"
+                                 baseTableName="nature_activite"
+                                 constraintName="fk_nature_activite__strategie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="strategie_pch_e"/>
+    </changeSet>
+</databaseChangeLog>

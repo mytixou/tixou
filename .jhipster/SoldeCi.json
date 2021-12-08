@@ -1,0 +1,35 @@
+{
+  "name": "SoldeCi",
+  "fields": [
+    {
+      "fieldName": "annee",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "soldeMontantCi",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "soldeMontantCiRec",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "beneficiaire",
+      "otherEntityRelationshipName": "soldeCi",
+      "relationshipName": "beneficiaire"
+    }
+  ],
+  "entityTableName": "solde_ci",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211208011841"
+}

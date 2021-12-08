@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tiersFinanceur">
+      <h2 data-cy="tiersFinanceurDetailsHeading"><span jhiTranslate="archisolverApp.tiersFinanceur.detail.title">Tiers Financeur</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tiersFinanceur.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.nom">Nom</span></dt>
+        <dd>
+          <span>{{ tiersFinanceur.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.localisation">Localisation</span></dt>
+        <dd>
+          <span>{{ tiersFinanceur.localisation }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.isActif">Is Actif</span></dt>
+        <dd>
+          <span>{{ tiersFinanceur.isActif }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.dateInscription">Date Inscription</span></dt>
+        <dd>
+          <span>{{ tiersFinanceur.dateInscription | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.anneLancement">Anne Lancement</span></dt>
+        <dd>
+          <span>{{ tiersFinanceur.anneLancement }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.moisLancement">Mois Lancement</span></dt>
+        <dd>
+          <span>{{ tiersFinanceur.moisLancement }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.dateResiliation">Date Resiliation</span></dt>
+        <dd>
+          <span>{{ tiersFinanceur.dateResiliation | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.derniereAnnee">Derniere Annee</span></dt>
+        <dd>
+          <span>{{ tiersFinanceur.derniereAnnee }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.dernierMois">Dernier Mois</span></dt>
+        <dd>
+          <span>{{ tiersFinanceur.dernierMois }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="tiersFinanceur.strategie">
+            <a [routerLink]="['/strategie-ci', tiersFinanceur.strategie?.id, 'view']">{{ tiersFinanceur.strategie?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="tiersFinanceur.strategie">
+            <a [routerLink]="['/strategie-apa', tiersFinanceur.strategie?.id, 'view']">{{ tiersFinanceur.strategie?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="tiersFinanceur.strategie">
+            <a [routerLink]="['/strategie-pch', tiersFinanceur.strategie?.id, 'view']">{{ tiersFinanceur.strategie?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.tiersFinanceur.strategie">Strategie</span></dt>
+        <dd>
+          <div *ngIf="tiersFinanceur.strategie">
+            <a [routerLink]="['/strategie-pch-e', tiersFinanceur.strategie?.id, 'view']">{{ tiersFinanceur.strategie?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/tiers-financeur', tiersFinanceur.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

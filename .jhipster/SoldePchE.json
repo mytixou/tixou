@@ -1,0 +1,39 @@
+{
+  "name": "SoldePchE",
+  "fields": [
+    {
+      "fieldName": "annee",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "mois",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "soldeMontantPchE",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "soldeHeurePchE",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "beneficiaire",
+      "otherEntityRelationshipName": "soldePchE",
+      "relationshipName": "beneficiaire"
+    }
+  ],
+  "entityTableName": "solde_pch_e",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211208011844"
+}

@@ -1,0 +1,74 @@
+{
+  "name": "Aide",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "TypeAide",
+      "fieldValues": "CI,APA,PCH,PCHE"
+    },
+    {
+      "fieldName": "isActif",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "dateLancement",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "anneLancement",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "moisLancement",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateArret",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "derniereAnnee",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dernierMois",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "strategieCi",
+      "otherEntityRelationshipName": "aide",
+      "relationshipName": "strategieCi"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "strategieApa",
+      "otherEntityRelationshipName": "aide",
+      "relationshipName": "strategieApa"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "strategiePch",
+      "otherEntityRelationshipName": "aide",
+      "relationshipName": "strategiePch"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "strategiePchE",
+      "otherEntityRelationshipName": "aide",
+      "relationshipName": "strategiePchE"
+    }
+  ],
+  "entityTableName": "aide",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211208011846"
+}

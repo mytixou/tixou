@@ -22,6 +22,7 @@ public class Proprietaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "prenom")
@@ -49,27 +50,28 @@ public class Proprietaire implements Serializable {
     private LocalDate finLe;
 
     @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(
         name = "rel_proprietaire__local",
         joinColumns = @JoinColumn(name = "proprietaire_id"),
         inverseJoinColumns = @JoinColumn(name = "local_id")
     )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "batiment", "proprietaires" }, allowSetters = true)
     private Set<Local> locals = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Proprietaire id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Proprietaire id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getPrenom() {
@@ -77,7 +79,7 @@ public class Proprietaire implements Serializable {
     }
 
     public Proprietaire prenom(String prenom) {
-        this.prenom = prenom;
+        this.setPrenom(prenom);
         return this;
     }
 
@@ -90,7 +92,7 @@ public class Proprietaire implements Serializable {
     }
 
     public Proprietaire nom(String nom) {
-        this.nom = nom;
+        this.setNom(nom);
         return this;
     }
 
@@ -103,7 +105,7 @@ public class Proprietaire implements Serializable {
     }
 
     public Proprietaire email(String email) {
-        this.email = email;
+        this.setEmail(email);
         return this;
     }
 
@@ -116,7 +118,7 @@ public class Proprietaire implements Serializable {
     }
 
     public Proprietaire telephoneFixe(String telephoneFixe) {
-        this.telephoneFixe = telephoneFixe;
+        this.setTelephoneFixe(telephoneFixe);
         return this;
     }
 
@@ -129,7 +131,7 @@ public class Proprietaire implements Serializable {
     }
 
     public Proprietaire telephonePortable(String telephonePortable) {
-        this.telephonePortable = telephonePortable;
+        this.setTelephonePortable(telephonePortable);
         return this;
     }
 
@@ -142,7 +144,7 @@ public class Proprietaire implements Serializable {
     }
 
     public Proprietaire depuis(LocalDate depuis) {
-        this.depuis = depuis;
+        this.setDepuis(depuis);
         return this;
     }
 
@@ -155,7 +157,7 @@ public class Proprietaire implements Serializable {
     }
 
     public Proprietaire habiteLocal(Boolean habiteLocal) {
-        this.habiteLocal = habiteLocal;
+        this.setHabiteLocal(habiteLocal);
         return this;
     }
 
@@ -168,7 +170,7 @@ public class Proprietaire implements Serializable {
     }
 
     public Proprietaire finLe(LocalDate finLe) {
-        this.finLe = finLe;
+        this.setFinLe(finLe);
         return this;
     }
 
@@ -178,6 +180,10 @@ public class Proprietaire implements Serializable {
 
     public Set<Local> getLocals() {
         return this.locals;
+    }
+
+    public void setLocals(Set<Local> locals) {
+        this.locals = locals;
     }
 
     public Proprietaire locals(Set<Local> locals) {
@@ -195,10 +201,6 @@ public class Proprietaire implements Serializable {
         this.locals.remove(local);
         local.getProprietaires().remove(this);
         return this;
-    }
-
-    public void setLocals(Set<Local> locals) {
-        this.locals = locals;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -1,0 +1,27 @@
+{
+  "archisolverApp": {
+    "soldeCi": {
+      "home": {
+        "title": "Solde Cis",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Solde Ci",
+        "createOrEditLabel": "Create or edit a Solde Ci",
+        "notFound": "No Solde Cis found"
+      },
+      "created": "A new Solde Ci is created with identifier {{ param }}",
+      "updated": "A Solde Ci is updated with identifier {{ param }}",
+      "deleted": "A Solde Ci is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Solde Ci {{ id }}?"
+      },
+      "detail": {
+        "title": "Solde Ci"
+      },
+      "id": "ID",
+      "annee": "Annee",
+      "soldeMontantCi": "Solde Montant Ci",
+      "soldeMontantCiRec": "Solde Montant Ci Rec",
+      "beneficiaire": "Beneficiaire"
+    }
+  }
+}

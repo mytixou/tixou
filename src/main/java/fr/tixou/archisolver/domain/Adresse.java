@@ -19,6 +19,7 @@ public class Adresse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "adresse_ligne_1")
@@ -41,17 +42,18 @@ public class Adresse implements Serializable {
     private Departement departement;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Adresse id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Adresse id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getAdresseLigne1() {
@@ -59,7 +61,7 @@ public class Adresse implements Serializable {
     }
 
     public Adresse adresseLigne1(String adresseLigne1) {
-        this.adresseLigne1 = adresseLigne1;
+        this.setAdresseLigne1(adresseLigne1);
         return this;
     }
 
@@ -72,7 +74,7 @@ public class Adresse implements Serializable {
     }
 
     public Adresse adresseLigne2(String adresseLigne2) {
-        this.adresseLigne2 = adresseLigne2;
+        this.setAdresseLigne2(adresseLigne2);
         return this;
     }
 
@@ -85,7 +87,7 @@ public class Adresse implements Serializable {
     }
 
     public Adresse codePostal(String codePostal) {
-        this.codePostal = codePostal;
+        this.setCodePostal(codePostal);
         return this;
     }
 
@@ -98,7 +100,7 @@ public class Adresse implements Serializable {
     }
 
     public Adresse ville(String ville) {
-        this.ville = ville;
+        this.setVille(ville);
         return this;
     }
 
@@ -111,7 +113,7 @@ public class Adresse implements Serializable {
     }
 
     public Adresse stateProvince(String stateProvince) {
-        this.stateProvince = stateProvince;
+        this.setStateProvince(stateProvince);
         return this;
     }
 
@@ -123,13 +125,13 @@ public class Adresse implements Serializable {
         return this.departement;
     }
 
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
+    }
+
     public Adresse departement(Departement departement) {
         this.setDepartement(departement);
         return this;
-    }
-
-    public void setDepartement(Departement departement) {
-        this.departement = departement;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

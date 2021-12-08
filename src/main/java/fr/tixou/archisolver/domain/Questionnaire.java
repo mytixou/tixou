@@ -22,6 +22,7 @@ public class Questionnaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "designation")
@@ -39,27 +40,28 @@ public class Questionnaire implements Serializable {
     private Dossier dossier;
 
     @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(
         name = "rel_questionnaire__question",
         joinColumns = @JoinColumn(name = "questionnaire_id"),
         inverseJoinColumns = @JoinColumn(name = "question_id")
     )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "questionnaires" }, allowSetters = true)
     private Set<Question> questions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Questionnaire id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Questionnaire id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getDesignation() {
@@ -67,7 +69,7 @@ public class Questionnaire implements Serializable {
     }
 
     public Questionnaire designation(String designation) {
-        this.designation = designation;
+        this.setDesignation(designation);
         return this;
     }
 
@@ -80,7 +82,7 @@ public class Questionnaire implements Serializable {
     }
 
     public Questionnaire explication(String explication) {
-        this.explication = explication;
+        this.setExplication(explication);
         return this;
     }
 
@@ -93,7 +95,7 @@ public class Questionnaire implements Serializable {
     }
 
     public Questionnaire typeQuestionnaire(TypeDestination typeQuestionnaire) {
-        this.typeQuestionnaire = typeQuestionnaire;
+        this.setTypeQuestionnaire(typeQuestionnaire);
         return this;
     }
 
@@ -105,17 +107,21 @@ public class Questionnaire implements Serializable {
         return this.dossier;
     }
 
+    public void setDossier(Dossier dossier) {
+        this.dossier = dossier;
+    }
+
     public Questionnaire dossier(Dossier dossier) {
         this.setDossier(dossier);
         return this;
     }
 
-    public void setDossier(Dossier dossier) {
-        this.dossier = dossier;
-    }
-
     public Set<Question> getQuestions() {
         return this.questions;
+    }
+
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
     }
 
     public Questionnaire questions(Set<Question> questions) {
@@ -133,10 +139,6 @@ public class Questionnaire implements Serializable {
         this.questions.remove(question);
         question.getQuestionnaires().remove(this);
         return this;
-    }
-
-    public void setQuestions(Set<Question> questions) {
-        this.questions = questions;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

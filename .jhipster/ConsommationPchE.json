@@ -1,0 +1,41 @@
+{
+  "name": "ConsommationPchE",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "montantCotisations",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "nbHeures",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "beneficiaire",
+      "otherEntityRelationshipName": "consommationPchE",
+      "relationshipName": "beneficiaire"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "strategiePchE",
+      "otherEntityRelationshipName": "consommationPchE",
+      "relationshipName": "strategiePchE"
+    }
+  ],
+  "entityTableName": "consommation_pch_e",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211208011856"
+}

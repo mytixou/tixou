@@ -20,6 +20,7 @@ public class ChoixReponse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "date_choix")
@@ -34,17 +35,18 @@ public class ChoixReponse implements Serializable {
     private Reponse reponse;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public ChoixReponse id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ChoixReponse id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public Instant getDateChoix() {
@@ -52,7 +54,7 @@ public class ChoixReponse implements Serializable {
     }
 
     public ChoixReponse dateChoix(Instant dateChoix) {
-        this.dateChoix = dateChoix;
+        this.setDateChoix(dateChoix);
         return this;
     }
 
@@ -64,26 +66,26 @@ public class ChoixReponse implements Serializable {
         return this.dossier;
     }
 
+    public void setDossier(Dossier dossier) {
+        this.dossier = dossier;
+    }
+
     public ChoixReponse dossier(Dossier dossier) {
         this.setDossier(dossier);
         return this;
-    }
-
-    public void setDossier(Dossier dossier) {
-        this.dossier = dossier;
     }
 
     public Reponse getReponse() {
         return this.reponse;
     }
 
+    public void setReponse(Reponse reponse) {
+        this.reponse = reponse;
+    }
+
     public ChoixReponse reponse(Reponse reponse) {
         this.setReponse(reponse);
         return this;
-    }
-
-    public void setReponse(Reponse reponse) {
-        this.reponse = reponse;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

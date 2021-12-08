@@ -39,21 +39,19 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
         return questionnaireRepository
             .findById(questionnaire.getId())
-            .map(
-                existingQuestionnaire -> {
-                    if (questionnaire.getDesignation() != null) {
-                        existingQuestionnaire.setDesignation(questionnaire.getDesignation());
-                    }
-                    if (questionnaire.getExplication() != null) {
-                        existingQuestionnaire.setExplication(questionnaire.getExplication());
-                    }
-                    if (questionnaire.getTypeQuestionnaire() != null) {
-                        existingQuestionnaire.setTypeQuestionnaire(questionnaire.getTypeQuestionnaire());
-                    }
-
-                    return existingQuestionnaire;
+            .map(existingQuestionnaire -> {
+                if (questionnaire.getDesignation() != null) {
+                    existingQuestionnaire.setDesignation(questionnaire.getDesignation());
                 }
-            )
+                if (questionnaire.getExplication() != null) {
+                    existingQuestionnaire.setExplication(questionnaire.getExplication());
+                }
+                if (questionnaire.getTypeQuestionnaire() != null) {
+                    existingQuestionnaire.setTypeQuestionnaire(questionnaire.getTypeQuestionnaire());
+                }
+
+                return existingQuestionnaire;
+            })
             .map(questionnaireRepository::save);
     }
 

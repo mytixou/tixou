@@ -1,0 +1,28 @@
+{
+  "archisolverApp": {
+    "soldePchE": {
+      "home": {
+        "title": "SoldePchES",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Solde Pch E",
+        "createOrEditLabel": "Créer ou éditer un Solde Pch E",
+        "notFound": "Aucun Solde Pch E trouvé"
+      },
+      "created": "Un nouveau Solde Pch E a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Solde Pch E avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Solde Pch E avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Solde Pch E {{ id }} ?"
+      },
+      "detail": {
+        "title": "Solde Pch E"
+      },
+      "id": "ID",
+      "annee": "Annee",
+      "mois": "Mois",
+      "soldeMontantPchE": "Solde Montant Pch E",
+      "soldeHeurePchE": "Solde Heure Pch E",
+      "beneficiaire": "Beneficiaire"
+    }
+  }
+}

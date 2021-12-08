@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-beneficiaire-heading"
+        data-cy="BeneficiaireCreateUpdateHeading"
+        jhiTranslate="archisolverApp.beneficiaire.home.createOrEditLabel"
+      >
+        Create or edit a Beneficiaire
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.beneficiaire.id" for="field_id">Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="id"
+            id="field_id"
+            data-cy="id"
+            formControlName="id"
+            [readonly]="editForm.get('id')!.value != null"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.beneficiaire.externeId" for="field_externeId">Externe Id</label>
+          <input type="text" class="form-control" name="externeId" id="field_externeId" data-cy="externeId" formControlName="externeId" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.beneficiaire.isActif" for="field_isActif">Is Actif</label>
+          <input type="checkbox" class="form-check" name="isActif" id="field_isActif" data-cy="isActif" formControlName="isActif" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.beneficiaire.dateInscription" for="field_dateInscription"
+            >Date Inscription</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateInscription"
+              data-cy="dateInscription"
+              type="text"
+              class="form-control"
+              name="dateInscription"
+              ngbDatepicker
+              #dateInscriptionDp="ngbDatepicker"
+              formControlName="dateInscription"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateInscriptionDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.beneficiaire.dateResiliation" for="field_dateResiliation"
+            >Date Resiliation</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateResiliation"
+              data-cy="dateResiliation"
+              type="text"
+              class="form-control"
+              name="dateResiliation"
+              ngbDatepicker
+              #dateResiliationDp="ngbDatepicker"
+              formControlName="dateResiliation"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateResiliationDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

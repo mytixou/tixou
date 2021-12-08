@@ -1,0 +1,35 @@
+{
+  "archisolverApp": {
+    "beneficiaire": {
+      "home": {
+        "title": "Beneficiaires",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Beneficiaire",
+        "createOrEditLabel": "Créer ou éditer un Beneficiaire",
+        "notFound": "Aucun Beneficiaire trouvé"
+      },
+      "created": "Un nouveau Beneficiaire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Beneficiaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Beneficiaire avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Beneficiaire {{ id }} ?"
+      },
+      "detail": {
+        "title": "Beneficiaire"
+      },
+      "id": "Id",
+      "externeId": "Externe Id",
+      "isActif": "Is Actif",
+      "dateInscription": "Date Inscription",
+      "dateResiliation": "Date Resiliation",
+      "soldeCi": "Solde Ci",
+      "soldeApa": "Solde Apa",
+      "soldePch": "Solde Pch",
+      "soldePchE": "Solde Pch E",
+      "consommationCi": "Consommation Ci",
+      "consommationApa": "Consommation Apa",
+      "consommationPch": "Consommation Pch",
+      "consommationPchE": "Consommation Pch E"
+    }
+  }
+}

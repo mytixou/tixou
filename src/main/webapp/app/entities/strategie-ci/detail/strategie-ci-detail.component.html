@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="strategieCi">
+      <h2 data-cy="strategieCiDetailsHeading"><span jhiTranslate="archisolverApp.strategieCi.detail.title">Strategie Ci</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ strategieCi.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.strategieCi.isActif">Is Actif</span></dt>
+        <dd>
+          <span>{{ strategieCi.isActif }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.strategieCi.anne">Anne</span></dt>
+        <dd>
+          <span>{{ strategieCi.anne }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.strategieCi.montantPlafond">Montant Plafond</span></dt>
+        <dd>
+          <span>{{ strategieCi.montantPlafond }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.strategieCi.taux">Taux</span></dt>
+        <dd>
+          <span>{{ strategieCi.taux }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.strategieCi.aide">Aide</span></dt>
+        <dd>
+          <div *ngIf="strategieCi.aide">
+            <a [routerLink]="['/aide', strategieCi.aide?.id, 'view']">{{ strategieCi.aide?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/strategie-ci', strategieCi.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="soldeApa">
+      <h2 data-cy="soldeApaDetailsHeading"><span jhiTranslate="archisolverApp.soldeApa.detail.title">Solde Apa</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ soldeApa.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.soldeApa.annee">Annee</span></dt>
+        <dd>
+          <span>{{ soldeApa.annee }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.soldeApa.mois">Mois</span></dt>
+        <dd>
+          <span>{{ soldeApa.mois }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.soldeApa.soldeMontantApa">Solde Montant Apa</span></dt>
+        <dd>
+          <span>{{ soldeApa.soldeMontantApa }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.soldeApa.soldeHeureApa">Solde Heure Apa</span></dt>
+        <dd>
+          <span>{{ soldeApa.soldeHeureApa }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.soldeApa.beneficiaire">Beneficiaire</span></dt>
+        <dd>
+          <div *ngIf="soldeApa.beneficiaire">
+            <a [routerLink]="['/beneficiaire', soldeApa.beneficiaire?.id, 'view']">{{ soldeApa.beneficiaire?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/solde-apa', soldeApa.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

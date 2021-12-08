@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="consommationCi">
+      <h2 data-cy="consommationCiDetailsHeading"><span jhiTranslate="archisolverApp.consommationCi.detail.title">Consommation Ci</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ consommationCi.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.consommationCi.date">Date</span></dt>
+        <dd>
+          <span>{{ consommationCi.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.consommationCi.montantCi">Montant Ci</span></dt>
+        <dd>
+          <span>{{ consommationCi.montantCi }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.consommationCi.montantRecuperable">Montant Recuperable</span></dt>
+        <dd>
+          <span>{{ consommationCi.montantRecuperable }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.consommationCi.beneficiaire">Beneficiaire</span></dt>
+        <dd>
+          <div *ngIf="consommationCi.beneficiaire">
+            <a [routerLink]="['/beneficiaire', consommationCi.beneficiaire?.id, 'view']">{{ consommationCi.beneficiaire?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.consommationCi.strategieCi">Strategie Ci</span></dt>
+        <dd>
+          <div *ngIf="consommationCi.strategieCi">
+            <a [routerLink]="['/strategie-ci', consommationCi.strategieCi?.id, 'view']">{{ consommationCi.strategieCi?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/consommation-ci', consommationCi.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

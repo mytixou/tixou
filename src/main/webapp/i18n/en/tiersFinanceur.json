@@ -1,0 +1,36 @@
+{
+  "archisolverApp": {
+    "tiersFinanceur": {
+      "home": {
+        "title": "Tiers Financeurs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tiers Financeur",
+        "createOrEditLabel": "Create or edit a Tiers Financeur",
+        "notFound": "No Tiers Financeurs found"
+      },
+      "created": "A new Tiers Financeur is created with identifier {{ param }}",
+      "updated": "A Tiers Financeur is updated with identifier {{ param }}",
+      "deleted": "A Tiers Financeur is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tiers Financeur {{ id }}?"
+      },
+      "detail": {
+        "title": "Tiers Financeur"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "localisation": "Localisation",
+      "isActif": "Is Actif",
+      "dateInscription": "Date Inscription",
+      "anneLancement": "Anne Lancement",
+      "moisLancement": "Mois Lancement",
+      "dateResiliation": "Date Resiliation",
+      "derniereAnnee": "Derniere Annee",
+      "dernierMois": "Dernier Mois",
+      "strategie": "Strategie",
+      "strategie": "Strategie",
+      "strategie": "Strategie",
+      "strategie": "Strategie"
+    }
+  }
+}

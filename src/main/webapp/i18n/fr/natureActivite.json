@@ -1,0 +1,30 @@
+{
+  "archisolverApp": {
+    "natureActivite": {
+      "home": {
+        "title": "NatureActivites",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Nature Activite",
+        "createOrEditLabel": "Créer ou éditer un Nature Activite",
+        "notFound": "Aucun Nature Activite trouvé"
+      },
+      "created": "Un nouveau Nature Activite a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Nature Activite avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Nature Activite avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Nature Activite {{ id }} ?"
+      },
+      "detail": {
+        "title": "Nature Activite"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "strategie": "Strategie",
+      "strategie": "Strategie",
+      "strategie": "Strategie",
+      "strategie": "Strategie"
+    }
+  }
+}

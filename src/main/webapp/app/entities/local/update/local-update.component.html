@@ -39,9 +39,9 @@
           <label class="form-control-label" jhiTranslate="archisolverApp.local.typelocal" for="field_typelocal">Typelocal</label>
           <select class="form-control" name="typelocal" formControlName="typelocal" id="field_typelocal" data-cy="typelocal">
             <option [ngValue]="null">{{ 'archisolverApp.TypeLocal.null' | translate }}</option>
-            <option value="PROFESSIONNEL">{{ 'archisolverApp.TypeLocal.PROFESSIONNEL' | translate }}</option>
-            <option value="HABITATION">{{ 'archisolverApp.TypeLocal.HABITATION' | translate }}</option>
-            <option value="COMMUN">{{ 'archisolverApp.TypeLocal.COMMUN' | translate }}</option>
+            <option *ngFor="let typeLocal of typeLocalValues" [value]="typeLocal">
+              {{ 'archisolverApp.TypeLocal.' + typeLocal | translate }}
+            </option>
           </select>
         </div>
 

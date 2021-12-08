@@ -1,0 +1,118 @@
+<div>
+  <h2 id="page-heading" data-cy="TiersFinanceurHeading">
+    <span jhiTranslate="archisolverApp.tiersFinanceur.home.title">Tiers Financeurs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="archisolverApp.tiersFinanceur.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-tiers-financeur"
+        [routerLink]="['/tiers-financeur/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="archisolverApp.tiersFinanceur.home.createLabel"> Create a new Tiers Financeur </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="tiersFinanceurs?.length === 0">
+    <span jhiTranslate="archisolverApp.tiersFinanceur.home.notFound">No tiersFinanceurs found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="tiersFinanceurs && tiersFinanceurs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.nom">Nom</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.localisation">Localisation</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.isActif">Is Actif</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.dateInscription">Date Inscription</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.anneLancement">Anne Lancement</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.moisLancement">Mois Lancement</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.dateResiliation">Date Resiliation</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.derniereAnnee">Derniere Annee</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.dernierMois">Dernier Mois</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.strategie">Strategie</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.strategie">Strategie</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.strategie">Strategie</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.tiersFinanceur.strategie">Strategie</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tiersFinanceur of tiersFinanceurs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/tiers-financeur', tiersFinanceur.id, 'view']">{{ tiersFinanceur.id }}</a>
+          </td>
+          <td>{{ tiersFinanceur.nom }}</td>
+          <td>{{ tiersFinanceur.localisation }}</td>
+          <td>{{ tiersFinanceur.isActif }}</td>
+          <td>{{ tiersFinanceur.dateInscription | formatMediumDate }}</td>
+          <td>{{ tiersFinanceur.anneLancement }}</td>
+          <td>{{ tiersFinanceur.moisLancement }}</td>
+          <td>{{ tiersFinanceur.dateResiliation | formatMediumDate }}</td>
+          <td>{{ tiersFinanceur.derniereAnnee }}</td>
+          <td>{{ tiersFinanceur.dernierMois }}</td>
+          <td>
+            <div *ngIf="tiersFinanceur.strategie">
+              <a [routerLink]="['/strategie-ci', tiersFinanceur.strategie?.id, 'view']">{{ tiersFinanceur.strategie?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="tiersFinanceur.strategie">
+              <a [routerLink]="['/strategie-apa', tiersFinanceur.strategie?.id, 'view']">{{ tiersFinanceur.strategie?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="tiersFinanceur.strategie">
+              <a [routerLink]="['/strategie-pch', tiersFinanceur.strategie?.id, 'view']">{{ tiersFinanceur.strategie?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="tiersFinanceur.strategie">
+              <a [routerLink]="['/strategie-pch-e', tiersFinanceur.strategie?.id, 'view']">{{ tiersFinanceur.strategie?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/tiers-financeur', tiersFinanceur.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/tiers-financeur', tiersFinanceur.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(tiersFinanceur)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

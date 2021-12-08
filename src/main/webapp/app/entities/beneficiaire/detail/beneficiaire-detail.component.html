@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="beneficiaire">
+      <h2 data-cy="beneficiaireDetailsHeading"><span jhiTranslate="archisolverApp.beneficiaire.detail.title">Beneficiaire</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="archisolverApp.beneficiaire.id">Id</span></dt>
+        <dd>
+          <span>{{ beneficiaire.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.beneficiaire.externeId">Externe Id</span></dt>
+        <dd>
+          <span>{{ beneficiaire.externeId }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.beneficiaire.isActif">Is Actif</span></dt>
+        <dd>
+          <span>{{ beneficiaire.isActif }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.beneficiaire.dateInscription">Date Inscription</span></dt>
+        <dd>
+          <span>{{ beneficiaire.dateInscription | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.beneficiaire.dateResiliation">Date Resiliation</span></dt>
+        <dd>
+          <span>{{ beneficiaire.dateResiliation | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/beneficiaire', beneficiaire.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

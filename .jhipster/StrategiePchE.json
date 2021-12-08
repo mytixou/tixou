@@ -1,0 +1,67 @@
+{
+  "name": "StrategiePchE",
+  "fields": [
+    {
+      "fieldName": "isActif",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "anne",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "montantPlafond",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "nbPlafondheure",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "taux",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "tiersFinanceur",
+      "otherEntityRelationshipName": "strategie",
+      "relationshipName": "tiersFinanceur"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "natureActivite",
+      "otherEntityRelationshipName": "strategie",
+      "relationshipName": "natureActivite"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "natureMontant",
+      "otherEntityRelationshipName": "strategie",
+      "relationshipName": "natureMontant"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "consommationPchE",
+      "otherEntityRelationshipName": "strategiePchE",
+      "relationshipName": "consommationPchE"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "aide",
+      "otherEntityRelationshipName": "strategiePchE",
+      "relationshipName": "aide"
+    }
+  ],
+  "entityTableName": "strategie_pch_e",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211208011850"
+}

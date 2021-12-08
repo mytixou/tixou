@@ -14,138 +14,136 @@ import { CommanditaireService } from 'app/entities/commanditaire/service/command
 
 import { DossierUpdateComponent } from './dossier-update.component';
 
-describe('Component Tests', () => {
-  describe('Dossier Management Update Component', () => {
-    let comp: DossierUpdateComponent;
-    let fixture: ComponentFixture<DossierUpdateComponent>;
-    let activatedRoute: ActivatedRoute;
-    let dossierService: DossierService;
-    let commanditaireService: CommanditaireService;
+describe('Dossier Management Update Component', () => {
+  let comp: DossierUpdateComponent;
+  let fixture: ComponentFixture<DossierUpdateComponent>;
+  let activatedRoute: ActivatedRoute;
+  let dossierService: DossierService;
+  let commanditaireService: CommanditaireService;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        declarations: [DossierUpdateComponent],
-        providers: [FormBuilder, ActivatedRoute],
-      })
-        .overrideTemplate(DossierUpdateComponent, '')
-        .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      declarations: [DossierUpdateComponent],
+      providers: [FormBuilder, ActivatedRoute],
+    })
+      .overrideTemplate(DossierUpdateComponent, '')
+      .compileComponents();
 
-      fixture = TestBed.createComponent(DossierUpdateComponent);
-      activatedRoute = TestBed.inject(ActivatedRoute);
-      dossierService = TestBed.inject(DossierService);
-      commanditaireService = TestBed.inject(CommanditaireService);
+    fixture = TestBed.createComponent(DossierUpdateComponent);
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    dossierService = TestBed.inject(DossierService);
+    commanditaireService = TestBed.inject(CommanditaireService);
 
-      comp = fixture.componentInstance;
+    comp = fixture.componentInstance;
+  });
+
+  describe('ngOnInit', () => {
+    it('Should call Commanditaire query and add missing value', () => {
+      const dossier: IDossier = { id: 456 };
+      const commanditaire: ICommanditaire = { id: 98208 };
+      dossier.commanditaire = commanditaire;
+
+      const commanditaireCollection: ICommanditaire[] = [{ id: 10564 }];
+      jest.spyOn(commanditaireService, 'query').mockReturnValue(of(new HttpResponse({ body: commanditaireCollection })));
+      const additionalCommanditaires = [commanditaire];
+      const expectedCollection: ICommanditaire[] = [...additionalCommanditaires, ...commanditaireCollection];
+      jest.spyOn(commanditaireService, 'addCommanditaireToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ dossier });
+      comp.ngOnInit();
+
+      expect(commanditaireService.query).toHaveBeenCalled();
+      expect(commanditaireService.addCommanditaireToCollectionIfMissing).toHaveBeenCalledWith(
+        commanditaireCollection,
+        ...additionalCommanditaires
+      );
+      expect(comp.commanditairesSharedCollection).toEqual(expectedCollection);
     });
 
-    describe('ngOnInit', () => {
-      it('Should call Commanditaire query and add missing value', () => {
-        const dossier: IDossier = { id: 456 };
-        const commanditaire: ICommanditaire = { id: 98208 };
-        dossier.commanditaire = commanditaire;
+    it('Should update editForm', () => {
+      const dossier: IDossier = { id: 456 };
+      const commanditaire: ICommanditaire = { id: 5829 };
+      dossier.commanditaire = commanditaire;
 
-        const commanditaireCollection: ICommanditaire[] = [{ id: 10564 }];
-        jest.spyOn(commanditaireService, 'query').mockReturnValue(of(new HttpResponse({ body: commanditaireCollection })));
-        const additionalCommanditaires = [commanditaire];
-        const expectedCollection: ICommanditaire[] = [...additionalCommanditaires, ...commanditaireCollection];
-        jest.spyOn(commanditaireService, 'addCommanditaireToCollectionIfMissing').mockReturnValue(expectedCollection);
+      activatedRoute.data = of({ dossier });
+      comp.ngOnInit();
 
-        activatedRoute.data = of({ dossier });
-        comp.ngOnInit();
+      expect(comp.editForm.value).toEqual(expect.objectContaining(dossier));
+      expect(comp.commanditairesSharedCollection).toContain(commanditaire);
+    });
+  });
 
-        expect(commanditaireService.query).toHaveBeenCalled();
-        expect(commanditaireService.addCommanditaireToCollectionIfMissing).toHaveBeenCalledWith(
-          commanditaireCollection,
-          ...additionalCommanditaires
-        );
-        expect(comp.commanditairesSharedCollection).toEqual(expectedCollection);
-      });
+  describe('save', () => {
+    it('Should call update service on save for existing entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Dossier>>();
+      const dossier = { id: 123 };
+      jest.spyOn(dossierService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ dossier });
+      comp.ngOnInit();
 
-      it('Should update editForm', () => {
-        const dossier: IDossier = { id: 456 };
-        const commanditaire: ICommanditaire = { id: 5829 };
-        dossier.commanditaire = commanditaire;
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: dossier }));
+      saveSubject.complete();
 
-        activatedRoute.data = of({ dossier });
-        comp.ngOnInit();
-
-        expect(comp.editForm.value).toEqual(expect.objectContaining(dossier));
-        expect(comp.commanditairesSharedCollection).toContain(commanditaire);
-      });
+      // THEN
+      expect(comp.previousState).toHaveBeenCalled();
+      expect(dossierService.update).toHaveBeenCalledWith(dossier);
+      expect(comp.isSaving).toEqual(false);
     });
 
-    describe('save', () => {
-      it('Should call update service on save for existing entity', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Dossier>>();
-        const dossier = { id: 123 };
-        jest.spyOn(dossierService, 'update').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ dossier });
-        comp.ngOnInit();
+    it('Should call create service on save for new entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Dossier>>();
+      const dossier = new Dossier();
+      jest.spyOn(dossierService, 'create').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ dossier });
+      comp.ngOnInit();
 
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: dossier }));
-        saveSubject.complete();
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: dossier }));
+      saveSubject.complete();
 
-        // THEN
-        expect(comp.previousState).toHaveBeenCalled();
-        expect(dossierService.update).toHaveBeenCalledWith(dossier);
-        expect(comp.isSaving).toEqual(false);
-      });
-
-      it('Should call create service on save for new entity', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Dossier>>();
-        const dossier = new Dossier();
-        jest.spyOn(dossierService, 'create').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ dossier });
-        comp.ngOnInit();
-
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: dossier }));
-        saveSubject.complete();
-
-        // THEN
-        expect(dossierService.create).toHaveBeenCalledWith(dossier);
-        expect(comp.isSaving).toEqual(false);
-        expect(comp.previousState).toHaveBeenCalled();
-      });
-
-      it('Should set isSaving to false on error', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Dossier>>();
-        const dossier = { id: 123 };
-        jest.spyOn(dossierService, 'update').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ dossier });
-        comp.ngOnInit();
-
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.error('This is an error!');
-
-        // THEN
-        expect(dossierService.update).toHaveBeenCalledWith(dossier);
-        expect(comp.isSaving).toEqual(false);
-        expect(comp.previousState).not.toHaveBeenCalled();
-      });
+      // THEN
+      expect(dossierService.create).toHaveBeenCalledWith(dossier);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).toHaveBeenCalled();
     });
 
-    describe('Tracking relationships identifiers', () => {
-      describe('trackCommanditaireById', () => {
-        it('Should return tracked Commanditaire primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackCommanditaireById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
+    it('Should set isSaving to false on error', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Dossier>>();
+      const dossier = { id: 123 };
+      jest.spyOn(dossierService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ dossier });
+      comp.ngOnInit();
+
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.error('This is an error!');
+
+      // THEN
+      expect(dossierService.update).toHaveBeenCalledWith(dossier);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Tracking relationships identifiers', () => {
+    describe('trackCommanditaireById', () => {
+      it('Should return tracked Commanditaire primary key', () => {
+        const entity = { id: 123 };
+        const trackResult = comp.trackCommanditaireById(0, entity);
+        expect(trackResult).toEqual(entity.id);
       });
     });
   });

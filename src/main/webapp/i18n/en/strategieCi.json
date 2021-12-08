@@ -1,0 +1,32 @@
+{
+  "archisolverApp": {
+    "strategieCi": {
+      "home": {
+        "title": "Strategie Cis",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Strategie Ci",
+        "createOrEditLabel": "Create or edit a Strategie Ci",
+        "notFound": "No Strategie Cis found"
+      },
+      "created": "A new Strategie Ci is created with identifier {{ param }}",
+      "updated": "A Strategie Ci is updated with identifier {{ param }}",
+      "deleted": "A Strategie Ci is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Strategie Ci {{ id }}?"
+      },
+      "detail": {
+        "title": "Strategie Ci"
+      },
+      "id": "ID",
+      "isActif": "Is Actif",
+      "anne": "Anne",
+      "montantPlafond": "Montant Plafond",
+      "taux": "Taux",
+      "tiersFinanceur": "Tiers Financeur",
+      "natureActivite": "Nature Activite",
+      "natureMontant": "Nature Montant",
+      "consommationCi": "Consommation Ci",
+      "aide": "Aide"
+    }
+  }
+}

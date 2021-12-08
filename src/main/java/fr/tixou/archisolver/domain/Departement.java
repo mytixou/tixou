@@ -18,6 +18,7 @@ public class Departement implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "nom")
@@ -30,17 +31,18 @@ public class Departement implements Serializable {
     private Region region;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Departement id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Departement id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getNom() {
@@ -48,7 +50,7 @@ public class Departement implements Serializable {
     }
 
     public Departement nom(String nom) {
-        this.nom = nom;
+        this.setNom(nom);
         return this;
     }
 
@@ -61,7 +63,7 @@ public class Departement implements Serializable {
     }
 
     public Departement code(Integer code) {
-        this.code = code;
+        this.setCode(code);
         return this;
     }
 
@@ -73,13 +75,13 @@ public class Departement implements Serializable {
         return this.region;
     }
 
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
     public Departement region(Region region) {
         this.setRegion(region);
         return this;
-    }
-
-    public void setRegion(Region region) {
-        this.region = region;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

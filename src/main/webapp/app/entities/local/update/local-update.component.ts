@@ -9,6 +9,7 @@ import { ILocal, Local } from '../local.model';
 import { LocalService } from '../service/local.service';
 import { IBatiment } from 'app/entities/batiment/batiment.model';
 import { BatimentService } from 'app/entities/batiment/service/batiment.service';
+import { TypeLocal } from 'app/entities/enumerations/type-local.model';
 
 @Component({
   selector: 'jhi-local-update',
@@ -16,6 +17,7 @@ import { BatimentService } from 'app/entities/batiment/service/batiment.service'
 })
 export class LocalUpdateComponent implements OnInit {
   isSaving = false;
+  typeLocalValues = Object.keys(TypeLocal);
 
   batimentsSharedCollection: IBatiment[] = [];
 

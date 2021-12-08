@@ -37,24 +37,22 @@ public class RefContrainteServiceImpl implements RefContrainteService {
 
         return refContrainteRepository
             .findById(refContrainte.getId())
-            .map(
-                existingRefContrainte -> {
-                    if (refContrainte.getDesignation() != null) {
-                        existingRefContrainte.setDesignation(refContrainte.getDesignation());
-                    }
-                    if (refContrainte.getTypeContrainte() != null) {
-                        existingRefContrainte.setTypeContrainte(refContrainte.getTypeContrainte());
-                    }
-                    if (refContrainte.getTypeDestination() != null) {
-                        existingRefContrainte.setTypeDestination(refContrainte.getTypeDestination());
-                    }
-                    if (refContrainte.getExplication() != null) {
-                        existingRefContrainte.setExplication(refContrainte.getExplication());
-                    }
-
-                    return existingRefContrainte;
+            .map(existingRefContrainte -> {
+                if (refContrainte.getDesignation() != null) {
+                    existingRefContrainte.setDesignation(refContrainte.getDesignation());
                 }
-            )
+                if (refContrainte.getTypeContrainte() != null) {
+                    existingRefContrainte.setTypeContrainte(refContrainte.getTypeContrainte());
+                }
+                if (refContrainte.getTypeDestination() != null) {
+                    existingRefContrainte.setTypeDestination(refContrainte.getTypeDestination());
+                }
+                if (refContrainte.getExplication() != null) {
+                    existingRefContrainte.setExplication(refContrainte.getExplication());
+                }
+
+                return existingRefContrainte;
+            })
             .map(refContrainteRepository::save);
     }
 

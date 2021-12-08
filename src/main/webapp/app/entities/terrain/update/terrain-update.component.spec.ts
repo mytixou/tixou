@@ -14,135 +14,133 @@ import { AdresseService } from 'app/entities/adresse/service/adresse.service';
 
 import { TerrainUpdateComponent } from './terrain-update.component';
 
-describe('Component Tests', () => {
-  describe('Terrain Management Update Component', () => {
-    let comp: TerrainUpdateComponent;
-    let fixture: ComponentFixture<TerrainUpdateComponent>;
-    let activatedRoute: ActivatedRoute;
-    let terrainService: TerrainService;
-    let adresseService: AdresseService;
+describe('Terrain Management Update Component', () => {
+  let comp: TerrainUpdateComponent;
+  let fixture: ComponentFixture<TerrainUpdateComponent>;
+  let activatedRoute: ActivatedRoute;
+  let terrainService: TerrainService;
+  let adresseService: AdresseService;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        declarations: [TerrainUpdateComponent],
-        providers: [FormBuilder, ActivatedRoute],
-      })
-        .overrideTemplate(TerrainUpdateComponent, '')
-        .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      declarations: [TerrainUpdateComponent],
+      providers: [FormBuilder, ActivatedRoute],
+    })
+      .overrideTemplate(TerrainUpdateComponent, '')
+      .compileComponents();
 
-      fixture = TestBed.createComponent(TerrainUpdateComponent);
-      activatedRoute = TestBed.inject(ActivatedRoute);
-      terrainService = TestBed.inject(TerrainService);
-      adresseService = TestBed.inject(AdresseService);
+    fixture = TestBed.createComponent(TerrainUpdateComponent);
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    terrainService = TestBed.inject(TerrainService);
+    adresseService = TestBed.inject(AdresseService);
 
-      comp = fixture.componentInstance;
+    comp = fixture.componentInstance;
+  });
+
+  describe('ngOnInit', () => {
+    it('Should call Adresse query and add missing value', () => {
+      const terrain: ITerrain = { id: 456 };
+      const adresse: IAdresse = { id: 39778 };
+      terrain.adresse = adresse;
+
+      const adresseCollection: IAdresse[] = [{ id: 53886 }];
+      jest.spyOn(adresseService, 'query').mockReturnValue(of(new HttpResponse({ body: adresseCollection })));
+      const additionalAdresses = [adresse];
+      const expectedCollection: IAdresse[] = [...additionalAdresses, ...adresseCollection];
+      jest.spyOn(adresseService, 'addAdresseToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ terrain });
+      comp.ngOnInit();
+
+      expect(adresseService.query).toHaveBeenCalled();
+      expect(adresseService.addAdresseToCollectionIfMissing).toHaveBeenCalledWith(adresseCollection, ...additionalAdresses);
+      expect(comp.adressesSharedCollection).toEqual(expectedCollection);
     });
 
-    describe('ngOnInit', () => {
-      it('Should call Adresse query and add missing value', () => {
-        const terrain: ITerrain = { id: 456 };
-        const adresse: IAdresse = { id: 39778 };
-        terrain.adresse = adresse;
+    it('Should update editForm', () => {
+      const terrain: ITerrain = { id: 456 };
+      const adresse: IAdresse = { id: 79320 };
+      terrain.adresse = adresse;
 
-        const adresseCollection: IAdresse[] = [{ id: 53886 }];
-        jest.spyOn(adresseService, 'query').mockReturnValue(of(new HttpResponse({ body: adresseCollection })));
-        const additionalAdresses = [adresse];
-        const expectedCollection: IAdresse[] = [...additionalAdresses, ...adresseCollection];
-        jest.spyOn(adresseService, 'addAdresseToCollectionIfMissing').mockReturnValue(expectedCollection);
+      activatedRoute.data = of({ terrain });
+      comp.ngOnInit();
 
-        activatedRoute.data = of({ terrain });
-        comp.ngOnInit();
+      expect(comp.editForm.value).toEqual(expect.objectContaining(terrain));
+      expect(comp.adressesSharedCollection).toContain(adresse);
+    });
+  });
 
-        expect(adresseService.query).toHaveBeenCalled();
-        expect(adresseService.addAdresseToCollectionIfMissing).toHaveBeenCalledWith(adresseCollection, ...additionalAdresses);
-        expect(comp.adressesSharedCollection).toEqual(expectedCollection);
-      });
+  describe('save', () => {
+    it('Should call update service on save for existing entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Terrain>>();
+      const terrain = { id: 123 };
+      jest.spyOn(terrainService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ terrain });
+      comp.ngOnInit();
 
-      it('Should update editForm', () => {
-        const terrain: ITerrain = { id: 456 };
-        const adresse: IAdresse = { id: 79320 };
-        terrain.adresse = adresse;
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: terrain }));
+      saveSubject.complete();
 
-        activatedRoute.data = of({ terrain });
-        comp.ngOnInit();
-
-        expect(comp.editForm.value).toEqual(expect.objectContaining(terrain));
-        expect(comp.adressesSharedCollection).toContain(adresse);
-      });
+      // THEN
+      expect(comp.previousState).toHaveBeenCalled();
+      expect(terrainService.update).toHaveBeenCalledWith(terrain);
+      expect(comp.isSaving).toEqual(false);
     });
 
-    describe('save', () => {
-      it('Should call update service on save for existing entity', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Terrain>>();
-        const terrain = { id: 123 };
-        jest.spyOn(terrainService, 'update').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ terrain });
-        comp.ngOnInit();
+    it('Should call create service on save for new entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Terrain>>();
+      const terrain = new Terrain();
+      jest.spyOn(terrainService, 'create').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ terrain });
+      comp.ngOnInit();
 
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: terrain }));
-        saveSubject.complete();
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: terrain }));
+      saveSubject.complete();
 
-        // THEN
-        expect(comp.previousState).toHaveBeenCalled();
-        expect(terrainService.update).toHaveBeenCalledWith(terrain);
-        expect(comp.isSaving).toEqual(false);
-      });
-
-      it('Should call create service on save for new entity', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Terrain>>();
-        const terrain = new Terrain();
-        jest.spyOn(terrainService, 'create').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ terrain });
-        comp.ngOnInit();
-
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: terrain }));
-        saveSubject.complete();
-
-        // THEN
-        expect(terrainService.create).toHaveBeenCalledWith(terrain);
-        expect(comp.isSaving).toEqual(false);
-        expect(comp.previousState).toHaveBeenCalled();
-      });
-
-      it('Should set isSaving to false on error', () => {
-        // GIVEN
-        const saveSubject = new Subject<HttpResponse<Terrain>>();
-        const terrain = { id: 123 };
-        jest.spyOn(terrainService, 'update').mockReturnValue(saveSubject);
-        jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ terrain });
-        comp.ngOnInit();
-
-        // WHEN
-        comp.save();
-        expect(comp.isSaving).toEqual(true);
-        saveSubject.error('This is an error!');
-
-        // THEN
-        expect(terrainService.update).toHaveBeenCalledWith(terrain);
-        expect(comp.isSaving).toEqual(false);
-        expect(comp.previousState).not.toHaveBeenCalled();
-      });
+      // THEN
+      expect(terrainService.create).toHaveBeenCalledWith(terrain);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).toHaveBeenCalled();
     });
 
-    describe('Tracking relationships identifiers', () => {
-      describe('trackAdresseById', () => {
-        it('Should return tracked Adresse primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackAdresseById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
+    it('Should set isSaving to false on error', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<Terrain>>();
+      const terrain = { id: 123 };
+      jest.spyOn(terrainService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ terrain });
+      comp.ngOnInit();
+
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.error('This is an error!');
+
+      // THEN
+      expect(terrainService.update).toHaveBeenCalledWith(terrain);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Tracking relationships identifiers', () => {
+    describe('trackAdresseById', () => {
+      it('Should return tracked Adresse primary key', () => {
+        const entity = { id: 123 };
+        const trackResult = comp.trackAdresseById(0, entity);
+        expect(trackResult).toEqual(entity.id);
       });
     });
   });

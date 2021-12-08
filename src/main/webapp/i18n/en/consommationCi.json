@@ -1,0 +1,28 @@
+{
+  "archisolverApp": {
+    "consommationCi": {
+      "home": {
+        "title": "Consommation Cis",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Consommation Ci",
+        "createOrEditLabel": "Create or edit a Consommation Ci",
+        "notFound": "No Consommation Cis found"
+      },
+      "created": "A new Consommation Ci is created with identifier {{ param }}",
+      "updated": "A Consommation Ci is updated with identifier {{ param }}",
+      "deleted": "A Consommation Ci is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Consommation Ci {{ id }}?"
+      },
+      "detail": {
+        "title": "Consommation Ci"
+      },
+      "id": "ID",
+      "date": "Date",
+      "montantCi": "Montant Ci",
+      "montantRecuperable": "Montant Recuperable",
+      "beneficiaire": "Beneficiaire",
+      "strategieCi": "Strategie Ci"
+    }
+  }
+}

@@ -38,24 +38,22 @@ public class LocalServiceImpl implements LocalService {
 
         return localRepository
             .findById(local.getId())
-            .map(
-                existingLocal -> {
-                    if (local.getDesignation() != null) {
-                        existingLocal.setDesignation(local.getDesignation());
-                    }
-                    if (local.getSurface() != null) {
-                        existingLocal.setSurface(local.getSurface());
-                    }
-                    if (local.getEtage() != null) {
-                        existingLocal.setEtage(local.getEtage());
-                    }
-                    if (local.getTypelocal() != null) {
-                        existingLocal.setTypelocal(local.getTypelocal());
-                    }
-
-                    return existingLocal;
+            .map(existingLocal -> {
+                if (local.getDesignation() != null) {
+                    existingLocal.setDesignation(local.getDesignation());
                 }
-            )
+                if (local.getSurface() != null) {
+                    existingLocal.setSurface(local.getSurface());
+                }
+                if (local.getEtage() != null) {
+                    existingLocal.setEtage(local.getEtage());
+                }
+                if (local.getTypelocal() != null) {
+                    existingLocal.setTypelocal(local.getTypelocal());
+                }
+
+                return existingLocal;
+            })
             .map(localRepository::save);
     }
 

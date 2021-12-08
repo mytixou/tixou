@@ -1,0 +1,80 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-strategie-ci-heading"
+        data-cy="StrategieCiCreateUpdateHeading"
+        jhiTranslate="archisolverApp.strategieCi.home.createOrEditLabel"
+      >
+        Create or edit a Strategie Ci
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.strategieCi.isActif" for="field_isActif">Is Actif</label>
+          <input type="checkbox" class="form-check" name="isActif" id="field_isActif" data-cy="isActif" formControlName="isActif" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.strategieCi.anne" for="field_anne">Anne</label>
+          <input type="number" class="form-control" name="anne" id="field_anne" data-cy="anne" formControlName="anne" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.strategieCi.montantPlafond" for="field_montantPlafond"
+            >Montant Plafond</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="montantPlafond"
+            id="field_montantPlafond"
+            data-cy="montantPlafond"
+            formControlName="montantPlafond"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.strategieCi.taux" for="field_taux">Taux</label>
+          <input type="number" class="form-control" name="taux" id="field_taux" data-cy="taux" formControlName="taux" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="archisolverApp.strategieCi.aide" for="field_aide">Aide</label>
+          <select class="form-control" id="field_aide" data-cy="aide" name="aide" formControlName="aide">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="aideOption.id === editForm.get('aide')!.value?.id ? editForm.get('aide')!.value : aideOption"
+              *ngFor="let aideOption of aidesSharedCollection; trackBy: trackAideById"
+            >
+              {{ aideOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

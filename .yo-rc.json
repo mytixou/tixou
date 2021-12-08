@@ -59,9 +59,26 @@
       "Reponse",
       "ChoixReponse",
       "Impact",
-      "RefContrainte"
+      "RefContrainte",
+      "Beneficiaire",
+      "SoldeCi",
+      "SoldeApa",
+      "SoldePch",
+      "SoldePchE",
+      "TiersFinanceur",
+      "Aide",
+      "StrategieCi",
+      "StrategieApa",
+      "StrategiePch",
+      "StrategiePchE",
+      "NatureActivite",
+      "NatureMontant",
+      "ConsommationCi",
+      "ConsommationApa",
+      "ConsommationPch",
+      "ConsommationPchE"
     ],
-    "lastLiquibaseTimestamp": 1627829551000
+    "lastLiquibaseTimestamp": 1638926336000
   },
   "git-provider": "GitHub",
   "git-company": "mytixou",

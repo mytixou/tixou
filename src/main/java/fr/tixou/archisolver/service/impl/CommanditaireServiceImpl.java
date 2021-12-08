@@ -37,33 +37,31 @@ public class CommanditaireServiceImpl implements CommanditaireService {
 
         return commanditaireRepository
             .findById(commanditaire.getId())
-            .map(
-                existingCommanditaire -> {
-                    if (commanditaire.getIdMetierInterne() != null) {
-                        existingCommanditaire.setIdMetierInterne(commanditaire.getIdMetierInterne());
-                    }
-                    if (commanditaire.getPrenom() != null) {
-                        existingCommanditaire.setPrenom(commanditaire.getPrenom());
-                    }
-                    if (commanditaire.getNom() != null) {
-                        existingCommanditaire.setNom(commanditaire.getNom());
-                    }
-                    if (commanditaire.getEmail() != null) {
-                        existingCommanditaire.setEmail(commanditaire.getEmail());
-                    }
-                    if (commanditaire.getTelephoneFixe() != null) {
-                        existingCommanditaire.setTelephoneFixe(commanditaire.getTelephoneFixe());
-                    }
-                    if (commanditaire.getTelephonePortable() != null) {
-                        existingCommanditaire.setTelephonePortable(commanditaire.getTelephonePortable());
-                    }
-                    if (commanditaire.getConnuDepuis() != null) {
-                        existingCommanditaire.setConnuDepuis(commanditaire.getConnuDepuis());
-                    }
-
-                    return existingCommanditaire;
+            .map(existingCommanditaire -> {
+                if (commanditaire.getIdMetierInterne() != null) {
+                    existingCommanditaire.setIdMetierInterne(commanditaire.getIdMetierInterne());
                 }
-            )
+                if (commanditaire.getPrenom() != null) {
+                    existingCommanditaire.setPrenom(commanditaire.getPrenom());
+                }
+                if (commanditaire.getNom() != null) {
+                    existingCommanditaire.setNom(commanditaire.getNom());
+                }
+                if (commanditaire.getEmail() != null) {
+                    existingCommanditaire.setEmail(commanditaire.getEmail());
+                }
+                if (commanditaire.getTelephoneFixe() != null) {
+                    existingCommanditaire.setTelephoneFixe(commanditaire.getTelephoneFixe());
+                }
+                if (commanditaire.getTelephonePortable() != null) {
+                    existingCommanditaire.setTelephonePortable(commanditaire.getTelephonePortable());
+                }
+                if (commanditaire.getConnuDepuis() != null) {
+                    existingCommanditaire.setConnuDepuis(commanditaire.getConnuDepuis());
+                }
+
+                return existingCommanditaire;
+            })
             .map(commanditaireRepository::save);
     }
 

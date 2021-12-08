@@ -7,6 +7,7 @@ import { finalize } from 'rxjs/operators';
 
 import { IQuestion, Question } from '../question.model';
 import { QuestionService } from '../service/question.service';
+import { TypeDestination } from 'app/entities/enumerations/type-destination.model';
 
 @Component({
   selector: 'jhi-question-update',
@@ -14,6 +15,7 @@ import { QuestionService } from '../service/question.service';
 })
 export class QuestionUpdateComponent implements OnInit {
   isSaving = false;
+  typeDestinationValues = Object.keys(TypeDestination);
 
   editForm = this.fb.group({
     id: [],

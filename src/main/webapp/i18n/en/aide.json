@@ -1,0 +1,35 @@
+{
+  "archisolverApp": {
+    "aide": {
+      "home": {
+        "title": "Aides",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Aide",
+        "createOrEditLabel": "Create or edit a Aide",
+        "notFound": "No Aides found"
+      },
+      "created": "A new Aide is created with identifier {{ param }}",
+      "updated": "A Aide is updated with identifier {{ param }}",
+      "deleted": "A Aide is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Aide {{ id }}?"
+      },
+      "detail": {
+        "title": "Aide"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "isActif": "Is Actif",
+      "dateLancement": "Date Lancement",
+      "anneLancement": "Anne Lancement",
+      "moisLancement": "Mois Lancement",
+      "dateArret": "Date Arret",
+      "derniereAnnee": "Derniere Annee",
+      "dernierMois": "Dernier Mois",
+      "strategieCi": "Strategie Ci",
+      "strategieApa": "Strategie Apa",
+      "strategiePch": "Strategie Pch",
+      "strategiePchE": "Strategie Pch E"
+    }
+  }
+}

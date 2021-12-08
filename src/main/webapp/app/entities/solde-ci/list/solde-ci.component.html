@@ -1,0 +1,88 @@
+<div>
+  <h2 id="page-heading" data-cy="SoldeCiHeading">
+    <span jhiTranslate="archisolverApp.soldeCi.home.title">Solde Cis</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="archisolverApp.soldeCi.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-solde-ci"
+        [routerLink]="['/solde-ci/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="archisolverApp.soldeCi.home.createLabel"> Create a new Solde Ci </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="soldeCis?.length === 0">
+    <span jhiTranslate="archisolverApp.soldeCi.home.notFound">No soldeCis found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="soldeCis && soldeCis.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.soldeCi.annee">Annee</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.soldeCi.soldeMontantCi">Solde Montant Ci</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.soldeCi.soldeMontantCiRec">Solde Montant Ci Rec</span></th>
+          <th scope="col"><span jhiTranslate="archisolverApp.soldeCi.beneficiaire">Beneficiaire</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let soldeCi of soldeCis; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/solde-ci', soldeCi.id, 'view']">{{ soldeCi.id }}</a>
+          </td>
+          <td>{{ soldeCi.annee }}</td>
+          <td>{{ soldeCi.soldeMontantCi }}</td>
+          <td>{{ soldeCi.soldeMontantCiRec }}</td>
+          <td>
+            <div *ngIf="soldeCi.beneficiaire">
+              <a [routerLink]="['/beneficiaire', soldeCi.beneficiaire?.id, 'view']">{{ soldeCi.beneficiaire?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/solde-ci', soldeCi.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/solde-ci', soldeCi.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(soldeCi)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

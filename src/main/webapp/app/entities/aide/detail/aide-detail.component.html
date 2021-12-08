@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="aide">
+      <h2 data-cy="aideDetailsHeading"><span jhiTranslate="archisolverApp.aide.detail.title">Aide</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ aide.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.aide.nom">Nom</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'archisolverApp.TypeAide.' + aide.nom }}">{{ aide.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.aide.isActif">Is Actif</span></dt>
+        <dd>
+          <span>{{ aide.isActif }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.aide.dateLancement">Date Lancement</span></dt>
+        <dd>
+          <span>{{ aide.dateLancement | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.aide.anneLancement">Anne Lancement</span></dt>
+        <dd>
+          <span>{{ aide.anneLancement }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.aide.moisLancement">Mois Lancement</span></dt>
+        <dd>
+          <span>{{ aide.moisLancement }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.aide.dateArret">Date Arret</span></dt>
+        <dd>
+          <span>{{ aide.dateArret | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.aide.derniereAnnee">Derniere Annee</span></dt>
+        <dd>
+          <span>{{ aide.derniereAnnee }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.aide.dernierMois">Dernier Mois</span></dt>
+        <dd>
+          <span>{{ aide.dernierMois }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/aide', aide.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

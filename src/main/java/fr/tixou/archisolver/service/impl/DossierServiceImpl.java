@@ -37,24 +37,22 @@ public class DossierServiceImpl implements DossierService {
 
         return dossierRepository
             .findById(dossier.getId())
-            .map(
-                existingDossier -> {
-                    if (dossier.getDesignation() != null) {
-                        existingDossier.setDesignation(dossier.getDesignation());
-                    }
-                    if (dossier.getDescription() != null) {
-                        existingDossier.setDescription(dossier.getDescription());
-                    }
-                    if (dossier.getDateCreation() != null) {
-                        existingDossier.setDateCreation(dossier.getDateCreation());
-                    }
-                    if (dossier.getDateCloture() != null) {
-                        existingDossier.setDateCloture(dossier.getDateCloture());
-                    }
-
-                    return existingDossier;
+            .map(existingDossier -> {
+                if (dossier.getDesignation() != null) {
+                    existingDossier.setDesignation(dossier.getDesignation());
                 }
-            )
+                if (dossier.getDescription() != null) {
+                    existingDossier.setDescription(dossier.getDescription());
+                }
+                if (dossier.getDateCreation() != null) {
+                    existingDossier.setDateCreation(dossier.getDateCreation());
+                }
+                if (dossier.getDateCloture() != null) {
+                    existingDossier.setDateCloture(dossier.getDateCloture());
+                }
+
+                return existingDossier;
+            })
             .map(dossierRepository::save);
     }
 

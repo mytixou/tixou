@@ -20,6 +20,7 @@ public class Reponse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "designation")
@@ -37,17 +38,18 @@ public class Reponse implements Serializable {
     private Question question;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Reponse id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Reponse id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getDesignation() {
@@ -55,7 +57,7 @@ public class Reponse implements Serializable {
     }
 
     public Reponse designation(String designation) {
-        this.designation = designation;
+        this.setDesignation(designation);
         return this;
     }
 
@@ -68,7 +70,7 @@ public class Reponse implements Serializable {
     }
 
     public Reponse explication(String explication) {
-        this.explication = explication;
+        this.setExplication(explication);
         return this;
     }
 
@@ -81,7 +83,7 @@ public class Reponse implements Serializable {
     }
 
     public Reponse typeQuestion(TypeDestination typeQuestion) {
-        this.typeQuestion = typeQuestion;
+        this.setTypeQuestion(typeQuestion);
         return this;
     }
 
@@ -93,13 +95,13 @@ public class Reponse implements Serializable {
         return this.question;
     }
 
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
     public Reponse question(Question question) {
         this.setQuestion(question);
         return this;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

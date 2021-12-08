@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="soldePchE">
+      <h2 data-cy="soldePchEDetailsHeading"><span jhiTranslate="archisolverApp.soldePchE.detail.title">Solde Pch E</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ soldePchE.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.soldePchE.annee">Annee</span></dt>
+        <dd>
+          <span>{{ soldePchE.annee }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.soldePchE.mois">Mois</span></dt>
+        <dd>
+          <span>{{ soldePchE.mois }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.soldePchE.soldeMontantPchE">Solde Montant Pch E</span></dt>
+        <dd>
+          <span>{{ soldePchE.soldeMontantPchE }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.soldePchE.soldeHeurePchE">Solde Heure Pch E</span></dt>
+        <dd>
+          <span>{{ soldePchE.soldeHeurePchE }}</span>
+        </dd>
+        <dt><span jhiTranslate="archisolverApp.soldePchE.beneficiaire">Beneficiaire</span></dt>
+        <dd>
+          <div *ngIf="soldePchE.beneficiaire">
+            <a [routerLink]="['/beneficiaire', soldePchE.beneficiaire?.id, 'view']">{{ soldePchE.beneficiaire?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/solde-pch-e', soldePchE.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

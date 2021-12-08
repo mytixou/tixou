@@ -1,0 +1,53 @@
+{
+  "name": "NatureActivite",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "strategieCi",
+      "otherEntityRelationshipName": "natureActivite",
+      "relationshipName": "strategie"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "strategieApa",
+      "otherEntityRelationshipName": "natureActivite",
+      "relationshipName": "strategie"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "strategiePch",
+      "otherEntityRelationshipName": "natureActivite",
+      "relationshipName": "strategie"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "strategiePchE",
+      "otherEntityRelationshipName": "natureActivite",
+      "relationshipName": "strategie"
+    }
+  ],
+  "entityTableName": "nature_activite",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211208011851"
+}

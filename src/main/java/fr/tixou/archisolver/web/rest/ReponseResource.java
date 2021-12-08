@@ -103,7 +103,7 @@ public class ReponseResource {
      * or with status {@code 500 (Internal Server Error)} if the reponse couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/reponses/{id}", consumes = "application/merge-patch+json")
+    @PatchMapping(value = "/reponses/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Reponse> partialUpdateReponse(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Reponse reponse

@@ -103,7 +103,7 @@ public class ImpactResource {
      * or with status {@code 500 (Internal Server Error)} if the impact couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/impacts/{id}", consumes = "application/merge-patch+json")
+    @PatchMapping(value = "/impacts/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Impact> partialUpdateImpact(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Impact impact

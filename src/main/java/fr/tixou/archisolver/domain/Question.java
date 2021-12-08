@@ -22,6 +22,7 @@ public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "designation")
@@ -40,17 +41,18 @@ public class Question implements Serializable {
     private Set<Questionnaire> questionnaires = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Question id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Question id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getDesignation() {
@@ -58,7 +60,7 @@ public class Question implements Serializable {
     }
 
     public Question designation(String designation) {
-        this.designation = designation;
+        this.setDesignation(designation);
         return this;
     }
 
@@ -71,7 +73,7 @@ public class Question implements Serializable {
     }
 
     public Question explication(String explication) {
-        this.explication = explication;
+        this.setExplication(explication);
         return this;
     }
 
@@ -84,7 +86,7 @@ public class Question implements Serializable {
     }
 
     public Question typeQuestion(TypeDestination typeQuestion) {
-        this.typeQuestion = typeQuestion;
+        this.setTypeQuestion(typeQuestion);
         return this;
     }
 
@@ -94,6 +96,16 @@ public class Question implements Serializable {
 
     public Set<Questionnaire> getQuestionnaires() {
         return this.questionnaires;
+    }
+
+    public void setQuestionnaires(Set<Questionnaire> questionnaires) {
+        if (this.questionnaires != null) {
+            this.questionnaires.forEach(i -> i.removeQuestion(this));
+        }
+        if (questionnaires != null) {
+            questionnaires.forEach(i -> i.addQuestion(this));
+        }
+        this.questionnaires = questionnaires;
     }
 
     public Question questionnaires(Set<Questionnaire> questionnaires) {
@@ -111,16 +123,6 @@ public class Question implements Serializable {
         this.questionnaires.remove(questionnaire);
         questionnaire.getQuestions().remove(this);
         return this;
-    }
-
-    public void setQuestionnaires(Set<Questionnaire> questionnaires) {
-        if (this.questionnaires != null) {
-            this.questionnaires.forEach(i -> i.removeQuestion(this));
-        }
-        if (questionnaires != null) {
-            questionnaires.forEach(i -> i.addQuestion(this));
-        }
-        this.questionnaires = questionnaires;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
